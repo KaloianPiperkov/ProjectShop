@@ -20,10 +20,12 @@ public class Main {
 
         Shop shop = new Shop("Lidl", cashiers, inventory, receipts, 0,0);
 
+        SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator();
+
         //creating the goods
-        Goods goods1 = new Goods(1000, "apples", 10, Category.FOOD, LocalDate.of(2024, 4, 7), 50);
-        Goods goods2 = new Goods(1001, "strawberries", 13, Category.FOOD, LocalDate.of(2024, 6, 30), 150);
-        Goods goods3 = new Goods(1002, "toilet paper", 6, Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200);
+        Goods goods1 = new Goods(1000, "apples", 10, Category.FOOD, LocalDate.of(2024, 4, 7), 50,sellingPriceCalculator);
+        Goods goods2 = new Goods(1001, "strawberries", 13, Category.FOOD, LocalDate.of(2024, 6, 30), 150, sellingPriceCalculator);
+        Goods goods3 = new Goods(1002, "toilet paper", 6, Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200, sellingPriceCalculator);
 
         //adding the goods to the array list
         inventory.add(goods1);
@@ -36,9 +38,9 @@ public class Main {
         System.out.println(goods3);
 
         //printing the selling price of these goods
-        System.out.println("Selling price for apples: " + goods1.calculatingSellingPrice()); //almost expired
-        System.out.println("Selling price for strawberries: " + goods2.calculatingSellingPrice()); //not expired
-        System.out.println("Selling price for toilet paper: " + goods3.calculatingSellingPrice()); //not expired
+        System.out.println("Selling price for apples: " + goods1.calculateSellingPrice()); //almost expired
+        System.out.println("Selling price for strawberries: " + goods2.calculateSellingPrice()); //not expired
+        System.out.println("Selling price for toilet paper: " + goods3.calculateSellingPrice()); //not expired
 
 
         Cashier cashier1 = new Cashier("Maria", 345);

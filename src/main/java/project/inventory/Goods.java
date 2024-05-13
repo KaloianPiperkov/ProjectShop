@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 
-public class Goods{
+public class Goods extends GoodsSellingPriceCalculator{
 
     private long goods_id;
     private String goods_name;
@@ -22,13 +22,20 @@ public class Goods{
     private LocalDate goods_expiry_date;
     private int goods_quantity;
 
-    public Goods(long goods_id, String goods_name, double goods_delivery_price, Category category, LocalDate goods_expiry_date, int goods_quantity) {
+    private SellingPriceCalculation sellingPriceCalculator;
+
+    public double calculateSellingPrice() {
+        return sellingPriceCalculator.calcualteSellingPrice(this);
+    }
+
+    public Goods(long goods_id, String goods_name, double goods_delivery_price, Category category, LocalDate goods_expiry_date, int goods_quantity, SellingPriceCalculation sellingPriceCalculator) {
         this.goods_id = goods_id;
         this.goods_name = goods_name;
         this.goods_delivery_price = goods_delivery_price;
         this.category = category;
         this.goods_expiry_date = goods_expiry_date;
         this.goods_quantity = goods_quantity;
+        this.sellingPriceCalculator = sellingPriceCalculator;
     }
 
     public long getId() {
@@ -65,26 +72,7 @@ public class Goods{
             System.out.println("Quantity not enough");
         }
     }
-    public double calculatingSellingPrice() {
 
-        double selling_price = 0;
-        //getting the overcharge percentage for the specific category
-        double overcharge_percent = (this.category == Category.FOOD) ? Category.FOOD.getDefaultOverchargePercent() : Category.NON_FOOD.getDefaultOverchargePercent();
-
-        selling_price = this.goods_delivery_price * (1 + (overcharge_percent / 100));
-
-
-        long days_until_expiration = ChronoUnit.DAYS.between(LocalDate.now(), getExpiry_date());        //should be put in another method
-
-        if (days_until_expiration > 0 && days_until_expiration <= 3) { // Considered close to expiration if less than or equal to 3 days left
-            selling_price *= (1 - this.category.getDefaultOverchargePercent() / 100);
-
-        }
-
-        selling_price = Math.round(selling_price * 100.0) / 100.0; //should be put in another method and used in shop too!!!
-
-        return selling_price;
-    }
 
     @Override
     public String toString() {
@@ -98,4 +86,3 @@ public class Goods{
                 '}';
     }
 }
-
