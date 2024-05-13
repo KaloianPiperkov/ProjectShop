@@ -1,4 +1,6 @@
-package project.inventory;
+package project.customer;
+
+import project.inventory.Goods;
 
 import java.util.List;
 

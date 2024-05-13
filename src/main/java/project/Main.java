@@ -2,6 +2,7 @@ package project;
 
 
 import project.cashier.Cashier;
+import project.customer.Customer;
 import project.inventory.*;
 import project.shop.Shop;
 
@@ -54,7 +55,7 @@ public class Main {
         System.out.println("Cashier 2's monthly salary: " +cashier2.calculatingSalary(8.50, 178));
 
         CashDesk cashDesk = new CashDesk(cashier1);
-        Customer customer = new Customer(0001, inventory, 120.32 );
+        Customer customer = new Customer(0001, inventory, 120.32);
         Receipt receipt = new Receipt();
 
         System.out.println(inventory);
