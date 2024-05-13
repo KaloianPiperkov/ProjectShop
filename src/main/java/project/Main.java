@@ -42,8 +42,8 @@ public class Main {
         System.out.println("Selling price for toilet paper: " + goods3.calculateSellingPrice()); //not expired
 
 
-        Cashier cashier1 = new Cashier("Maria", 345, 9.40, 146);
-        Cashier cashier2 = new Cashier("Alex", 346, 7.50, 120);
+        Cashier cashier1 = new Cashier("Maria", 345);
+        Cashier cashier2 = new Cashier("Alex", 346);
 
         System.out.println(cashier1);
         System.out.println(cashier2);
@@ -52,8 +52,8 @@ public class Main {
         cashiers.add(cashier1);
         cashiers.add(cashier2);
         //printing their salaries
-        System.out.println("Cashier 1's monthly salary: " +cashier1.calculateMonthlySalary());
-        System.out.println("Cashier 2's monthly salary: " +cashier2.calculateMonthlySalary());
+        System.out.println("Cashier 1's monthly salary: " +cashier1.calculatingSalary(7.50, 170));
+        System.out.println("Cashier 2's monthly salary: " +cashier2.calculatingSalary(8.50, 178));
 
         CashDesk cashDesk = new CashDesk(cashier1);
         Customer customer = new Customer(0001, inventory, 120.32 );
