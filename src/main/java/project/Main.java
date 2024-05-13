@@ -62,9 +62,9 @@ public class Main {
 
 
         Customer customer = new Customer(0001, inventory, 120.32);
-        AddingToCart cart = new AddingToCart(customer, inventory);
+        AddingToCart cart = new AddingToCart(customer);
         cart.addGoodsToCart(goods2, 5);
-        System.out.println(inventory);
+        System.out.println(cart);
 
         Receipt receipt = new Receipt();
 
