@@ -4,9 +4,10 @@
 // When a receipt is created it has to be saved in a file. The name of the file has to be the id of the receipt.
 // The information in the files have to be read.
 
-package project.inventory;
+package project.checkout;
 
 import project.cashier.Cashier;
+import project.inventory.Goods;
 
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.List;

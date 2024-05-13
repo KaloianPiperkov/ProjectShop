@@ -2,6 +2,8 @@ package project;
 
 
 import project.cashier.Cashier;
+import project.checkout.CashDesk;
+import project.checkout.Receipt;
 import project.customer.AddingToCart;
 import project.customer.Customer;
 import project.inventory.*;

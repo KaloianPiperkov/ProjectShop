@@ -1,7 +1,7 @@
 package project.shop;
 import project.cashier.Cashier;
 import project.inventory.Goods;
-import project.inventory.Receipt;
+import project.checkout.Receipt;
 
 import java.util.ArrayList;
 import java.util.List;
