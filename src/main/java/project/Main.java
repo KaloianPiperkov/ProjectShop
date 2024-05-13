@@ -2,6 +2,7 @@ package project;
 
 
 import project.cashier.Cashier;
+import project.customer.AddingToCart;
 import project.customer.Customer;
 import project.inventory.*;
 import project.shop.Shop;
@@ -27,10 +28,10 @@ public class Main {
         Goods goods2 = new Goods(1001, "strawberries", 13, Category.FOOD, LocalDate.of(2024, 6, 30), 150, sellingPriceCalculator);
         Goods goods3 = new Goods(1002, "toilet paper", 6, Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200, sellingPriceCalculator);
 
-        //adding the goods to the array list
-        inventory.add(goods1);
-        inventory.add(goods2);
-        inventory.add(goods3);
+//        //adding the goods to the array list
+//        inventory.add(goods1);
+//        inventory.add(goods2);
+//        inventory.add(goods3);
 
         //printing the goods
         System.out.println(goods1);
@@ -53,14 +54,20 @@ public class Main {
         cashiers.add(cashier1);
         cashiers.add(cashier2);
         //printing their salaries
+
         System.out.println("Cashier 1's monthly salary: " +cashier1.calculatingSalary(7.50, 170));
         System.out.println("Cashier 2's monthly salary: " +cashier2.calculatingSalary(8.50, 178));
 
         CashDesk cashDesk = new CashDesk(cashier1);
+
+
         Customer customer = new Customer(0001, inventory, 120.32);
+        AddingToCart cart = new AddingToCart(customer, inventory);
+        cart.addGoodsToCart(goods2, 5);
+        System.out.println(inventory);
+
         Receipt receipt = new Receipt();
 
-        System.out.println(inventory);
 
     }
 }

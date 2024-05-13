@@ -27,4 +27,6 @@ public class Customer {
     public double getFunds() {
         return funds;
     }
+
+
 }
