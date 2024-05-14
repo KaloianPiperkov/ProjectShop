@@ -17,104 +17,166 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
 
-        List<Cashier> cashiers = new ArrayList<>();
-        List<Goods> inventory = new ArrayList<>();
-        List<Receipt> receipts = new ArrayList<>();
+        CreatingLists lists = getCreatingLists();
 
-        Shop shop = new Shop("Lidl", cashiers, inventory, receipts, 0,0);
+        Shop shop = new Shop("Lidl", lists.cashiers(), lists.inventory(), lists.receipts(), 0,0);
 
         SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator();
 
         //creating the goods
-        Goods goods1 = new Goods(1000, "apples", 10, Category.FOOD, LocalDate.of(2024, 4, 7), 50,sellingPriceCalculator);
-        Goods goods2 = new Goods(1001, "strawberries", 13, Category.FOOD, LocalDate.of(2024, 6, 30), 150, sellingPriceCalculator);
-        Goods goods3 = new Goods(1002, "toilet paper", 6, Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200, sellingPriceCalculator);
-
-//        //adding the goods to the array list
-//        inventory.add(goods1);
-//        inventory.add(goods2);
-//        inventory.add(goods3);
+        CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
 
         //printing the goods
-        System.out.println(goods1);
-        System.out.println(goods2);
-        System.out.println(goods3);
+        PrintGoods(goods);
 
         //printing the selling price of these goods
-        System.out.println("Selling price for 1 apple: " + goods1.calculateSellingPrice()); //almost expired
-        System.out.println("Selling price for 1 strawberries: " + goods2.calculateSellingPrice()); //not expired
-        System.out.println("Selling price for 1 toilet paper: " + goods3.calculateSellingPrice()); //not expired
+        PrintSellingPriceForGoods(goods);
 
 
-        Cashier cashier1 = new Cashier("Maria", 345);
-        Cashier cashier2 = new Cashier("Alex", 346);
-
-        System.out.println(cashier1);
-        System.out.println(cashier2);
+        CreatingAndPrintingCashiers cashiers = getCreatingAndPrintingCashiers();
 
         //adding the cashiers to the shop
-        cashiers.add(cashier1);
-        cashiers.add(cashier2);
+        AddingCashiersToShop(lists, cashiers);
+
         //printing their salaries
+        PrintCashiersSalary(cashiers);
 
-        System.out.println("Cashier 1's monthly salary: " +cashier1.calculatingSalary(7.50, 170));
-        System.out.println("Cashier 2's monthly salary: " +cashier2.calculatingSalary(8.50, 178));
+        CreatingCustomers customers = getCreatingCustomers(lists);
 
+        CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
 
-        Customer customer = new Customer(0001, inventory, 120.32);
-        AddingToCart cart = new AddingToCart(customer);
-        cart.addGoodsToCart(goods2, 5);
-        cart.addGoodsToCart(goods3, 5);
-        System.out.println(cart);
-        Customer customer2 = new Customer(0002, inventory, 120.32);
-        AddingToCart cart2 = new AddingToCart(customer2);
-        cart2.addGoodsToCart(goods1, 6);
-        cart2.addGoodsToCart(goods2, 3);
-        System.out.println(cart2);
-
-        CashDesk cashDesk = new CashDesk(receipts);
+        CashDesk cashDesk = new CashDesk(lists.receipts());
 
         // Get the items from the customer's cart
-        Map<Goods, Integer> purchaseMap = cart.getShoppingCart(); // assuming you have a getShoppingCart method in AddingToCart
-        Map<Goods, Integer> purchaseMap2 = cart2.getShoppingCart(); // assuming you have a getShoppingCart method in AddingToCart
+        GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
 
 // Process the purchase at the cash desk
-        Random random = new Random();
-        int randomIndex = random.nextInt(cashiers.size());
-        Cashier randomCashier = cashiers.get(randomIndex);
+        Cashier randomCashier = RandomizeCashier(lists);
 
 // Use randomCashier for the purchase
-        Receipt receipt = cashDesk.processPurchase(randomCashier, customer, purchaseMap);
-        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customer, purchaseMap2);
+        CreatingAndPrintingReciepts(cashDesk, randomCashier, customers, itemsCart);
 
-// Print the receipt
-//        String filename =  receipt.getId() + ".dat"; // assuming you have a getId method in Receipt
-//        String filename2 = receipt2.getId() + ".dat"; // assuming you have a getId method in Receipt
-//        receipt.saveToFile();
-//        receipt2.saveToFile();
-//
-//// Read the receipt from the file
-//        Receipt readReceipt = Receipt.readFromFile(filename);
-//        Receipt readReceipt2 = Receipt.readFromFile(filename2);
-//
-//// Print the read receipt
-//        System.out.println(readReceipt);
-//        System.out.println(readReceipt2);
 
-        // Main.java
-// ...
+    }
+
+    private static void CreatingAndPrintingReciepts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart) {
+        Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
+
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
 
 // Save the receipt to a file
         String filename = receipt.getId() + ".dat";
+        String filename2 = receipt.getId() + ".dat";
         fileHandler.saveToFile(receipt);
+        fileHandler.saveToFile(receipt2);
 
 // Read the receipt from the file
         Receipt readReceipt = fileHandler.readFromFile(filename);
+        Receipt readReceipt2 = fileHandler.readFromFile(filename2);
 
         System.out.println(readReceipt);
+        System.out.println(readReceipt2);
+    }
 
+    private static Cashier RandomizeCashier(CreatingLists lists) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(lists.cashiers().size());
+        Cashier randomCashier = lists.cashiers().get(randomIndex);
+        return randomCashier;
+    }
 
+    private static GetItemsFromCart getGetItemsFromCart(CreatingCartsAndAddingGoodsToCards carts) {
+        Map<Goods, Integer> purchaseMap = carts.cart().getShoppingCart(); // assuming you have a getShoppingCart method in AddingToCart
+        Map<Goods, Integer> purchaseMap2 = carts.cart2().getShoppingCart(); // assuming you have a getShoppingCart method in AddingToCart
+        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2);
+        return itemsCart;
+    }
+
+    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2) {
+    }
+
+    private static CreatingCartsAndAddingGoodsToCards getCreatingCartsAndAddingGoodsToCards(CreatingCustomers customers, CreatingGoods goods) {
+        AddingToCart cart = new AddingToCart(customers.customer());
+        cart.addGoodsToCart(goods.goods2(), 5);
+        cart.addGoodsToCart(goods.goods3(), 5);
+        System.out.println(cart);
+        AddingToCart cart2 = new AddingToCart(customers.customer2());
+        cart2.addGoodsToCart(goods.goods1(), 6);
+        cart2.addGoodsToCart(goods.goods2(), 3);
+        System.out.println(cart2);
+        CreatingCartsAndAddingGoodsToCards carts = new CreatingCartsAndAddingGoodsToCards(cart, cart2);
+        return carts;
+    }
+
+    private record CreatingCartsAndAddingGoodsToCards(AddingToCart cart, AddingToCart cart2) {
+    }
+
+    private static CreatingCustomers getCreatingCustomers(CreatingLists lsists) {
+        Customer customer = new Customer(0001, lsists.inventory(), 120.32);
+        Customer customer2 = new Customer(0002, lsists.inventory(), 120.32);
+        CreatingCustomers customers = new CreatingCustomers(customer, customer2);
+        return customers;
+    }
+
+    private record CreatingCustomers(Customer customer, Customer customer2) {
+    }
+
+    private static void PrintCashiersSalary(CreatingAndPrintingCashiers cashiers) {
+        System.out.println("Cashier 1's monthly salary: " + cashiers.cashier1().calculatingSalary(7.50, 170));
+        System.out.println("Cashier 2's monthly salary: " + cashiers.cashier2().calculatingSalary(8.50, 178));
+    }
+
+    private static void AddingCashiersToShop(CreatingLists lsists, CreatingAndPrintingCashiers cashiers) {
+        lsists.cashiers().add(cashiers.cashier1());
+        lsists.cashiers().add(cashiers.cashier2());
+    }
+
+    private static CreatingAndPrintingCashiers getCreatingAndPrintingCashiers() {
+        Cashier cashier1 = new Cashier("Maria", 345);
+        Cashier cashier2 = new Cashier("Alex", 346);
+
+        System.out.println(cashier1);
+        System.out.println(cashier2);
+        CreatingAndPrintingCashiers cashiers = new CreatingAndPrintingCashiers(cashier1, cashier2);
+        return cashiers;
+    }
+
+    private record CreatingAndPrintingCashiers(Cashier cashier1, Cashier cashier2) {
+    }
+
+    private static void PrintSellingPriceForGoods(CreatingGoods goods) {
+        System.out.println("Selling price for 1 apple: " + goods.goods1().calculateSellingPrice()); //almost expired
+        System.out.println("Selling price for 1 strawberries: " + goods.goods2().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 toilet paper: " + goods.goods3().calculateSellingPrice()); //not expired
+    }
+
+    private static void PrintGoods(CreatingGoods goods) {
+        System.out.println(goods.goods1());
+        System.out.println(goods.goods2());
+        System.out.println(goods.goods3());
+    }
+
+    private static CreatingGoods getCreatingGoods(SellingPriceCalculation sellingPriceCalculator) {
+        Goods goods1 = new Goods(1000, "apples", 10, Category.FOOD, LocalDate.of(2024, 4, 7), 50, sellingPriceCalculator);
+        Goods goods2 = new Goods(1001, "strawberries", 13, Category.FOOD, LocalDate.of(2024, 6, 30), 150, sellingPriceCalculator);
+        Goods goods3 = new Goods(1002, "toilet paper", 6, Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200, sellingPriceCalculator);
+        CreatingGoods goods = new CreatingGoods(goods1, goods2, goods3);
+        return goods;
+    }
+
+    private record CreatingGoods(Goods goods1, Goods goods2, Goods goods3) {
+    }
+
+    private static CreatingLists getCreatingLists() {
+        List<Cashier> cashiers = new ArrayList<>();
+        List<Goods> inventory = new ArrayList<>();
+        List<Receipt> receipts = new ArrayList<>();
+        CreatingLists lsists = new CreatingLists(cashiers, inventory, receipts);
+        return lsists;
+    }
+
+    private record CreatingLists(List<Cashier> cashiers, List<Goods> inventory, List<Receipt> receipts) {
     }
 }
