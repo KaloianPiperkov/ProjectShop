@@ -4,7 +4,9 @@
 
 package project.cashier;
 
-public class Cashier extends Salary{
+import java.io.Serializable;
+
+public class Cashier extends Salary implements Serializable {
     private String name_of_cashier;
     private long id_of_cashier;
     //private double salary_of_cashier_per_hour;

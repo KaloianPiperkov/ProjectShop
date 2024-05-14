@@ -55,7 +55,7 @@ public class Receipt implements Serializable {
         this.date_and_time_of_creation = now;
     }
 
-    private void saveToFile() {
+    public void saveToFile() {
         String filename = "receipt_" + id_receipt + ".dat"; // Use .dat extension for serialized files
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
             oos.writeObject(this);                          // Write the Receipt object to the file
@@ -78,19 +78,23 @@ public class Receipt implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Receipt ID: ").append(id_receipt)
-                .append(", Cashier: ").append(cashier.getName()) // assuming you have a getName method in Cashier
-                .append(", Date of Creation: ").append(date_and_time_of_creation)
-                .append(", Purchased Items: \n");
+        sb.append("Receipt ID: ").append(id_receipt).append("\n")
+                .append("Cashier: ").append(cashier.getName()).append("\n") // assuming you have a getName method in Cashier
+                .append("Date of Creation: ").append(date_and_time_of_creation).append("\n")
+                .append("Purchased Items: \n");
 
         for (PurchasedItem item : purchasedItems) {
             sb.append("Goods Name: ").append(item.getGoods().getName()) // assuming you have a getName method in Goods
                     .append(", Quantity: ").append(item.getQuantity()).append("\n");
         }
 
-        sb.append("Total Value: ").append(totalValue);
+        sb.append("Total Value: ").append(totalValue).append("\n");
 
         return sb.toString();
+    }
+
+    public long getId() {
+        return id_receipt;
     }
 }
 

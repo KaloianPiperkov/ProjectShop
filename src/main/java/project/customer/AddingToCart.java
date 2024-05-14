@@ -4,10 +4,11 @@ import project.inventory.CanBeSold;
 import project.inventory.Goods;
 import project.inventory.GoodsQuantity;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AddingToCart extends GoodsQuantity{
+public class AddingToCart extends GoodsQuantity implements Serializable {
     private Customer customer;
     private Map<Goods, Integer> shopping_cart;
 

@@ -2,9 +2,10 @@ package project.customer;
 
 import project.inventory.Goods;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Customer {
+public class Customer implements Serializable {
 
     private long id;
     private List<Goods> goods;

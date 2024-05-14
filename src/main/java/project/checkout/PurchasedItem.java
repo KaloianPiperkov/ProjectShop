@@ -2,7 +2,9 @@ package project.checkout;
 
 import project.inventory.Goods;
 
-public class PurchasedItem {
+import java.io.Serializable;
+
+public class PurchasedItem implements Serializable {
     private Goods goods;
     private int quantity;
     private double totalPrice;

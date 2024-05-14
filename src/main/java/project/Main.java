@@ -65,11 +65,17 @@ public class Main {
         cart.addGoodsToCart(goods2, 5);
         cart.addGoodsToCart(goods3, 5);
         System.out.println(cart);
+        Customer customer2 = new Customer(0002, inventory, 120.32);
+        AddingToCart cart2 = new AddingToCart(customer2);
+        cart2.addGoodsToCart(goods1, 6);
+        cart2.addGoodsToCart(goods2, 3);
+        System.out.println(cart2);
 
         CashDesk cashDesk = new CashDesk(receipts);
 
         // Get the items from the customer's cart
         Map<Goods, Integer> purchaseMap = cart.getShoppingCart(); // assuming you have a getShoppingCart method in AddingToCart
+        Map<Goods, Integer> purchaseMap2 = cart2.getShoppingCart(); // assuming you have a getShoppingCart method in AddingToCart
 
 // Process the purchase at the cash desk
         Random random = new Random();
@@ -78,9 +84,21 @@ public class Main {
 
 // Use randomCashier for the purchase
         Receipt receipt = cashDesk.processPurchase(randomCashier, customer, purchaseMap);
+        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customer, purchaseMap2);
 
 // Print the receipt
-        System.out.println(receipt);
+        String filename =  receipt.getId() + ".dat"; // assuming you have a getId method in Receipt
+        String filename2 = receipt2.getId() + ".dat"; // assuming you have a getId method in Receipt
+        receipt.saveToFile();
+        receipt2.saveToFile();
+
+// Read the receipt from the file
+        Receipt readReceipt = Receipt.readFromFile(filename);
+        Receipt readReceipt2 = Receipt.readFromFile(filename2);
+
+// Print the read receipt
+        System.out.println(readReceipt);
+        System.out.println(readReceipt2);
 
 
     }

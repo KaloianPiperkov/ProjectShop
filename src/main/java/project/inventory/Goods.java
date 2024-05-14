@@ -9,11 +9,12 @@
 
 package project.inventory;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 
-public class Goods extends GoodsSellingPriceCalculator{
+public class Goods extends GoodsSellingPriceCalculator implements Serializable {
 
     private long goods_id;
     private String goods_name;
