@@ -32,7 +32,6 @@ public class Receipt implements Serializable {
         this.id_receipt = nextId++;
         this.date_and_time_of_creation = LocalDateTime.now();
         calculateTotalValue();
-        saveToFile(); // Save the receipt to a file when it is created
     }
 
     public void setCashier(Cashier cashier) {
@@ -55,25 +54,7 @@ public class Receipt implements Serializable {
         this.date_and_time_of_creation = now;
     }
 
-    public void saveToFile() {
-        String filename = "receipt_" + id_receipt + ".dat"; // Use .dat extension for serialized files
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-            oos.writeObject(this);                          // Write the Receipt object to the file
-            System.out.println("Receipt saved to file: " + filename);
-        } catch (IOException e) {
-            System.out.println("Error occurred while saving receipt to file: " + e.getMessage());
-        }
-    }
 
-    public static Receipt readFromFile(String filename) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
-            return (Receipt) ois.readObject(); // Read the Receipt object from the file
-        } catch (IOException | ClassNotFoundException e) {
-            System.out.println("Error occurred while reading receipt from file: " + e.getMessage());
-            return null;
-        }
-
-    }
 
     @Override
     public String toString() {

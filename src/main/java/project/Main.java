@@ -4,6 +4,7 @@ package project;
 import project.cashier.Cashier;
 import project.checkout.CashDesk;
 import project.checkout.Receipt;
+import project.checkout.ReceiptFileHandler;
 import project.customer.AddingToCart;
 import project.customer.Customer;
 import project.inventory.*;
@@ -87,18 +88,32 @@ public class Main {
         Receipt receipt2 = cashDesk.processPurchase(randomCashier, customer, purchaseMap2);
 
 // Print the receipt
-        String filename =  receipt.getId() + ".dat"; // assuming you have a getId method in Receipt
-        String filename2 = receipt2.getId() + ".dat"; // assuming you have a getId method in Receipt
-        receipt.saveToFile();
-        receipt2.saveToFile();
+//        String filename =  receipt.getId() + ".dat"; // assuming you have a getId method in Receipt
+//        String filename2 = receipt2.getId() + ".dat"; // assuming you have a getId method in Receipt
+//        receipt.saveToFile();
+//        receipt2.saveToFile();
+//
+//// Read the receipt from the file
+//        Receipt readReceipt = Receipt.readFromFile(filename);
+//        Receipt readReceipt2 = Receipt.readFromFile(filename2);
+//
+//// Print the read receipt
+//        System.out.println(readReceipt);
+//        System.out.println(readReceipt2);
+
+        // Main.java
+// ...
+
+        ReceiptFileHandler fileHandler = new ReceiptFileHandler();
+
+// Save the receipt to a file
+        String filename = receipt.getId() + ".dat";
+        fileHandler.saveToFile(receipt);
 
 // Read the receipt from the file
-        Receipt readReceipt = Receipt.readFromFile(filename);
-        Receipt readReceipt2 = Receipt.readFromFile(filename2);
+        Receipt readReceipt = fileHandler.readFromFile(filename);
 
-// Print the read receipt
         System.out.println(readReceipt);
-        System.out.println(readReceipt2);
 
 
     }
