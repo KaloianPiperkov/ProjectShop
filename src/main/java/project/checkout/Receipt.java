@@ -10,20 +10,30 @@ import project.cashier.Cashier;
 import project.customer.AddingToCart;
 import project.inventory.Goods;
 
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Receipt {
+public class Receipt implements Serializable {
+
+    private static final long serialVersionUID = 1L; // Serial version UID for version control
+
+    private static long nextId = 1; // Static variable to generate unique receipt IDs
     private long id_receipt;
     private Cashier cashier; //the cashier that creates it;
     private LocalDateTime date_and_time_of_creation;
-
     private AddingToCart addingToCart;
-
     private List<PurchasedItem> purchasedItems = new ArrayList<>();
     private double totalValue = 0.0;
+
+    public Receipt() {
+        this.id_receipt = nextId++;
+        this.date_and_time_of_creation = LocalDateTime.now();
+        calculateTotalValue();
+        saveToFile(); // Save the receipt to a file when it is created
+    }
 
     public void setCashier(Cashier cashier) {
         this.cashier = cashier;
@@ -45,6 +55,26 @@ public class Receipt {
         this.date_and_time_of_creation = now;
     }
 
+    private void saveToFile() {
+        String filename = "receipt_" + id_receipt + ".dat"; // Use .dat extension for serialized files
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+            oos.writeObject(this);                          // Write the Receipt object to the file
+            System.out.println("Receipt saved to file: " + filename);
+        } catch (IOException e) {
+            System.out.println("Error occurred while saving receipt to file: " + e.getMessage());
+        }
+    }
+
+    public static Receipt readFromFile(String filename) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            return (Receipt) ois.readObject(); // Read the Receipt object from the file
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error occurred while reading receipt from file: " + e.getMessage());
+            return null;
+        }
+
+    }
+
     @Override
     public String toString() {
         return "Receipt{" +
@@ -56,9 +86,5 @@ public class Receipt {
                 ", totalValue=" + totalValue +
                 '}';
     }
-
-
-    //when the receipt is created it need to be stored in a file!
-
 }
 
