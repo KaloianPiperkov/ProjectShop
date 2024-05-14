@@ -33,6 +33,10 @@ public class Cashier extends Salary{
                 '}';
     }
 
+    public char[] getName() {
+        return name_of_cashier.toCharArray();
+    }
+
 
     //    public double calculateMonthlySalary(){
 //        double salary = 0.0;

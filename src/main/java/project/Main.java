@@ -10,10 +10,7 @@ import project.inventory.*;
 import project.shop.Shop;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class Main {
@@ -66,17 +63,23 @@ public class Main {
         Customer customer = new Customer(0001, inventory, 120.32);
         AddingToCart cart = new AddingToCart(customer);
         cart.addGoodsToCart(goods2, 5);
+        cart.addGoodsToCart(goods3, 5);
         System.out.println(cart);
 
         CashDesk cashDesk = new CashDesk(receipts);
 
-        Map<Goods, Integer> purchaseMap = new HashMap<>();
-        purchaseMap.put(goods2, 5);
+        // Get the items from the customer's cart
+        Map<Goods, Integer> purchaseMap = cart.getShoppingCart(); // assuming you have a getShoppingCart method in AddingToCart
 
-        // Process the purchase at the cash desk
-        Receipt receipt = cashDesk.processPurchase(cashier1, customer, purchaseMap);
+// Process the purchase at the cash desk
+        Random random = new Random();
+        int randomIndex = random.nextInt(cashiers.size());
+        Cashier randomCashier = cashiers.get(randomIndex);
 
-        // Print the receipt
+// Use randomCashier for the purchase
+        Receipt receipt = cashDesk.processPurchase(randomCashier, customer, purchaseMap);
+
+// Print the receipt
         System.out.println(receipt);
 
 

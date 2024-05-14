@@ -37,4 +37,8 @@ public class AddingToCart extends GoodsQuantity{
         }
         return sb.toString();
     }
+
+    public Map<Goods, Integer> getShoppingCart() {
+        return shopping_cart;
+    }
 }

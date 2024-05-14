@@ -47,14 +47,20 @@ public class Receipt {
 
     @Override
     public String toString() {
-        return "Receipt{" +
-                "id_receipt=" + id_receipt +
-                ", cashier=" + cashier +
-                ", date_and_time_of_creation=" + date_and_time_of_creation +
-                ", addingToCart=" + addingToCart +
-                ", purchasedItems=" + purchasedItems +
-                ", totalValue=" + totalValue +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        sb.append("Receipt ID: ").append(id_receipt)
+                .append(", Cashier: ").append(cashier.getName()) // assuming you have a getName method in Cashier
+                .append(", Date of Creation: ").append(date_and_time_of_creation)
+                .append(", Purchased Items: \n");
+
+        for (PurchasedItem item : purchasedItems) {
+            sb.append("Goods Name: ").append(item.getGoods().getName()) // assuming you have a getName method in Goods
+                    .append(", Quantity: ").append(item.getQuantity()).append("\n");
+        }
+
+        sb.append("Total Value: ").append(totalValue);
+
+        return sb.toString();
     }
 
 
