@@ -13,4 +13,5 @@ public class Salary implements SalaryCalculator{
                 return 0;
             }
     }
+
 }

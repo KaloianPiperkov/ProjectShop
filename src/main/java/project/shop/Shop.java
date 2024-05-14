@@ -11,10 +11,10 @@ public class Shop{
     private List<Cashier> cashiers;
     private List<Goods> inventory;
     private List<Receipt> receipts;
-    private double total_costs;
-    private double total_income;
+    private ShopCosts total_costs;
+    private ShopIncome total_income;
 
-    public Shop(String shop_name, List<Cashier> cashiers, List<Goods> inventory, List<Receipt> receipts, double total_costs, double total_income) {
+    public Shop(String shop_name, List<Cashier> cashiers, List<Goods> inventory, List<Receipt> receipts, ShopCosts total_costs, ShopIncome total_income) {
         this.shop_name = shop_name;
         this.cashiers = new ArrayList<>();
         this.inventory = new ArrayList<>();
@@ -39,21 +39,21 @@ public class Shop{
         return receipts;
     }
 
-    public double getTotal_costs() {
-        total_costs = 0;
-
-        //implementation to get the total cost
-        return total_costs;
-    }
-
-    public double getTotal_income() {
+    public ShopIncome getTotal_income() {
         return total_income;
     }
 
+    public double getCashierSalary(long cashierId)
+    {
+        for (Cashier cashier : cashiers ){
+            if (cashier.getId_of_cashier() == cashierId){
+                return cashier.getSalary();
+            }
+        }
+        return -1;
+    }
 
-    //adding the cashiers and the goods to the shop????
 
 
-    //calculate total cost and profit and income
 
 }

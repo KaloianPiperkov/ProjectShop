@@ -9,6 +9,8 @@ import project.customer.AddingToCart;
 import project.customer.Customer;
 import project.inventory.*;
 import project.shop.Shop;
+import project.shop.ShopCosts;
+import project.shop.ShopIncome;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -18,8 +20,6 @@ public class Main {
     public static void main(String[] args) {
 
         CreatingLists lists = getCreatingLists();
-
-        Shop shop = new Shop("Lidl", lists.cashiers(), lists.inventory(), lists.receipts(), 0,0);
 
         SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator();
 
@@ -56,6 +56,13 @@ public class Main {
 // Use randomCashier for the purchase
         CreatingAndPrintingReciepts(cashDesk, randomCashier, customers, itemsCart);
 
+        ShopIncome shopIncome = new ShopIncome(lists.receipts);
+        ShopCosts shopCosts = new ShopCosts(lists.cashiers, lists.inventory);
+
+        System.out.println("Shop Income: " + shopIncome);
+        System.out.println("Shop Costs: " + shopCosts);
+
+        Shop shop = new Shop("Lidl", lists.cashiers(), lists.inventory(), lists.receipts(), shopCosts, shopIncome);
 
     }
 

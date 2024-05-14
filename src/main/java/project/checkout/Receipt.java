@@ -44,10 +44,11 @@ public class Receipt implements Serializable {
         totalValue += totalPrice;
     }
 
-    public void calculateTotalValue() {
+    public double calculateTotalValue() {
         totalValue = purchasedItems.stream()
                 .mapToDouble(PurchasedItem::getTotalPrice)
                 .sum();
+        return totalValue;
     }
 
     public void setDateTime(LocalDateTime now) {
