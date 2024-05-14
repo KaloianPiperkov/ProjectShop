@@ -85,4 +85,12 @@ public class Goods extends GoodsSellingPriceCalculator{
                 ", goods_quantity=" + goods_quantity +
                 '}';
     }
+
+    public void decreaseQuantity(int quantity) {
+        if (this.goods_quantity >= quantity) {
+            this.goods_quantity -= quantity;
+        } else {
+            throw new IllegalArgumentException("Not enough quantity in stock");
+        }
+    }
 }

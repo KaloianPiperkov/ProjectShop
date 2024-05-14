@@ -11,7 +11,9 @@ import project.shop.Shop;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class Main {
@@ -41,9 +43,9 @@ public class Main {
         System.out.println(goods3);
 
         //printing the selling price of these goods
-        System.out.println("Selling price for apples: " + goods1.calculateSellingPrice()); //almost expired
-        System.out.println("Selling price for strawberries: " + goods2.calculateSellingPrice()); //not expired
-        System.out.println("Selling price for toilet paper: " + goods3.calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 apple: " + goods1.calculateSellingPrice()); //almost expired
+        System.out.println("Selling price for 1 strawberries: " + goods2.calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 toilet paper: " + goods3.calculateSellingPrice()); //not expired
 
 
         Cashier cashier1 = new Cashier("Maria", 345);
@@ -60,15 +62,22 @@ public class Main {
         System.out.println("Cashier 1's monthly salary: " +cashier1.calculatingSalary(7.50, 170));
         System.out.println("Cashier 2's monthly salary: " +cashier2.calculatingSalary(8.50, 178));
 
-        CashDesk cashDesk = new CashDesk(cashier1);
-
 
         Customer customer = new Customer(0001, inventory, 120.32);
         AddingToCart cart = new AddingToCart(customer);
         cart.addGoodsToCart(goods2, 5);
         System.out.println(cart);
 
-        Receipt receipt = new Receipt();
+        CashDesk cashDesk = new CashDesk(receipts);
+
+        Map<Goods, Integer> purchaseMap = new HashMap<>();
+        purchaseMap.put(goods2, 5);
+
+        // Process the purchase at the cash desk
+        Receipt receipt = cashDesk.processPurchase(cashier1, customer, purchaseMap);
+
+        // Print the receipt
+        System.out.println(receipt);
 
 
     }
