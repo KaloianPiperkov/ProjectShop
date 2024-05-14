@@ -31,7 +31,7 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Shopping Cart: \n");
+        sb.append("Customer ").append(customer.getId()).append(" Shopping Cart: \n");
         for (Map.Entry<Goods, Integer> entry : shopping_cart.entrySet()) {
             sb.append("Goods Name: ").append(entry.getKey().getName())
                     .append(", Quantity: ").append(entry.getValue()).append("\n");

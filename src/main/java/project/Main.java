@@ -75,7 +75,7 @@ public class Main {
 
 // Save the receipt to a file
         String filename = receipt.getId() + ".dat";
-        String filename2 = receipt.getId() + ".dat";
+        String filename2 = receipt2.getId() + ".dat";
         fileHandler.saveToFile(receipt);
         fileHandler.saveToFile(receipt2);
 
