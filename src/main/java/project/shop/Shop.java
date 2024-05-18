@@ -6,6 +6,7 @@ import project.inventory.Goods;
 import project.checkout.Receipt;
 import project.inventory.IInventoryManager;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +17,34 @@ public class Shop {
     private IReceiptManager receiptManager;
     private ShopCosts total_costs;
     private ShopIncome total_income;
+    private BigDecimal foodOverchargePercent;
+    private BigDecimal nonFoodOverchargePercent;
 
-    public Shop(String shop_name, ICashierManager cashierManager, IInventoryManager inventoryManager, IReceiptManager receiptManager, ShopCosts total_costs, ShopIncome total_income) {
+    public Shop(String shop_name, ICashierManager cashierManager, IInventoryManager inventoryManager, IReceiptManager receiptManager, ShopCosts total_costs, ShopIncome total_income, BigDecimal foodOverchargePercent, BigDecimal nonFoodOverchargePercent) {
         this.shop_name = shop_name;
         this.cashierManager = cashierManager;
         this.inventoryManager = inventoryManager;
         this.receiptManager = receiptManager;
         this.total_costs = total_costs;
         this.total_income = total_income;
+        this.foodOverchargePercent = foodOverchargePercent;
+        this.nonFoodOverchargePercent = nonFoodOverchargePercent;
+    }
+
+    public BigDecimal getFoodOverchargePercent() {
+        return foodOverchargePercent;
+    }
+
+    public void setFoodOverchargePercent(BigDecimal foodOverchargePercent) {
+        this.foodOverchargePercent = foodOverchargePercent;
+    }
+
+    public BigDecimal getNonFoodOverchargePercent() {
+        return nonFoodOverchargePercent;
+    }
+
+    public void setNonFoodOverchargePercent(BigDecimal nonFoodOverchargePercent) {
+        this.nonFoodOverchargePercent = nonFoodOverchargePercent;
     }
 
     public String getShop_name() {
@@ -56,8 +77,6 @@ public class Shop {
         return "Shop{" +
                 "shop_name='" + shop_name + '\'' +
                 ", cashierManager=" + cashierManager +
-                ", inventoryManager=" + inventoryManager +
-                ", receiptManager=" + receiptManager +
                 ", total_costs=" + total_costs +
                 ", total_income=" + total_income +
                 '}';

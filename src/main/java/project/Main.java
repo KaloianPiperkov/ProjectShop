@@ -7,10 +7,7 @@ import project.checkout.*;
 import project.customer.AddingToCart;
 import project.customer.Customer;
 import project.inventory.*;
-import project.shop.ProfitCalculator;
-import project.shop.Shop;
-import project.shop.ShopCosts;
-import project.shop.ShopIncome;
+import project.shop.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,17 +18,14 @@ public class Main {
 
         CreatingLists lists = getCreatingLists();
 
-        SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator();
+        OverchargeCalculator overchargeCalculator = new OverchargeCalculator();
+
+
+
         CashDesk cashDesk = new CashDesk(lists.receipts());
 
         //creating the goods
-        CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
 
-        //printing the goods
-        PrintGoods(goods);
-
-        //printing the selling price of these goods
-        PrintSellingPriceForGoods(goods);
 
         CreatingAndPrintingCashiers cashiers = getCreatingAndPrintingCashiers();
 
@@ -43,29 +37,11 @@ public class Main {
 
         Cashier randomCashier = RandomizeCashier(lists);
 
-        // Simulate shopping
-
-//        //creating the goods
-//        CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
-
-        //printing the goods
-        PrintGoods(goods);
-
-        //printing the selling price of these goods
-        PrintSellingPriceForGoods(goods);
-
-//        CreatingAndPrintingCashiers cashiers = getCreatingAndPrintingCashiers();
-
-        //adding the cashiers to the shop
-        AddingCashiersToShop(lists, cashiers);
-
-        //printing their salaries
-        PrintCashiersSalary(cashiers);
 
         CreatingCustomers customers = getCreatingCustomers(lists);
 
 
-        CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
+
 
         ICashierManager cashierManager = new CashierManager();
         IInventoryManager inventoryManager = new InventoryManager();
@@ -74,6 +50,27 @@ public class Main {
         // Add cashiers, goods, and receipts to their respective managers
         cashierManager.addCashier(cashiers.cashier1());
         cashierManager.addCashier(cashiers.cashier2());
+
+
+
+
+        ShopIncome shopIncome = new ShopIncome(receiptManager.getReceipts());
+        ShopCosts shopCosts = new ShopCosts(cashierManager.getCashiers(), inventoryManager.getInventory());
+
+        Shop shop = new Shop("Lidl", cashierManager, inventoryManager, receiptManager, shopCosts, shopIncome, BigDecimal.valueOf(8.5), BigDecimal.valueOf(4.0));
+        Shop shop2 = new Shop("Kaufland", cashierManager, inventoryManager, receiptManager, shopCosts, shopIncome, BigDecimal.valueOf(10.5), BigDecimal.valueOf(6.0));
+        List<Shop> shops = new ArrayList<>();
+        shops.add(shop);
+        shops.add(shop2);
+        System.out.println(shop);
+
+        SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator,shop);
+        SellingPriceCalculation sellingPriceCalculator2 = new GoodsSellingPriceCalculator(overchargeCalculator,shop2);
+
+        CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
+        CreatingGoods goods2 = getCreatingGoods(sellingPriceCalculator2);
+
+        CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
         inventoryManager.addGoods(goods.goods1());
         inventoryManager.addGoods(goods.goods2());
         inventoryManager.addGoods(goods.goods3());
@@ -81,13 +78,14 @@ public class Main {
         // Process the purchase at the cash desk
         GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
 
+        //printing the goods
+        PrintGoods(goods);
+
+        //printing the selling price of these goods
+        PrintSellingPriceForGoods(goods);
+        PrintSellingPriceForGoods(goods2);
         CreatingAndPrintingReceipts(cashDesk,randomCashier,customers, itemsCart, receiptManager);
 
-        ShopIncome shopIncome = new ShopIncome(receiptManager.getReceipts());
-        ShopCosts shopCosts = new ShopCosts(cashierManager.getCashiers(), inventoryManager.getInventory());
-
-        Shop shop = new Shop("Lidl", cashierManager, inventoryManager, receiptManager, shopCosts, shopIncome);
-        System.out.println(shop);
 
         System.out.println(shopCosts);
         System.out.println(shopIncome);
@@ -172,6 +170,14 @@ public class Main {
         System.out.println("Cashier 1's monthly salary: " + salary1);
         System.out.println("Cashier 2's monthly salary: " + salary2);
     }
+
+//    private static void AddingShopsToList(CreatingLists lists){
+//
+//    }
+//    private static CreatingShops getCreatingShops(){
+//
+//    }
+//    private record CreatingShops(Shop shop, Shop shop2)
 
     private static void AddingCashiersToShop(CreatingLists lists, CreatingAndPrintingCashiers cashiers) {
         lists.cashiers().add(cashiers.cashier1());
