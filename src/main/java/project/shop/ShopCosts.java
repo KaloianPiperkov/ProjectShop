@@ -4,12 +4,13 @@ import project.cashier.Cashier;
 import project.cashier.Salary;
 import project.inventory.Goods;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ShopCosts implements CalculatingTotalCost{
     private List<Cashier> cashiers;
     private List<Goods> goods;
-    private double total_cost;
+    private BigDecimal total_cost;
 
     public ShopCosts(List<Cashier> cashiers, List<Goods> goods) {
         this.cashiers = cashiers;
@@ -17,7 +18,7 @@ public class ShopCosts implements CalculatingTotalCost{
     }
 
     @Override
-    public double calculateTotalCost() {
+    public BigDecimal calculateTotalCost() {
 
         for (Cashier cashier : cashiers){
             total_cost += cashier.getSalary();

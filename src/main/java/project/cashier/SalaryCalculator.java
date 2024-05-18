@@ -1,5 +1,7 @@
 package project.cashier;
 
+import java.math.BigDecimal;
+
 public interface SalaryCalculator {
-    double calculatingSalary(double salary_per_hour, double hours_worked);
+    BigDecimal calculatingSalary(BigDecimal salary_per_hour, BigDecimal hours_worked);
 }

@@ -5,11 +5,12 @@
 package project.cashier;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class Cashier extends Salary implements Serializable {
     private String name_of_cashier;
     private long id_of_cashier;
-    private double salary;
+    private BigDecimal salary;
 
     public Cashier(String name_of_cashier, long id_of_cashier) {
         this.name_of_cashier = name_of_cashier;
@@ -23,7 +24,7 @@ public class Cashier extends Salary implements Serializable {
     public long getId_of_cashier() {
         return id_of_cashier;
     }
-    public double getSalary(){return salary;}
+    public BigDecimal getSalary(){return salary;}
 
     @Override
     public String toString() {

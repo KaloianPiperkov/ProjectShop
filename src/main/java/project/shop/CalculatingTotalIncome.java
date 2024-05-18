@@ -1,5 +1,7 @@
 package project.shop;
 
+import java.math.BigDecimal;
+
 public interface CalculatingTotalIncome {
-    public double calculateTotalIncome();
+    public BigDecimal calculateTotalIncome();
 }

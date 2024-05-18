@@ -10,6 +10,7 @@
 package project.inventory;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -18,18 +19,18 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
 
     private long goods_id;
     private String goods_name;
-    private double goods_delivery_price;
+    private BigDecimal goods_delivery_price;
     private Category category;
     private LocalDate goods_expiry_date;
     private int goods_quantity;
 
     private SellingPriceCalculation sellingPriceCalculator;
 
-    public double calculateSellingPrice() {
+    public BigDecimal calculateSellingPrice() {
         return sellingPriceCalculator.calcualteSellingPrice(this);
     }
 
-    public Goods(long goods_id, String goods_name, double goods_delivery_price, Category category, LocalDate goods_expiry_date, int goods_quantity, SellingPriceCalculation sellingPriceCalculator) {
+    public Goods(long goods_id, String goods_name, BigDecimal goods_delivery_price, Category category, LocalDate goods_expiry_date, int goods_quantity, SellingPriceCalculation sellingPriceCalculator) {
         this.goods_id = goods_id;
         this.goods_name = goods_name;
         this.goods_delivery_price = goods_delivery_price;
@@ -47,7 +48,7 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
         return goods_name;
     }
 
-    public double getDelivery_price() {
+    public BigDecimal getDelivery_price() {
         return goods_delivery_price;
     }
 

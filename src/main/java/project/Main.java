@@ -1,10 +1,9 @@
 package project;
 
-
 import project.cashier.Cashier;
-import project.checkout.CashDesk;
-import project.checkout.Receipt;
-import project.checkout.ReceiptFileHandler;
+import project.cashier.CashierManager;
+import project.cashier.ICashierManager;
+import project.checkout.*;
 import project.customer.AddingToCart;
 import project.customer.Customer;
 import project.inventory.*;
@@ -14,7 +13,6 @@ import project.shop.ShopIncome;
 
 import java.time.LocalDate;
 import java.util.*;
-
 
 public class Main {
     public static void main(String[] args) {
@@ -32,7 +30,6 @@ public class Main {
         //printing the selling price of these goods
         PrintSellingPriceForGoods(goods);
 
-
         CreatingAndPrintingCashiers cashiers = getCreatingAndPrintingCashiers();
 
         //adding the cashiers to the shop
@@ -45,42 +42,52 @@ public class Main {
 
         CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
 
-        CashDesk cashDesk = new CashDesk(lists.receipts());
+        ICashierManager cashierManager = new CashierManager();
+        IInventoryManager inventoryManager = new InventoryManager();
+        IReceiptManager receiptManager = new ReceiptManager();
+
+        // Add cashiers, goods, and receipts to their respective managers
+        cashierManager.addCashier(cashiers.cashier1());
+        cashierManager.addCashier(cashiers.cashier2());
+        inventoryManager.addGoods(goods.goods1());
+        inventoryManager.addGoods(goods.goods2());
+        inventoryManager.addGoods(goods.goods3());
+
+        // Process the purchase at the cash desk
+        CashDesk cashDesk = new CashDesk(receiptManager.getReceipts());
 
         // Get the items from the customer's cart
         GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
 
-// Process the purchase at the cash desk
+        // Use randomCashier for the purchase
         Cashier randomCashier = RandomizeCashier(lists);
 
-        // Use randomCashier for the purchase
-        CreatingAndPrintingReciepts(cashDesk, randomCashier, customers, itemsCart);
-
-        ShopIncome shopIncome = new ShopIncome(lists.receipts);
-        ShopCosts shopCosts = new ShopCosts(lists.cashiers, lists.inventory);
-
-        System.out.println("Shop Income: " + shopIncome);
-        System.out.println("Shop Costs: " + shopCosts);
-
-        Shop shop = new Shop("Lidl", lists.cashiers(), lists.inventory(), lists.receipts(), shopCosts, shopIncome);
-        System.out.println(shop);
-    }
-
-
-    private static void CreatingAndPrintingReciepts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
         Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
 
+        receiptManager.addReceipt(receipt);
+        receiptManager.addReceipt(receipt2);
+
+        ShopIncome shopIncome = new ShopIncome(receiptManager.getReceipts());
+        ShopCosts shopCosts = new ShopCosts(cashierManager.getCashiers(), inventoryManager.getInventory());
+
+        Shop shop = new Shop("Lidl", cashierManager, inventoryManager, receiptManager, shopCosts, shopIncome);
+        System.out.println(shop);
+    }
+
+    private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart) {
+        Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
 
-// Save the receipt to a file
+        // Save the receipt to a file
         String filename = receipt.getId() + ".dat";
         String filename2 = receipt2.getId() + ".dat";
         fileHandler.saveToFile(receipt);
         fileHandler.saveToFile(receipt2);
 
-// Read the receipt from the file
+        // Read the receipt from the file
         Receipt readReceipt = fileHandler.readFromFile(filename);
         Receipt readReceipt2 = fileHandler.readFromFile(filename2);
 
@@ -121,9 +128,9 @@ public class Main {
     private record CreatingCartsAndAddingGoodsToCards(AddingToCart cart, AddingToCart cart2) {
     }
 
-    private static CreatingCustomers getCreatingCustomers(CreatingLists lsists) {
-        Customer customer = new Customer(0001, lsists.inventory(), 120.32);
-        Customer customer2 = new Customer(0002, lsists.inventory(), 120.32);
+    private static CreatingCustomers getCreatingCustomers(CreatingLists lists) {
+        Customer customer = new Customer(0001, lists.inventory(), 120.32);
+        Customer customer2 = new Customer(0002, lists.inventory(), 120.32);
         CreatingCustomers customers = new CreatingCustomers(customer, customer2);
         return customers;
     }
@@ -136,9 +143,9 @@ public class Main {
         System.out.println("Cashier 2's monthly salary: " + cashiers.cashier2().calculatingSalary(8.50, 178));
     }
 
-    private static void AddingCashiersToShop(CreatingLists lsists, CreatingAndPrintingCashiers cashiers) {
-        lsists.cashiers().add(cashiers.cashier1());
-        lsists.cashiers().add(cashiers.cashier2());
+    private static void AddingCashiersToShop(CreatingLists lists, CreatingAndPrintingCashiers cashiers) {
+        lists.cashiers().add(cashiers.cashier1());
+        lists.cashiers().add(cashiers.cashier2());
     }
 
     private static CreatingAndPrintingCashiers getCreatingAndPrintingCashiers() {
@@ -181,8 +188,8 @@ public class Main {
         List<Cashier> cashiers = new ArrayList<>();
         List<Goods> inventory = new ArrayList<>();
         List<Receipt> receipts = new ArrayList<>();
-        CreatingLists lsists = new CreatingLists(cashiers, inventory, receipts);
-        return lsists;
+        CreatingLists lists = new CreatingLists(cashiers, inventory, receipts);
+        return lists;
     }
 
     private record CreatingLists(List<Cashier> cashiers, List<Goods> inventory, List<Receipt> receipts) {

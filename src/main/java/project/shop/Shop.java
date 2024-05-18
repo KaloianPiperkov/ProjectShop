@@ -1,24 +1,27 @@
 package project.shop;
 import project.cashier.Cashier;
+import project.cashier.ICashierManager;
+import project.checkout.IReceiptManager;
 import project.inventory.Goods;
 import project.checkout.Receipt;
+import project.inventory.IInventoryManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shop{
+public class Shop {
     private String shop_name;
-    private List<Cashier> cashiers;
-    private List<Goods> inventory;
-    private List<Receipt> receipts;
+    private ICashierManager cashierManager;
+    private IInventoryManager inventoryManager;
+    private IReceiptManager receiptManager;
     private ShopCosts total_costs;
     private ShopIncome total_income;
 
-    public Shop(String shop_name, List<Cashier> cashiers, List<Goods> inventory, List<Receipt> receipts, ShopCosts total_costs, ShopIncome total_income) {
+    public Shop(String shop_name, ICashierManager cashierManager, IInventoryManager inventoryManager, IReceiptManager receiptManager, ShopCosts total_costs, ShopIncome total_income) {
         this.shop_name = shop_name;
-        this.cashiers = new ArrayList<>();
-        this.inventory = new ArrayList<>();
-        this.receipts = new ArrayList<>();
+        this.cashierManager = cashierManager;
+        this.inventoryManager = inventoryManager;
+        this.receiptManager = receiptManager;
         this.total_costs = total_costs;
         this.total_income = total_income;
     }
@@ -27,30 +30,24 @@ public class Shop{
         return shop_name;
     }
 
-    public List<Cashier> getCashiers() {
-        return cashiers;
+    public ICashierManager getCashierManager() {
+        return cashierManager;
     }
 
-    public List<Goods> getInventory() {
-        return inventory;
+    public IInventoryManager getInventoryManager() {
+        return inventoryManager;
     }
 
-    public List<Receipt> getReceipts() {
-        return receipts;
+    public IReceiptManager getReceiptManager() {
+        return receiptManager;
+    }
+
+    public ShopCosts getTotal_costs() {
+        return total_costs;
     }
 
     public ShopIncome getTotal_income() {
         return total_income;
-    }
-
-    public double getCashierSalary(long cashierId)
-    {
-        for (Cashier cashier : cashiers ){
-            if (cashier.getId_of_cashier() == cashierId){
-                return cashier.getSalary();
-            }
-        }
-        return -1;
     }
 
 
@@ -58,9 +55,9 @@ public class Shop{
     public String toString() {
         return "Shop{" +
                 "shop_name='" + shop_name + '\'' +
-                ", cashiers=" + cashiers +
-                ", inventory=" + inventory +
-                ", receipts=" + receipts +
+                ", cashierManager=" + cashierManager +
+                ", inventoryManager=" + inventoryManager +
+                ", receiptManager=" + receiptManager +
                 ", total_costs=" + total_costs +
                 ", total_income=" + total_income +
                 '}';
