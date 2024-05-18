@@ -17,6 +17,9 @@ public class Cashier extends Salary implements Serializable {
         this.id_of_cashier = id_of_cashier;
     }
 
+    public void setSalary(BigDecimal salary){
+        this.salary = salary;
+    }
     public String getName_of_cashier() {
         return name_of_cashier;
     }

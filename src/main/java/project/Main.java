@@ -6,12 +6,11 @@ import project.cashier.ICashierManager;
 import project.checkout.*;
 import project.customer.AddingToCart;
 import project.customer.Customer;
-import project.customer.CustomerGenerator;
 import project.inventory.*;
+import project.shop.ProfitCalculator;
 import project.shop.Shop;
 import project.shop.ShopCosts;
 import project.shop.ShopIncome;
-import project.shop.ShoppingSimulator;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,8 +22,6 @@ public class Main {
         CreatingLists lists = getCreatingLists();
 
         SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator();
-        CustomerGenerator customerGenerator = new CustomerGenerator();
-        GoodsGenerator goodsGenerator = new GoodsGenerator(sellingPriceCalculator);
         CashDesk cashDesk = new CashDesk(lists.receipts());
 
         //creating the goods
@@ -45,10 +42,8 @@ public class Main {
         PrintCashiersSalary(cashiers);
 
         Cashier randomCashier = RandomizeCashier(lists);
-        ShoppingSimulator simulator = new ShoppingSimulator(customerGenerator, goodsGenerator, cashDesk, randomCashier, new Random());
 
         // Simulate shopping
-        simulator.simulateShopping();
 
 //        //creating the goods
 //        CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
@@ -69,6 +64,7 @@ public class Main {
 
         CreatingCustomers customers = getCreatingCustomers(lists);
 
+
         CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
 
         ICashierManager cashierManager = new CashierManager();
@@ -85,18 +81,34 @@ public class Main {
         // Process the purchase at the cash desk
         GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
 
-        CreatingAndPrintingReceipts(cashDesk,randomCashier,customers, itemsCart);
+        CreatingAndPrintingReceipts(cashDesk,randomCashier,customers, itemsCart, receiptManager);
 
         ShopIncome shopIncome = new ShopIncome(receiptManager.getReceipts());
         ShopCosts shopCosts = new ShopCosts(cashierManager.getCashiers(), inventoryManager.getInventory());
 
         Shop shop = new Shop("Lidl", cashierManager, inventoryManager, receiptManager, shopCosts, shopIncome);
         System.out.println(shop);
+
+        System.out.println(shopCosts);
+        System.out.println(shopIncome);
+        shopIncome.calculateTotalIncome();
+
+        BigDecimal totalIncome = shopIncome.calculateTotalIncome();
+        BigDecimal totalCosts = shopCosts.calculateTotalCost();
+        ProfitCalculator profitCalculator = new ProfitCalculator(totalIncome,totalCosts);
+        BigDecimal profit = profitCalculator.calculateProfit();
+        System.out.println("Profit: " + profit);
+
+
     }
 
-    private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart) {
+    private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart, IReceiptManager receiptManager) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
         Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
+
+        // Add the receipts to the receiptManager
+        receiptManager.addReceipt(receipt);
+        receiptManager.addReceipt(receipt2);
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
 
@@ -105,14 +117,6 @@ public class Main {
         String filename2 = receipt2.getId() + ".dat";
         fileHandler.saveToFile(receipt,filename);
         fileHandler.saveToFile(receipt2,filename2);
-
-
-        // Read the receipt from the file
-//        Receipt readReceipt = fileHandler.readFromFile(filename);
-//        Receipt readReceipt2 = fileHandler.readFromFile(filename2);
-//
-//        System.out.println(readReceipt);
-//        System.out.println(readReceipt2);
     }
 
     private static Cashier RandomizeCashier(CreatingLists lists) {
@@ -159,8 +163,14 @@ public class Main {
     }
 
     private static void PrintCashiersSalary(CreatingAndPrintingCashiers cashiers) {
-        System.out.println("Cashier 1's monthly salary: " + cashiers.cashier1().calculatingSalary(BigDecimal.valueOf(7.50), BigDecimal.valueOf(170)));
-        System.out.println("Cashier 2's monthly salary: " + cashiers.cashier2().calculatingSalary(BigDecimal.valueOf(8.50), BigDecimal.valueOf(160)));
+        BigDecimal salary1 = cashiers.cashier1().calculatingSalary(BigDecimal.valueOf(7.50), BigDecimal.valueOf(170));
+        BigDecimal salary2 = cashiers.cashier2().calculatingSalary(BigDecimal.valueOf(8.50), BigDecimal.valueOf(160));
+
+        cashiers.cashier1().setSalary(salary1);
+        cashiers.cashier2().setSalary(salary2);
+
+        System.out.println("Cashier 1's monthly salary: " + salary1);
+        System.out.println("Cashier 2's monthly salary: " + salary2);
     }
 
     private static void AddingCashiersToShop(CreatingLists lists, CreatingAndPrintingCashiers cashiers) {

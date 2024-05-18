@@ -21,7 +21,7 @@ public class Receipt implements Serializable {
 
     private static final long serialVersionUID = 1L; // Serial version UID for version control
 
-    private static long nextId = 0; // Static variable to generate unique receipt IDs
+    private static long nextId = 1; // Static variable to generate unique receipt IDs
     private long id_receipt;
     private Cashier cashier; //the cashier that creates it;
     private LocalDateTime date_and_time_of_creation;

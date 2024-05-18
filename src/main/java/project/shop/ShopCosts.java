@@ -7,35 +7,48 @@ import project.inventory.Goods;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class ShopCosts implements CalculatingTotalCost{
+public class ShopCosts implements CalculatingTotalCost {
     private List<Cashier> cashiers;
     private List<Goods> goods;
-    private BigDecimal total_cost;
+    private BigDecimal totalCost;
 
     public ShopCosts(List<Cashier> cashiers, List<Goods> goods) {
         this.cashiers = cashiers;
         this.goods = goods;
+        this.totalCost = calculateTotalCost();
     }
 
     @Override
     public BigDecimal calculateTotalCost() {
-
-        total_cost = BigDecimal.ZERO; // Reset totalCost to zero
+        totalCost = BigDecimal.ZERO; // Reset totalCost to zero
 
         for (Cashier cashier : cashiers) {
-            total_cost = total_cost.add(cashier.getSalary());
+            BigDecimal salary = cashier.getSalary();
+            if (salary != null) {
+                totalCost = totalCost.add(salary);
+            }
+            else {
+                System.out.println("---------SALARIES ARE NULL");
+            }
         }
 
         for (Goods goodsItem : goods) {
-            total_cost = total_cost.add(goodsItem.getDelivery_price());
+            BigDecimal deliveryPrice = goodsItem.getDelivery_price();
+            if (deliveryPrice != null) {
+                totalCost = totalCost.add(deliveryPrice);
+            }
+            else{
+                System.out.println("------Goods are null");
+            }
         }
-        return total_cost;
+
+        return totalCost;
     }
 
     @Override
-    public String toString() {
-        return "ShopCosts{" +
-                "total_cost=" + total_cost +
-                '}';
+    public String toString(){
+        return "Total Costs: " + totalCost;
     }
 }
+
+
