@@ -53,7 +53,7 @@ public class Main {
 // Process the purchase at the cash desk
         Cashier randomCashier = RandomizeCashier(lists);
 
-// Use randomCashier for the purchase
+        // Use randomCashier for the purchase
         CreatingAndPrintingReciepts(cashDesk, randomCashier, customers, itemsCart);
 
         ShopIncome shopIncome = new ShopIncome(lists.receipts);
@@ -63,8 +63,9 @@ public class Main {
         System.out.println("Shop Costs: " + shopCosts);
 
         Shop shop = new Shop("Lidl", lists.cashiers(), lists.inventory(), lists.receipts(), shopCosts, shopIncome);
-
+        System.out.println(shop);
     }
+
 
     private static void CreatingAndPrintingReciepts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());

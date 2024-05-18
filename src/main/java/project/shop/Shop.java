@@ -54,6 +54,15 @@ public class Shop{
     }
 
 
-
-
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "shop_name='" + shop_name + '\'' +
+                ", cashiers=" + cashiers +
+                ", inventory=" + inventory +
+                ", receipts=" + receipts +
+                ", total_costs=" + total_costs +
+                ", total_income=" + total_income +
+                '}';
+    }
 }

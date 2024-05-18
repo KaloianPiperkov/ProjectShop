@@ -65,7 +65,6 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
 
     public void setQuantity(int goods_quantity) {
         if(goods_quantity > 0){
-            //adding the goods to the cart/receipt
             this.goods_quantity = goods_quantity;
         }
         else {
