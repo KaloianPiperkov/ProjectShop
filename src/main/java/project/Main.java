@@ -6,10 +6,12 @@ import project.cashier.ICashierManager;
 import project.checkout.*;
 import project.customer.AddingToCart;
 import project.customer.Customer;
+import project.customer.CustomerGenerator;
 import project.inventory.*;
 import project.shop.Shop;
 import project.shop.ShopCosts;
 import project.shop.ShopIncome;
+import project.shop.ShoppingSimulator;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -21,6 +23,9 @@ public class Main {
         CreatingLists lists = getCreatingLists();
 
         SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator();
+        CustomerGenerator customerGenerator = new CustomerGenerator();
+        GoodsGenerator goodsGenerator = new GoodsGenerator(sellingPriceCalculator);
+        CashDesk cashDesk = new CashDesk(lists.receipts());
 
         //creating the goods
         CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
@@ -32,6 +37,29 @@ public class Main {
         PrintSellingPriceForGoods(goods);
 
         CreatingAndPrintingCashiers cashiers = getCreatingAndPrintingCashiers();
+
+        //adding the cashiers to the shop
+        AddingCashiersToShop(lists, cashiers);
+
+        //printing their salaries
+        PrintCashiersSalary(cashiers);
+
+        Cashier randomCashier = RandomizeCashier(lists);
+        ShoppingSimulator simulator = new ShoppingSimulator(customerGenerator, goodsGenerator, cashDesk, randomCashier, new Random());
+
+        // Simulate shopping
+        simulator.simulateShopping();
+
+//        //creating the goods
+//        CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
+
+        //printing the goods
+        PrintGoods(goods);
+
+        //printing the selling price of these goods
+        PrintSellingPriceForGoods(goods);
+
+//        CreatingAndPrintingCashiers cashiers = getCreatingAndPrintingCashiers();
 
         //adding the cashiers to the shop
         AddingCashiersToShop(lists, cashiers);
@@ -55,19 +83,7 @@ public class Main {
         inventoryManager.addGoods(goods.goods3());
 
         // Process the purchase at the cash desk
-        CashDesk cashDesk = new CashDesk(receiptManager.getReceipts());
-
-        // Get the items from the customer's cart
         GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
-
-        // Use randomCashier for the purchase
-        Cashier randomCashier = RandomizeCashier(lists);
-
-    //        Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
-    //        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
-//        CreatingAndPrintingReceipts(cashDesk,randomCashier,customers,itemsCart);
-//        receiptManager.addReceipt(receipt);
-//        receiptManager.addReceipt(receipt2);
 
         CreatingAndPrintingReceipts(cashDesk,randomCashier,customers, itemsCart);
 
