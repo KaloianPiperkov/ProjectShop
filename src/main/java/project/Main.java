@@ -11,6 +11,7 @@ import project.shop.Shop;
 import project.shop.ShopCosts;
 import project.shop.ShopIncome;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -129,8 +130,8 @@ public class Main {
     }
 
     private static CreatingCustomers getCreatingCustomers(CreatingLists lists) {
-        Customer customer = new Customer(0001, lists.inventory(), 120.32);
-        Customer customer2 = new Customer(0002, lists.inventory(), 120.32);
+        Customer customer = new Customer(0001, lists.inventory(), BigDecimal.valueOf(120.32));
+        Customer customer2 = new Customer(0002, lists.inventory(), BigDecimal.valueOf(120.30));
         CreatingCustomers customers = new CreatingCustomers(customer, customer2);
         return customers;
     }
@@ -139,8 +140,8 @@ public class Main {
     }
 
     private static void PrintCashiersSalary(CreatingAndPrintingCashiers cashiers) {
-        System.out.println("Cashier 1's monthly salary: " + cashiers.cashier1().calculatingSalary(7.50, 170));
-        System.out.println("Cashier 2's monthly salary: " + cashiers.cashier2().calculatingSalary(8.50, 178));
+        System.out.println("Cashier 1's monthly salary: " + cashiers.cashier1().calculatingSalary(BigDecimal.valueOf(7.50), BigDecimal.valueOf(170)));
+        System.out.println("Cashier 2's monthly salary: " + cashiers.cashier2().calculatingSalary(BigDecimal.valueOf(8.50), BigDecimal.valueOf(160)));
     }
 
     private static void AddingCashiersToShop(CreatingLists lists, CreatingAndPrintingCashiers cashiers) {
@@ -174,9 +175,9 @@ public class Main {
     }
 
     private static CreatingGoods getCreatingGoods(SellingPriceCalculation sellingPriceCalculator) {
-        Goods goods1 = new Goods(1000, "apples", 10, Category.FOOD, LocalDate.of(2024, 4, 7), 50, sellingPriceCalculator);
-        Goods goods2 = new Goods(1001, "strawberries", 13, Category.FOOD, LocalDate.of(2024, 6, 30), 150, sellingPriceCalculator);
-        Goods goods3 = new Goods(1002, "toilet paper", 6, Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200, sellingPriceCalculator);
+        Goods goods1 = new Goods(1000, "apples", BigDecimal.valueOf(10.35), Category.FOOD, LocalDate.of(2024, 4, 7), 50, sellingPriceCalculator);
+        Goods goods2 = new Goods(1001, "strawberries", BigDecimal.valueOf(13.5), Category.FOOD, LocalDate.of(2024, 6, 30), 150, sellingPriceCalculator);
+        Goods goods3 = new Goods(1002, "toilet paper", BigDecimal.valueOf(6.03), Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200, sellingPriceCalculator);
         CreatingGoods goods = new CreatingGoods(goods1, goods2, goods3);
         return goods;
     }
