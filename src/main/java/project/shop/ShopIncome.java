@@ -2,12 +2,13 @@ package project.shop;
 
 import project.checkout.Receipt;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ShopIncome implements CalculatingTotalIncome{
 
     private List<Receipt> receipts;
-    private double total_income;
+    private BigDecimal total_income;
 
 
     public ShopIncome(List<Receipt> receipts){
@@ -15,13 +16,13 @@ public class ShopIncome implements CalculatingTotalIncome{
     }
 
     @Override
-    public double calculateTotalIncome() {
+    public BigDecimal calculateTotalIncome() {
+        total_income = BigDecimal.ZERO; // Reset totalIncome to zero
 
-        for (Receipt receipt : receipts ){
-            total_income += receipt.calculateTotalValue();
-
-            //total_income - total_costs
+        for (Receipt receipt : receipts) {
+            total_income = total_income.add(receipt.calculateTotalValue());
         }
+
         return total_income;
     }
 

@@ -11,6 +11,7 @@ import project.customer.AddingToCart;
 import project.inventory.Goods;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
@@ -26,8 +27,7 @@ public class Receipt implements Serializable {
     private LocalDateTime date_and_time_of_creation;
     private AddingToCart addingToCart;
     private List<PurchasedItem> purchasedItems = new ArrayList<>();
-    private double totalValue = 0.0;
-
+    private BigDecimal totalValue = BigDecimal.ZERO;
     public Receipt() {
         this.id_receipt = nextId++;
         this.date_and_time_of_creation = LocalDateTime.now();
@@ -38,16 +38,16 @@ public class Receipt implements Serializable {
         this.cashier = cashier;
     }
 
-    public void addItem(Goods goods, int quantity, double totalPrice) {
+    public void addItem(Goods goods, int quantity, BigDecimal totalPrice) {
         PurchasedItem item = new PurchasedItem(goods, quantity, totalPrice);
         purchasedItems.add(item);
-        totalValue += totalPrice;
+        totalValue = totalValue.add(totalPrice);
     }
 
-    public double calculateTotalValue() {
+    public BigDecimal calculateTotalValue() {
         totalValue = purchasedItems.stream()
-                .mapToDouble(PurchasedItem::getTotalPrice)
-                .sum();
+                .map(PurchasedItem::getTotalPrice)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
         return totalValue;
     }
 

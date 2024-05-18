@@ -1,31 +1,30 @@
 package project.inventory;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Serializable {
+        @Override
+        public BigDecimal calculateSellingPrice(Goods goods) {
+            BigDecimal sellingPrice = BigDecimal.ZERO;
 
+            // Getting the overcharge percentage for the specific category
+            BigDecimal overchargePercent = goods.getCategory().getDefaultOverchargePercent();
 
-    @Override
-    public double calcualteSellingPrice(Goods goods) {
-        double selling_price = 0;
-        //getting the overcharge percentage for the specific category
-        double overcharge_percent = (goods.getCategory() == Category.FOOD) ? Category.FOOD.getDefaultOverchargePercent() : Category.NON_FOOD.getDefaultOverchargePercent();
+            sellingPrice = goods.getDelivery_price().multiply(BigDecimal.ONE.add(overchargePercent.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP)));
 
-        selling_price = goods.getDelivery_price() * (1 + (overcharge_percent / 100));
+            long daysUntilExpiration = ChronoUnit.DAYS.between(LocalDate.now(), goods.getExpiry_date()); // Should be put in another method
 
+            if (daysUntilExpiration > 0 && daysUntilExpiration <= 3) { // Considered close to expiration if less than or equal to 3 days left
+                sellingPrice = sellingPrice.multiply(BigDecimal.ONE.subtract(overchargePercent.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP)));
+            }
 
-        long days_until_expiration = ChronoUnit.DAYS.between(LocalDate.now(), goods.getExpiry_date());        //should be put in another method
+            sellingPrice = sellingPrice.setScale(2, RoundingMode.HALF_UP); // Should be put in another method and used in shop too!!!
 
-        if (days_until_expiration > 0 && days_until_expiration <= 3) { // Considered close to expiration if less than or equal to 3 days left
-            selling_price *= (1 - goods.getCategory().getDefaultOverchargePercent() / 100);
-
+            return sellingPrice;
         }
-
-        selling_price = Math.round(selling_price * 100.0) / 100.0; //should be put in another method and used in shop too!!!
-
-        return selling_price;
     }
-}
 

@@ -1,5 +1,7 @@
 package project.inventory;
 
+import java.math.BigDecimal;
+
 public interface SellingPriceCalculation {
-    double calcualteSellingPrice(Goods goods);
+    BigDecimal calculateSellingPrice(Goods goods);
 }

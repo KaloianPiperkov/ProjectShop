@@ -3,15 +3,16 @@ package project.customer;
 import project.inventory.Goods;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class Customer implements Serializable {
 
     private long id;
     private List<Goods> goods;
-    private double funds;
+    private BigDecimal funds;
 
-    public Customer(long id, List<Goods> goods, double funds) {
+    public Customer(long id, List<Goods> goods, BigDecimal funds) {
         this.id = id;
         this.goods = goods;
         this.funds = funds;
@@ -25,7 +26,7 @@ public class Customer implements Serializable {
         return goods;
     }
 
-    public double getFunds() {
+    public BigDecimal getFunds() {
         return funds;
     }
 

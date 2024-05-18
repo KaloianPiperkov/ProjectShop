@@ -3,13 +3,14 @@ package project.checkout;
 import project.inventory.Goods;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class PurchasedItem implements Serializable {
     private Goods goods;
     private int quantity;
-    private double totalPrice;
+    private BigDecimal totalPrice;
 
-    public PurchasedItem(Goods goods, int quantity, double totalPrice) {
+    public PurchasedItem(Goods goods, int quantity, BigDecimal totalPrice) {
         this.goods = goods;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
@@ -23,7 +24,7 @@ public class PurchasedItem implements Serializable {
         return quantity;
     }
 
-    public double getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 

@@ -20,12 +20,14 @@ public class ShopCosts implements CalculatingTotalCost{
     @Override
     public BigDecimal calculateTotalCost() {
 
-        for (Cashier cashier : cashiers){
-            total_cost += cashier.getSalary();
+        total_cost = BigDecimal.ZERO; // Reset totalCost to zero
+
+        for (Cashier cashier : cashiers) {
+            total_cost = total_cost.add(cashier.getSalary());
         }
 
-        for (Goods goods : goods){
-            total_cost += goods.getDelivery_price();
+        for (Goods goodsItem : goods) {
+            total_cost = total_cost.add(goodsItem.getDelivery_price());
         }
         return total_cost;
     }

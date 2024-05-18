@@ -3,7 +3,7 @@ package project.checkout;
 
 import java.io.*;
 
-public class ReceiptFileHandler {
+public class ReceiptFileHandler{
 
     public void saveToFile(Receipt receipt) {
         String filename = receipt.getId() + ".dat"; // Use .dat extension for serialized files

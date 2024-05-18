@@ -1,5 +1,6 @@
 package project.cashier;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +22,13 @@ public class CashierManager implements ICashierManager {
     }
 
     @Override
-    public double getCashierSalary(long cashierId) {
+    public BigDecimal getCashierSalary(long cashierId) {
         for (Cashier cashier : cashiers) {
             if (cashier.getId_of_cashier() == cashierId) {
                 return cashier.getSalary();
             }
         }
-        return -1;
+        return BigDecimal.valueOf(-1);
     }
 
     @Override

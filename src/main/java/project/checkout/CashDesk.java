@@ -5,6 +5,7 @@ import project.customer.AddingToCart;
 import project.customer.Customer;
 import project.inventory.Goods;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class CashDesk {
         for (Map.Entry<Goods, Integer> entry : purchaseMap.entrySet()) {
             Goods goods = entry.getKey();
             int quantity = entry.getValue();
-            double totalPrice = goods.calculateSellingPrice() * quantity;
+            BigDecimal totalPrice = goods.calculateSellingPrice().multiply(BigDecimal.valueOf(quantity));
 
             // Add the purchased item to the receipt
             receipt.addItem(goods, quantity, totalPrice);

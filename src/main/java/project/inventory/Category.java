@@ -1,15 +1,17 @@
 package project.inventory;
 
+import java.math.BigDecimal;
+
 public enum Category {
-    FOOD(12.5), NON_FOOD(9.0);
+    FOOD(new BigDecimal("12.5")), NON_FOOD(new BigDecimal("9.0"));
 
-    private final double defaultOverchargePercent;
+    private final BigDecimal defaultOverchargePercent;
 
-    Category(double defaultOverchargePercent) {
+    Category(BigDecimal defaultOverchargePercent) {
         this.defaultOverchargePercent = defaultOverchargePercent;
     }
 
-    public double getDefaultOverchargePercent() {
+    public BigDecimal getDefaultOverchargePercent() {
         return defaultOverchargePercent;
     }
 
