@@ -3,15 +3,13 @@ package project.checkout;
 
 import java.io.*;
 
-public class ReceiptFileHandler{
+public class ReceiptFileHandler {
 
-    public void saveToFile(Receipt receipt) {
-        String filename = receipt.getId() + ".dat"; // Use .dat extension for serialized files
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
-            oos.writeObject(receipt);                          // Write the Receipt object to the file
-            System.out.println("Receipt saved to file: " + filename);
+    public void saveToFile(Receipt receipt, String filename) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            writer.write(receipt.toString());
         } catch (IOException e) {
-            System.out.println("Error occurred while saving receipt to file: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

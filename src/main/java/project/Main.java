@@ -63,11 +63,13 @@ public class Main {
         // Use randomCashier for the purchase
         Cashier randomCashier = RandomizeCashier(lists);
 
-        Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
-        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
+    //        Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+    //        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
+//        CreatingAndPrintingReceipts(cashDesk,randomCashier,customers,itemsCart);
+//        receiptManager.addReceipt(receipt);
+//        receiptManager.addReceipt(receipt2);
 
-        receiptManager.addReceipt(receipt);
-        receiptManager.addReceipt(receipt2);
+        CreatingAndPrintingReceipts(cashDesk,randomCashier,customers, itemsCart);
 
         ShopIncome shopIncome = new ShopIncome(receiptManager.getReceipts());
         ShopCosts shopCosts = new ShopCosts(cashierManager.getCashiers(), inventoryManager.getInventory());
@@ -85,15 +87,16 @@ public class Main {
         // Save the receipt to a file
         String filename = receipt.getId() + ".dat";
         String filename2 = receipt2.getId() + ".dat";
-        fileHandler.saveToFile(receipt);
-        fileHandler.saveToFile(receipt2);
+        fileHandler.saveToFile(receipt,filename);
+        fileHandler.saveToFile(receipt2,filename2);
+
 
         // Read the receipt from the file
-        Receipt readReceipt = fileHandler.readFromFile(filename);
-        Receipt readReceipt2 = fileHandler.readFromFile(filename2);
-
-        System.out.println(readReceipt);
-        System.out.println(readReceipt2);
+//        Receipt readReceipt = fileHandler.readFromFile(filename);
+//        Receipt readReceipt2 = fileHandler.readFromFile(filename2);
+//
+//        System.out.println(readReceipt);
+//        System.out.println(readReceipt2);
     }
 
     private static Cashier RandomizeCashier(CreatingLists lists) {
