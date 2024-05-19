@@ -53,12 +53,4 @@ public class CashDesk {
     }
 }
 
-    //method to generate receipt for the client
-            //probably here we can also see if the customer has enough money for the purchase
-            //before giving the receipt??
-            //here we check for quantity of the goods
-
-    //method to update inventory with sold goods
-
-
 

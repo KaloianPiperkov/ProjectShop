@@ -39,6 +39,7 @@ public class Main {
         OverchargeCalculator overchargeCalculator = new OverchargeCalculator();
 
         CashDesk cashDesk1 = new CashDesk(lists1.receipts());
+
         System.out.println("\n");
         System.out.println("---Information about the cashiers in shop1---");
         CreatingAndPrintingCashiersShop1 cashiers = getCreatingAndPrintingCashiersShop1();
@@ -64,6 +65,15 @@ public class Main {
         inventoryManager1.addGoods(goods.goods1());
         inventoryManager1.addGoods(goods.goods2());
         inventoryManager1.addGoods(goods.goods3());
+        inventoryManager1.addGoods(goods.goods4());
+        inventoryManager1.addGoods(goods.goods5());
+        inventoryManager1.addGoods(goods.goods6());
+        inventoryManager1.addGoods(goods.goods7());
+        inventoryManager1.addGoods(goods.goods8());
+        inventoryManager1.addGoods(goods.goods9());
+        inventoryManager1.addGoods(goods.goods10());
+        inventoryManager1.addGoods(goods.goods11());
+        inventoryManager1.addGoods(goods.goods12());
 
         System.out.println("\n");
         System.out.println("---Printing the goods added to the shop1---");
@@ -144,6 +154,15 @@ public class Main {
         inventoryManager2.addGoods(goods2.goods1());
         inventoryManager2.addGoods(goods2.goods2());
         inventoryManager2.addGoods(goods2.goods3());
+        inventoryManager2.addGoods(goods2.goods4());
+        inventoryManager2.addGoods(goods2.goods5());
+        inventoryManager2.addGoods(goods2.goods6());
+        inventoryManager2.addGoods(goods2.goods7());
+        inventoryManager2.addGoods(goods2.goods8());
+        inventoryManager2.addGoods(goods2.goods9());
+        inventoryManager2.addGoods(goods2.goods10());
+        inventoryManager2.addGoods(goods2.goods11());
+        inventoryManager2.addGoods(goods2.goods12());
 
         PrintGoods2(goods2);
 
@@ -251,12 +270,14 @@ public class Main {
     }
 
     private static CreatingAndPrintingCashiersShop1 getCreatingAndPrintingCashiersShop1() {
+
         Cashier cashier1 = new Cashier("Maria", 345);
         Cashier cashier2 = new Cashier("Alex", 346);
 
         System.out.println(cashier1);
         System.out.println(cashier2);
         CreatingAndPrintingCashiersShop1 cashiers = new CreatingAndPrintingCashiersShop1(cashier1, cashier2);
+
         return cashiers;
     }
 
@@ -264,9 +285,18 @@ public class Main {
     }
 
     private static void PrintSellingPriceForGoods(CreatingGoods goods) {
-        System.out.println("Selling price for 1 apple: " + goods.goods1().calculateSellingPrice()); //almost expired
+        System.out.println("Selling price for 1 apple: " + goods.goods1().calculateSellingPrice());
         System.out.println("Selling price for 1 strawberries: " + goods.goods2().calculateSellingPrice()); //not expired
         System.out.println("Selling price for 1 toilet paper: " + goods.goods3().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 lutenica: " + goods.goods4().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 banana: " + goods.goods5().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 toothpaste: " + goods.goods6().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 tomato: " + goods.goods7().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 cigarette: " + goods.goods8().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 cereal: " + goods.goods9().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 tools: " + goods.goods10().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 sheets: " + goods.goods11().calculateSellingPrice()); //not expired
+        System.out.println("Selling price for 1 pasta: " + goods.goods12().calculateSellingPrice()); //not expired
     }
 
     private static void PrintGoods(CreatingGoods goods) {
@@ -279,11 +309,22 @@ public class Main {
         Goods goods1 = new Goods(1000, "apples", BigDecimal.valueOf(0.18), Category.FOOD, LocalDate.of(2024, 4, 7), 50, sellingPriceCalculator);
         Goods goods2 = new Goods(1001, "strawberries", BigDecimal.valueOf(0.62), Category.FOOD, LocalDate.of(2024, 6, 30), 150, sellingPriceCalculator);
         Goods goods3 = new Goods(1002, "toilet paper", BigDecimal.valueOf(0.70), Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200, sellingPriceCalculator);
-        CreatingGoods goods = new CreatingGoods(goods1, goods2, goods3);
+        Goods goods4 = new Goods(1003, "lutenica", BigDecimal.valueOf(1.50), Category.FOOD, LocalDate.of(2024, 6, 22), 45, sellingPriceCalculator);
+        Goods goods5 = new Goods(1004, "bananas", BigDecimal.valueOf(0.28), Category.FOOD, LocalDate.of(2024, 6, 10), 97, sellingPriceCalculator);
+        Goods goods6 = new Goods(1005, "toothpaste", BigDecimal.valueOf(2.30), Category.NON_FOOD, LocalDate.of(2030, 12, 10), 30, sellingPriceCalculator);
+        Goods goods7 = new Goods(1006, "tomatoes", BigDecimal.valueOf(0.57), Category.FOOD, LocalDate.of(2024, 6, 23), 77, sellingPriceCalculator);
+        Goods goods8 = new Goods(1007, "cigarettes", BigDecimal.valueOf(4.00), Category.NON_FOOD, LocalDate.of(2025, 12, 31),45 , sellingPriceCalculator);
+        Goods goods9 = new Goods(1008, "cereal", BigDecimal.valueOf(1.14), Category.FOOD, LocalDate.of(2025, 2, 6), 82, sellingPriceCalculator);
+        Goods goods10 = new Goods(1009, "tools", BigDecimal.valueOf(20.80), Category.NON_FOOD, LocalDate.of(2040, 11, 25), 25, sellingPriceCalculator);
+        Goods goods11 = new Goods(1010, "sheets", BigDecimal.valueOf(35.60), Category.NON_FOOD, LocalDate.of(2035, 9, 30), 20, sellingPriceCalculator);
+        Goods goods12 = new Goods(1011, "pasta", BigDecimal.valueOf(1.50), Category.FOOD, LocalDate.of(2026, 6, 15), 65, sellingPriceCalculator);
+
+        CreatingGoods goods = new CreatingGoods(goods1, goods2, goods3, goods4, goods5, goods6, goods7, goods8, goods9, goods10, goods11,goods12);
         return goods;
     }
 
-    private record CreatingGoods(Goods goods1, Goods goods2, Goods goods3) {
+    private record CreatingGoods(Goods goods1, Goods goods2, Goods goods3, Goods goods4, Goods goods5, Goods goods6,Goods goods7,
+                                 Goods goods8, Goods goods9,Goods goods10, Goods goods11, Goods goods12) {
     }
 
     private static CreatingLists getCreatingLists() {
@@ -332,15 +373,27 @@ public class Main {
         lists.inventory().add(goods.goods3());
     }
     private static CreatingGoods2 getCreatingGoodsForShop2(SellingPriceCalculation sellingPriceCalculator) {
-        Goods goods1 = new Goods(1000, "oranges", BigDecimal.valueOf(0.27), Category.FOOD, LocalDate.of(2024, 5, 7), 50, sellingPriceCalculator);
-        Goods goods2 = new Goods(1001, "cheese", BigDecimal.valueOf(2.30), Category.FOOD, LocalDate.of(2024, 7, 30), 150, sellingPriceCalculator);
-        Goods goods3 = new Goods(1002, "chairs", BigDecimal.valueOf(15.80), Category.NON_FOOD, LocalDate.of(2030, 7, 15), 200, sellingPriceCalculator);
-        CreatingGoods2 goods = new CreatingGoods2(goods1, goods2, goods3);
+        Goods goods1 = new Goods(2000, "milk", BigDecimal.valueOf(1.20), Category.NON_FOOD, LocalDate.of(2024, 5, 20), 120, sellingPriceCalculator);
+        Goods goods2 = new Goods(2001, "bread", BigDecimal.valueOf(0.95), Category.FOOD, LocalDate.of(2024, 5, 25), 130, sellingPriceCalculator);
+        Goods goods3 = new Goods(2002, "shampoo", BigDecimal.valueOf(3.50), Category.NON_FOOD, LocalDate.of(2030, 8, 15), 90, sellingPriceCalculator);
+        Goods goods4 = new Goods(2003, "cheese", BigDecimal.valueOf(2.50), Category.FOOD, LocalDate.of(2024, 7, 10), 75, sellingPriceCalculator);
+        Goods goods5 = new Goods(2004, "oranges", BigDecimal.valueOf(0.50), Category.FOOD, LocalDate.of(2024, 6, 5), 85, sellingPriceCalculator);
+        Goods goods6 = new Goods(2005, "detergent", BigDecimal.valueOf(4.30), Category.NON_FOOD, LocalDate.of(2031, 3, 20), 60, sellingPriceCalculator);
+        Goods goods7 = new Goods(2006, "carrots", BigDecimal.valueOf(0.40), Category.FOOD, LocalDate.of(2024, 5, 30), 110, sellingPriceCalculator);
+        Goods goods8 = new Goods(2007, "batteries", BigDecimal.valueOf(2.00), Category.NON_FOOD, LocalDate.of(2029, 12, 31), 50, sellingPriceCalculator);
+        Goods goods9 = new Goods(2008, "rice", BigDecimal.valueOf(1.10), Category.FOOD, LocalDate.of(2025, 1, 10), 100, sellingPriceCalculator);
+        Goods goods10 = new Goods(2009, "drill", BigDecimal.valueOf(45.00), Category.NON_FOOD, LocalDate.of(2045, 10, 1), 20, sellingPriceCalculator);
+        Goods goods11 = new Goods(2010, "towels", BigDecimal.valueOf(15.00), Category.NON_FOOD, LocalDate.of(2037, 7, 15), 30, sellingPriceCalculator);
+        Goods goods12 = new Goods(2011, "coffee", BigDecimal.valueOf(5.00), Category.NON_FOOD, LocalDate.of(2025, 12, 20), 140, sellingPriceCalculator);
+
+        CreatingGoods2 goods = new CreatingGoods2(goods1, goods2, goods3, goods4, goods5, goods6, goods7, goods8, goods9, goods10, goods11, goods12);
         return goods;
+
+
     }
 
-    private record CreatingGoods2(Goods goods1, Goods goods2, Goods goods3){
-
+    private record CreatingGoods2(Goods goods1, Goods goods2, Goods goods3, Goods goods4, Goods goods5, Goods goods6,Goods goods7,
+                                 Goods goods8, Goods goods9,Goods goods10, Goods goods11, Goods goods12) {
     }
     private static void PrintGoods2(CreatingGoods2 goods2){
         System.out.println(goods2.goods1());
@@ -349,9 +402,18 @@ public class Main {
     }
 
     private static void PrintSellingPriceForGoods2(CreatingGoods2 goods2){
-        System.out.println("Selling price for one orange: " + goods2.goods1().calculateSellingPrice());
-        System.out.println("Selling price for one cheese: " + goods2.goods2().calculateSellingPrice());
-        System.out.println("Selling price for one chair: " + goods2.goods3().calculateSellingPrice());
+        System.out.println("Selling price for one milk: " + goods2.goods1().calculateSellingPrice());
+        System.out.println("Selling price for one bread: " + goods2.goods2().calculateSellingPrice());
+        System.out.println("Selling price for one shampoo: " + goods2.goods3().calculateSellingPrice());
+        System.out.println("Selling price for one cheese: " + goods2.goods4().calculateSellingPrice());
+        System.out.println("Selling price for one orange: " + goods2.goods5().calculateSellingPrice());
+        System.out.println("Selling price for one detergent: " + goods2.goods6().calculateSellingPrice());
+        System.out.println("Selling price for one carrot: " + goods2.goods7().calculateSellingPrice());
+        System.out.println("Selling price for one battery: " + goods2.goods8().calculateSellingPrice());
+        System.out.println("Selling price for one rice: " + goods2.goods9().calculateSellingPrice());
+        System.out.println("Selling price for one drill: " + goods2.goods10().calculateSellingPrice());
+        System.out.println("Selling price for one towel: " + goods2.goods11().calculateSellingPrice());
+        System.out.println("Selling price for one coffee: " + goods2.goods12().calculateSellingPrice());
     }
 
     private static void CreatingAndPrintingReceiptsShop2(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers2 customers, GetItemsFromCart2 itemsCart, IReceiptManager receiptManager,Shop shop2) {

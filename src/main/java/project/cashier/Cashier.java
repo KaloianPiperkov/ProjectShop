@@ -4,6 +4,8 @@
 
 package project.cashier;
 
+import project.checkout.CashDesk;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -11,6 +13,7 @@ public class Cashier extends Salary implements Serializable {
     private String name_of_cashier;
     private long id_of_cashier;
     private BigDecimal salary;
+
 
     public Cashier(String name_of_cashier, long id_of_cashier) {
         this.name_of_cashier = name_of_cashier;
