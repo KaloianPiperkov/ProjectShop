@@ -192,18 +192,34 @@ public class Main {
     private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart, IReceiptManager receiptManager, Shop shop) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
         receipt.setShop(shop);
-        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
+
+        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer2(), itemsCart.purchaseMap2());
         receipt2.setShop(shop);
+
+        Receipt receipt3 = cashDesk.processPurchase(randomCashier, customers.customer3(), itemsCart.purchaseMap3());
+        receipt3.setShop(shop);
+
+        Receipt receipt4 = cashDesk.processPurchase(randomCashier, customers.customer4(), itemsCart.purchaseMap4());
+        receipt4.setShop(shop);
+
+        Receipt receipt5 = cashDesk.processPurchase(randomCashier, customers.customer5(), itemsCart.purchaseMap5());
+        receipt5.setShop(shop);
 
         // Add the receipts to the receiptManager
         receiptManager.addReceipt(receipt);
         receiptManager.addReceipt(receipt2);
+        receiptManager.addReceipt(receipt3);
+        receiptManager.addReceipt(receipt4);
+        receiptManager.addReceipt(receipt5);
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
 
 
         fileHandler.saveToFile(receipt,shop.getShop_name());
         fileHandler.saveToFile(receipt2, shop.getShop_name());
+        fileHandler.saveToFile(receipt3, shop.getShop_name());
+        fileHandler.saveToFile(receipt4, shop.getShop_name());
+        fileHandler.saveToFile(receipt5, shop.getShop_name());
     }
 
     private static Cashier RandomizeCashier(CreatingLists lists) {
@@ -216,11 +232,14 @@ public class Main {
     private static GetItemsFromCart getGetItemsFromCart(CreatingCartsAndAddingGoodsToCards carts) {
         Map<Goods, Integer> purchaseMap = carts.cart().getShoppingCart();       // assuming you have a getShoppingCart method in AddingToCart
         Map<Goods, Integer> purchaseMap2 = carts.cart2().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
-        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2);
+        Map<Goods, Integer> purchaseMap3 = carts.cart3().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        Map<Goods, Integer> purchaseMap4 = carts.cart4().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        Map<Goods, Integer> purchaseMap5 = carts.cart5().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2, purchaseMap3, purchaseMap4, purchaseMap5);
         return itemsCart;
     }
 
-    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2) {
+    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2, Map<Goods, Integer> purchaseMap3, Map<Goods, Integer> purchaseMap4, Map<Goods, Integer> purchaseMap5) {
     }
 
     private static CreatingCartsAndAddingGoodsToCards getCreatingCartsAndAddingGoodsToCards(CreatingCustomers customers, CreatingGoods goods) {
@@ -449,9 +468,6 @@ public class Main {
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
 
-        // Save the receipt to a file
-        String filename = receipt.getId() + ".dat";
-        String filename2 = receipt2.getId() + ".dat";
         fileHandler.saveToFile(receipt,shop2.getShop_name());
         fileHandler.saveToFile(receipt2,shop2.getShop_name());
     }
