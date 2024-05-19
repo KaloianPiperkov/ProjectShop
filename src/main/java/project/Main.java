@@ -129,25 +129,27 @@ public class Main {
         //Adding new cashiers to shop2
         CreatingAndPrintingCashiersShop2 cashiers2 = getCreatingAndPrintingCashiersShop2();
         AddingCashiersToShop2(lists2, cashiers2);
-        PrintCashiersSalaryShop2(cashiers2);        Cashier randomCashier2 = RandomizeCashier(lists2);
+        PrintCashiersSalaryShop2(cashiers2);
+        Cashier randomCashier2 = RandomizeCashier(lists2);
 
         cashierManager2.addCashier(cashiers2.cashier1());
         cashierManager2.addCashier(cashiers2.cashier2());
 
-//        inventoryManager2.addGoods(goods2.goods1());
-//        inventoryManager2.addGoods(goods2.goods2());
-//        inventoryManager2.addGoods(goods2.goods3());
-//
-//        CreatingCartsAndAddingGoodsToCards carts2 = getCreatingCartsAndAddingGoodsToCards(customers2,goods2);
-//
+
         System.out.println(shop2);
 
         SellingPriceCalculation sellingPriceCalculator2 = new GoodsSellingPriceCalculator(overchargeCalculator,shop2);
-        CreatingGoods goods2 = getCreatingGoods(sellingPriceCalculator2);
+        CreatingGoods2 goods2 = getCreatingGoodsForShop2(sellingPriceCalculator2);
+
+        inventoryManager2.addGoods(goods2.goods1());
+        inventoryManager2.addGoods(goods2.goods2());
+        inventoryManager2.addGoods(goods2.goods3());
+
+        PrintGoods2(goods2);
 
         System.out.println("\n");
         System.out.println("---Printing the price per one item for shop2---");
-        PrintSellingPriceForGoods(goods2);
+        PrintSellingPriceForGoods2(goods2);
 
 
     }
@@ -303,5 +305,33 @@ public class Main {
 
         System.out.println("Cashier 1's monthly salary: " + salary1);
         System.out.println("Cashier 2's monthly salary: " + salary2);
+    }
+
+    private static void AddingGoodsToShop2(CreatingLists lists, CreatingGoods goods) {
+        lists.inventory().add(goods.goods1());
+        lists.inventory().add(goods.goods2());
+        lists.inventory().add(goods.goods3());
+    }
+    private static CreatingGoods2 getCreatingGoodsForShop2(SellingPriceCalculation sellingPriceCalculator) {
+        Goods goods1 = new Goods(1000, "oranges", BigDecimal.valueOf(0.27), Category.FOOD, LocalDate.of(2024, 5, 7), 60, sellingPriceCalculator);
+        Goods goods2 = new Goods(1001, "cheese", BigDecimal.valueOf(2.30), Category.FOOD, LocalDate.of(2024, 7, 30), 160, sellingPriceCalculator);
+        Goods goods3 = new Goods(1002, "chairs", BigDecimal.valueOf(15.80), Category.NON_FOOD, LocalDate.of(2030, 7, 15), 210, sellingPriceCalculator);
+        CreatingGoods2 goods = new CreatingGoods2(goods1, goods2, goods3);
+        return goods;
+    }
+
+    private record CreatingGoods2(Goods goods1, Goods goods2, Goods goods3){
+
+    }
+    private static void PrintGoods2(CreatingGoods2 goods2){
+        System.out.println(goods2.goods1());
+        System.out.println(goods2.goods2());
+        System.out.println(goods2.goods3());
+    }
+
+    private static void PrintSellingPriceForGoods2(CreatingGoods2 goods2){
+        System.out.println("Selling price for one orange: " + goods2.goods1().calculateSellingPrice());
+        System.out.println("Selling price for one cheese: " + goods2.goods2().calculateSellingPrice());
+        System.out.println("Selling price for one chair: " + goods2.goods3().calculateSellingPrice());
     }
 }
