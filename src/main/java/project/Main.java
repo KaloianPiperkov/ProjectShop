@@ -91,7 +91,6 @@ public class Main {
         //printing the selling price of these goods
         PrintSellingPriceForGoods(goods);
 
-
         CreatingAndPrintingReceipts(cashDesk1,randomCashier,customers, itemsCart, receiptManager1, shop);
 
         System.out.println("\n");
@@ -130,12 +129,12 @@ public class Main {
         Shop shop2 = new Shop("Kaufland", cashierManager2, inventoryManager2, receiptManager2, shopCosts2, shopIncome2, BigDecimal.valueOf(10.5), BigDecimal.valueOf(6.0));
         shops.add(shop2);
         System.out.println("\n");
-        
+
         CreatingLists lists2 = getCreatingLists();
         CashDesk cashDesk2 = new CashDesk(lists2.receipts());
         System.out.println("\n");
         System.out.println("---Information about the cashiers in shop2---");
-    
+
         //Adding new cashiers to shop2
         CreatingAndPrintingCashiersShop2 cashiers2 = getCreatingAndPrintingCashiersShop2();
         AddingCashiersToShop2(lists2, cashiers2);
@@ -144,7 +143,6 @@ public class Main {
 
         cashierManager2.addCashier(cashiers2.cashier1());
         cashierManager2.addCashier(cashiers2.cashier2());
-
 
         System.out.println(shop2);
 
@@ -192,34 +190,18 @@ public class Main {
     private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart, IReceiptManager receiptManager, Shop shop) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
         receipt.setShop(shop);
-
-        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer2(), itemsCart.purchaseMap2());
+        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
         receipt2.setShop(shop);
-
-        Receipt receipt3 = cashDesk.processPurchase(randomCashier, customers.customer3(), itemsCart.purchaseMap3());
-        receipt3.setShop(shop);
-
-        Receipt receipt4 = cashDesk.processPurchase(randomCashier, customers.customer4(), itemsCart.purchaseMap4());
-        receipt4.setShop(shop);
-
-        Receipt receipt5 = cashDesk.processPurchase(randomCashier, customers.customer5(), itemsCart.purchaseMap5());
-        receipt5.setShop(shop);
 
         // Add the receipts to the receiptManager
         receiptManager.addReceipt(receipt);
         receiptManager.addReceipt(receipt2);
-        receiptManager.addReceipt(receipt3);
-        receiptManager.addReceipt(receipt4);
-        receiptManager.addReceipt(receipt5);
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
 
 
         fileHandler.saveToFile(receipt,shop.getShop_name());
         fileHandler.saveToFile(receipt2, shop.getShop_name());
-        fileHandler.saveToFile(receipt3, shop.getShop_name());
-        fileHandler.saveToFile(receipt4, shop.getShop_name());
-        fileHandler.saveToFile(receipt5, shop.getShop_name());
     }
 
     private static Cashier RandomizeCashier(CreatingLists lists) {
@@ -232,14 +214,11 @@ public class Main {
     private static GetItemsFromCart getGetItemsFromCart(CreatingCartsAndAddingGoodsToCards carts) {
         Map<Goods, Integer> purchaseMap = carts.cart().getShoppingCart();       // assuming you have a getShoppingCart method in AddingToCart
         Map<Goods, Integer> purchaseMap2 = carts.cart2().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
-        Map<Goods, Integer> purchaseMap3 = carts.cart3().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
-        Map<Goods, Integer> purchaseMap4 = carts.cart4().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
-        Map<Goods, Integer> purchaseMap5 = carts.cart5().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
-        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2, purchaseMap3, purchaseMap4, purchaseMap5);
+        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2);
         return itemsCart;
     }
 
-    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2, Map<Goods, Integer> purchaseMap3, Map<Goods, Integer> purchaseMap4, Map<Goods, Integer> purchaseMap5) {
+    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2) {
     }
 
     private static CreatingCartsAndAddingGoodsToCards getCreatingCartsAndAddingGoodsToCards(CreatingCustomers customers, CreatingGoods goods) {
@@ -378,7 +357,7 @@ public class Main {
 
     private record CreatingLists(List<Cashier> cashiers, List<Goods> inventory, List<Receipt> receipts) {
     }
-//--------------------------Shop2------------------------
+    //--------------------------Shop2------------------------
     private static CreatingAndPrintingCashiersShop2 getCreatingAndPrintingCashiersShop2() {
         Cashier cashier1 = new Cashier("John", 347);
         Cashier cashier2 = new Cashier("Jane", 348);
@@ -434,7 +413,7 @@ public class Main {
     }
 
     private record CreatingGoods2(Goods goods1, Goods goods2, Goods goods3, Goods goods4, Goods goods5, Goods goods6,Goods goods7,
-                                 Goods goods8, Goods goods9,Goods goods10, Goods goods11, Goods goods12) {
+                                  Goods goods8, Goods goods9,Goods goods10, Goods goods11, Goods goods12) {
     }
     private static void PrintGoods2(CreatingGoods2 goods2){
         System.out.println(goods2.goods1());
@@ -462,14 +441,30 @@ public class Main {
         receipt.setShop(shop2);
         Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer2(), itemsCart.purchaseMap2());
         receipt2.setShop(shop2);
+        Receipt receipt3 = cashDesk.processPurchase(randomCashier, customers.customer3(), itemsCart.purchaseMap3());
+        receipt3.setShop(shop2);
+        Receipt receipt4 = cashDesk.processPurchase(randomCashier, customers.customer4(), itemsCart.purchaseMap4());
+        receipt4.setShop(shop2);
+        Receipt receipt5 = cashDesk.processPurchase(randomCashier, customers.customer4(), itemsCart.purchaseMap5());
+        receipt5.setShop(shop2);
+
+
+
         // Add the receipts to the receiptManager
         receiptManager.addReceipt(receipt);
         receiptManager.addReceipt(receipt2);
+        receiptManager.addReceipt(receipt3);
+        receiptManager.addReceipt(receipt4);
+        receiptManager.addReceipt(receipt5);
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
 
+        // Save the receipt to a file
         fileHandler.saveToFile(receipt,shop2.getShop_name());
         fileHandler.saveToFile(receipt2,shop2.getShop_name());
+        fileHandler.saveToFile(receipt3,shop2.getShop_name());
+        fileHandler.saveToFile(receipt4,shop2.getShop_name());
+        fileHandler.saveToFile(receipt5,shop2.getShop_name());
     }
 
     private static CreatingCustomers2 getCreatingCustomers2(CreatingLists lists) {
@@ -496,11 +491,11 @@ public class Main {
         cart2.addGoodsToCart(goods2.goods3(),5);
         System.out.println(cart2);
 
-        AddingToCart cart3 = new AddingToCart(customers2.customer2());
+        AddingToCart cart3 = new AddingToCart(customers2.customer3());
         cart3.addGoodsToCart(goods2.goods6(),19);
         System.out.println(cart3);
 
-        AddingToCart cart4 = new AddingToCart(customers2.customer2());
+        AddingToCart cart4 = new AddingToCart(customers2.customer4());
         cart4.addGoodsToCart(goods2.goods1(),15);
         cart4.addGoodsToCart(goods2.goods9(),1);
         cart4.addGoodsToCart(goods2.goods3(),34);
@@ -508,28 +503,31 @@ public class Main {
         cart4.addGoodsToCart(goods2.goods12(),150);
         System.out.println(cart4);
 
-        AddingToCart cart5 = new AddingToCart(customers2.customer2());
+        AddingToCart cart5 = new AddingToCart(customers2.customer5());
         cart5.addGoodsToCart(goods2.goods2(),15);
         cart5.addGoodsToCart(goods2.goods1(),3);
         cart5.addGoodsToCart(goods2.goods8(),8);
         cart5.addGoodsToCart(goods2.goods6(),14);
         System.out.println(cart5);
 
-        CreatingCartsAndAddingGoodsToCarts2 carts = new CreatingCartsAndAddingGoodsToCarts2(cart2,cart3);
+        CreatingCartsAndAddingGoodsToCarts2 carts = new CreatingCartsAndAddingGoodsToCarts2(cart, cart2,cart3,cart4,cart5);
         return carts;
 
     }
-    private record CreatingCartsAndAddingGoodsToCarts2(AddingToCart cart2, AddingToCart cart3){
+    private record CreatingCartsAndAddingGoodsToCarts2(AddingToCart cart, AddingToCart cart2, AddingToCart cart3, AddingToCart cart4, AddingToCart cart5){
 
     }
 
     private static GetItemsFromCart2 getGetItemsFromCart2(CreatingCartsAndAddingGoodsToCarts2 carts){
-        Map<Goods, Integer> purchaseMap = carts.cart2().getShoppingCart();
-        Map<Goods, Integer> purchaseMap2 = carts.cart3().getShoppingCart();
-        GetItemsFromCart2 itemsFromCart2 = new GetItemsFromCart2(purchaseMap, purchaseMap2);
+        Map<Goods, Integer> purchaseMap = carts.cart().getShoppingCart();
+        Map<Goods, Integer> purchaseMap2 = carts.cart2().getShoppingCart();
+        Map<Goods, Integer> purchaseMap3 = carts.cart3().getShoppingCart();
+        Map<Goods, Integer> purchaseMap4 = carts.cart4().getShoppingCart();
+        Map<Goods, Integer> purchaseMap5 = carts.cart5().getShoppingCart();
+        GetItemsFromCart2 itemsFromCart2 = new GetItemsFromCart2(purchaseMap, purchaseMap2, purchaseMap3, purchaseMap4, purchaseMap5);
         return itemsFromCart2;
     }
-    private record GetItemsFromCart2(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2){
+    private record GetItemsFromCart2(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2, Map<Goods, Integer> purchaseMap3, Map<Goods, Integer> purchaseMap4,Map<Goods, Integer> purchaseMap5 ){
 
     }
 }
