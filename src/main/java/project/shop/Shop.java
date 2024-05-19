@@ -77,6 +77,7 @@ public class Shop {
         return "Shop{" +
                 "shop_name='" + shop_name + '\'' +
                 ", cashierManager=" + cashierManager +
+                ", inventoryManager= " + inventoryManager +
                 ", total_costs=" + total_costs +
                 ", total_income=" + total_income +
                 '}';

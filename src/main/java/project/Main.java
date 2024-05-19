@@ -32,7 +32,6 @@ public class Main {
         shops.add(shop2);
         System.out.println(shop);
 
-
         CreatingLists lists = getCreatingLists();
 
         OverchargeCalculator overchargeCalculator = new OverchargeCalculator();
@@ -61,17 +60,21 @@ public class Main {
         CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
         CreatingGoods goods2 = getCreatingGoods(sellingPriceCalculator2);
 
-        CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
+
         inventoryManager.addGoods(goods.goods1());
         inventoryManager.addGoods(goods.goods2());
         inventoryManager.addGoods(goods.goods3());
 
-        // Process the purchase at the cash desk
-        GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
-
+        System.out.println("\n");
         System.out.println("---Printing the goods added to the shop---");
         //printing the goods
         PrintGoods(goods);
+        // Process the purchase at the cash desk
+
+        CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
+        GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
+        System.out.println("---Printing itemsCart: " + itemsCart);
+
 
         System.out.println("\n");
         System.out.println("---Printing the price per one item---");
@@ -96,7 +99,7 @@ public class Main {
         System.out.println(shop);
 
         System.out.println("\n");
-        System.out.println("Checking what is inside the inventoryManager: ");
+        System.out.println("Checking what is inside the inventoryManager after purchases: ");
         System.out.println(inventoryManager);
     }
 
@@ -138,7 +141,9 @@ public class Main {
         AddingToCart cart = new AddingToCart(customers.customer());
         cart.addGoodsToCart(goods.goods2(), 5);
         cart.addGoodsToCart(goods.goods3(), 5);
+        System.out.println("---CARTS---");
         System.out.println(cart);
+
         AddingToCart cart2 = new AddingToCart(customers.customer2());
         cart2.addGoodsToCart(goods.goods1(), 6);
         cart2.addGoodsToCart(goods.goods2(), 3);
