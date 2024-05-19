@@ -39,41 +39,41 @@ public class Shop implements Serializable {
         return foodOverchargePercent;
     }
 
-    public void setFoodOverchargePercent(BigDecimal foodOverchargePercent) {
-        this.foodOverchargePercent = foodOverchargePercent;
-    }
+//    public void setFoodOverchargePercent(BigDecimal foodOverchargePercent) {
+//        this.foodOverchargePercent = foodOverchargePercent;
+//    }
 
     public BigDecimal getNonFoodOverchargePercent() {
         return nonFoodOverchargePercent;
     }
 
-    public void setNonFoodOverchargePercent(BigDecimal nonFoodOverchargePercent) {
-        this.nonFoodOverchargePercent = nonFoodOverchargePercent;
-    }
+//    public void setNonFoodOverchargePercent(BigDecimal nonFoodOverchargePercent) {
+//        this.nonFoodOverchargePercent = nonFoodOverchargePercent;
+//    }
 
     public String getShop_name() {
         return shop_name;
     }
 
-    public ICashierManager getCashierManager() {
-        return cashierManager;
-    }
-
-    public IInventoryManager getInventoryManager() {
-        return inventoryManager;
-    }
-
-    public IReceiptManager getReceiptManager() {
-        return receiptManager;
-    }
-
-    public ShopCosts getTotal_costs() {
-        return total_costs;
-    }
-
-    public ShopIncome getTotal_income() {
-        return total_income;
-    }
+//    public ICashierManager getCashierManager() {
+//        return cashierManager;
+//    }
+//
+//    public IInventoryManager getInventoryManager() {
+//        return inventoryManager;
+//    }
+//
+//    public IReceiptManager getReceiptManager() {
+//        return receiptManager;
+//    }
+//
+//    public ShopCosts getTotal_costs() {
+//        return total_costs;
+//    }
+//
+//    public ShopIncome getTotal_income() {
+//        return total_income;
+//    }
 
 
     @Override

@@ -29,7 +29,7 @@ public class ShopCosts implements CalculatingTotalCost , Serializable {
                 totalCost = totalCost.add(salary);
             }
             else {
-                System.out.println("---------SALARIES ARE NULL");
+                System.out.println("-----SALARIES ARE NULL------");
             }
         }
 
@@ -39,7 +39,7 @@ public class ShopCosts implements CalculatingTotalCost , Serializable {
                 totalCost = totalCost.add(deliveryPrice);
             }
             else{
-                System.out.println("------Goods are null");
+                System.out.println("-----Goods are null-----");
             }
         }
 

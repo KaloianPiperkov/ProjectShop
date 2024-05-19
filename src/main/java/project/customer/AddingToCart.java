@@ -17,6 +17,10 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
         this.shopping_cart = new HashMap<>();
     }
 
+    public Map<Goods, Integer> getShoppingCart() {
+        return shopping_cart;
+    }
+
     public void addGoodsToCart(Goods goods, int desired_quantity){
         CanBeSold canBeSold = new GoodsQuantity();
         if (canBeSold.canBeSold(desired_quantity, goods.getQuantity())) {
@@ -37,9 +41,5 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
                     .append(", Quantity: ").append(entry.getValue()).append("\n");
         }
         return sb.toString();
-    }
-
-    public Map<Goods, Integer> getShoppingCart() {
-        return shopping_cart;
     }
 }

@@ -19,11 +19,6 @@ public class ReceiptManager implements IReceiptManager, Serializable {
     }
 
     @Override
-    public void addGoods(Goods goods) {
-
-    }
-
-    @Override
     public List<Receipt> getReceipts() {
         return receipts;
     }

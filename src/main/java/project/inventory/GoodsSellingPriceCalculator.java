@@ -23,6 +23,7 @@ public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Ser
 
     @Override
     public BigDecimal calculateSellingPrice(Goods goods) {
+
         BigDecimal sellingPrice = BigDecimal.ZERO;
 
         // Getting the overcharge percentage for the specific category

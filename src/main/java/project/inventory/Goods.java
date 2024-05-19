@@ -23,13 +23,9 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
     private LocalDate goods_expiry_date;
     private int goods_quantity;
     private BigDecimal overchargePercentage;
-
-
     private SellingPriceCalculation sellingPriceCalculator;
 
-    public BigDecimal calculateSellingPrice() {
-        return sellingPriceCalculator.calculateSellingPrice(this);
-    }
+
 
     public Goods(long goods_id, String goods_name, BigDecimal goods_delivery_price, Category category, LocalDate goods_expiry_date, int goods_quantity, SellingPriceCalculation sellingPriceCalculator) {
         this.goods_id = goods_id;
@@ -69,6 +65,9 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
     public BigDecimal getOverchargePercentage() {
         return overchargePercentage;
     }
+    public BigDecimal calculateSellingPrice() {
+        return sellingPriceCalculator.calculateSellingPrice(this);
+    }
 
     public void setQuantity(int goods_quantity) {
         if(goods_quantity > 0){
@@ -80,7 +79,6 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
         }
     }
 
-
     @Override
     public String toString() {
         return "Goods{" +
@@ -91,13 +89,5 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
                 ", goods_expiry_date=" + goods_expiry_date +
                 ", goods_quantity=" + goods_quantity +
                 '}';
-    }
-
-    public void decreaseQuantity(int quantity) {
-        if (this.goods_quantity >= quantity) {
-            this.goods_quantity -= quantity;
-        } else {
-            throw new IllegalArgumentException("Not enough quantity in stock");
-        }
     }
 }

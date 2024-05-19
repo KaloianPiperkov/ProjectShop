@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IReceiptManager {
     List<Goods> getInventory();
-    void addGoods(Goods goods);
+    //void addGoods(Goods goods);
 
     List<Receipt> getReceipts();
 

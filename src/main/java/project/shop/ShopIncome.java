@@ -36,10 +36,8 @@ public class ShopIncome implements CalculatingTotalIncome, Serializable {
             }
             return total_income;
         }
-//        System.out.println("-------------TOTAL INCOME: ");
         return total_income;
     }
-
     @Override
     public String toString() {
         return "ShopIncome{" +

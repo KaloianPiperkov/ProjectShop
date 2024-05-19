@@ -26,11 +26,13 @@ public class Cashier extends Salary implements Serializable {
     public String getName_of_cashier() {
         return name_of_cashier;
     }
-
     public long getId_of_cashier() {
         return id_of_cashier;
     }
     public BigDecimal getSalary(){return salary;}
+    public char[] getName() {
+        return name_of_cashier.toCharArray();
+    }
 
     @Override
     public String toString() {
@@ -40,9 +42,6 @@ public class Cashier extends Salary implements Serializable {
                 '}';
     }
 
-    public char[] getName() {
-        return name_of_cashier.toCharArray();
-    }
 
 }
 

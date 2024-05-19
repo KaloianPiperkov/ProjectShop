@@ -11,7 +11,6 @@ public class ProfitCalculator implements CalculatingProfit, Serializable {
         this.totalIncome = totalIncome;
         this.totalCosts = totalCosts;
     }
-
     @Override
     public BigDecimal calculateProfit() {
         return totalIncome.subtract(totalCosts);

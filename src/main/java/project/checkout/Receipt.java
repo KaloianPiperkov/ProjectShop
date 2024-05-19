@@ -21,12 +21,11 @@ import java.util.List;
 public class Receipt implements Serializable {
 
     private static final long serialVersionUID = 1L; // Serial version UID for version control
-
     private static long nextId = 1; // Static variable to generate unique receipt IDs
     private long id_receipt;
     private Cashier cashier; //the cashier that creates it;
     private LocalDateTime date_and_time_of_creation;
-    private AddingToCart addingToCart;
+    //private AddingToCart addingToCart;
     private List<PurchasedItem> purchasedItems = new ArrayList<>();
     private BigDecimal totalValue = BigDecimal.ZERO;
     private Shop shopName;
@@ -38,6 +37,15 @@ public class Receipt implements Serializable {
 
     public void setCashier(Cashier cashier) {
         this.cashier = cashier;
+    }
+    public void setDateTime(LocalDateTime now) {
+        this.date_and_time_of_creation = now;
+    }
+    public void setShop(Shop shop) {
+        this.shopName = shop;
+    }
+    public long getId() {
+        return id_receipt;
     }
 
     public void addItem(Goods goods, int quantity, BigDecimal totalPrice) {
@@ -52,15 +60,6 @@ public class Receipt implements Serializable {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
         return totalValue;
     }
-
-    public void setDateTime(LocalDateTime now) {
-        this.date_and_time_of_creation = now;
-    }
-
-    public void setShop(Shop shop) {
-        this.shopName = shop;
-    }
-
 
     @Override
     public String toString() {
@@ -81,8 +80,6 @@ public class Receipt implements Serializable {
         return sb.toString();
     }
 
-    public long getId() {
-        return id_receipt;
-    }
+
 }
 

@@ -19,6 +19,7 @@ public class CashDesk {
     }
 
     public Receipt processPurchase(Cashier cashier, Customer customer, Map<Goods, Integer> purchaseMap) {
+
         // Create a new receipt
         Receipt receipt = new Receipt();
 
@@ -34,13 +35,9 @@ public class CashDesk {
             int quantity = entry.getValue();
             BigDecimal totalPrice = goods.calculateSellingPrice().multiply(BigDecimal.valueOf(quantity));
 
-
-            //goods.setQuantity(goods.getQuantity() - quantity);
             // Add the purchased item to the receipt
             receipt.addItem(goods, quantity, totalPrice);
-//
-//            // Update the quantity of goods in the inventory
-//            goods.decreaseQuantity(quantity);
+
         }
 
         // Calculate total value of the receipt
