@@ -330,9 +330,9 @@ public class Main {
         lists.inventory().add(goods.goods3());
     }
     private static CreatingGoods2 getCreatingGoodsForShop2(SellingPriceCalculation sellingPriceCalculator) {
-        Goods goods1 = new Goods(1000, "oranges", BigDecimal.valueOf(0.27), Category.FOOD, LocalDate.of(2024, 5, 7), 60, sellingPriceCalculator);
-        Goods goods2 = new Goods(1001, "cheese", BigDecimal.valueOf(2.30), Category.FOOD, LocalDate.of(2024, 7, 30), 160, sellingPriceCalculator);
-        Goods goods3 = new Goods(1002, "chairs", BigDecimal.valueOf(15.80), Category.NON_FOOD, LocalDate.of(2030, 7, 15), 210, sellingPriceCalculator);
+        Goods goods1 = new Goods(1000, "oranges", BigDecimal.valueOf(0.27), Category.FOOD, LocalDate.of(2024, 5, 7), 50, sellingPriceCalculator);
+        Goods goods2 = new Goods(1001, "cheese", BigDecimal.valueOf(2.30), Category.FOOD, LocalDate.of(2024, 7, 30), 150, sellingPriceCalculator);
+        Goods goods3 = new Goods(1002, "chairs", BigDecimal.valueOf(15.80), Category.NON_FOOD, LocalDate.of(2030, 7, 15), 200, sellingPriceCalculator);
         CreatingGoods2 goods = new CreatingGoods2(goods1, goods2, goods3);
         return goods;
     }
@@ -354,7 +354,7 @@ public class Main {
 
     private static void CreatingAndPrintingReceiptsShop2(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers2 customers, GetItemsFromCart2 itemsCart, IReceiptManager receiptManager) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
-        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
+        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer2(), itemsCart.purchaseMap2());
 
         // Add the receipts to the receiptManager
         receiptManager.addReceipt(receipt);
