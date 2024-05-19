@@ -2,10 +2,11 @@ package project.checkout;
 
 import project.inventory.Goods;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReceiptManager implements IReceiptManager {
+public class ReceiptManager implements IReceiptManager, Serializable {
     private List<Receipt> receipts;
 
     public ReceiptManager() {

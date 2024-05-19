@@ -4,10 +4,11 @@ import project.cashier.Cashier;
 import project.cashier.Salary;
 import project.inventory.Goods;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class ShopCosts implements CalculatingTotalCost {
+public class ShopCosts implements CalculatingTotalCost , Serializable {
     private List<Cashier> cashiers;
     private List<Goods> goods;
     private BigDecimal totalCost;

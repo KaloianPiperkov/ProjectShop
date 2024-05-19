@@ -1,10 +1,11 @@
 package project.cashier;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CashierManager implements ICashierManager {
+public class CashierManager implements ICashierManager, Serializable {
     private List<Cashier> cashiers;
 
     public CashierManager() {

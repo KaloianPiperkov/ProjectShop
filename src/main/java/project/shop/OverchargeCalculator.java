@@ -1,10 +1,11 @@
 package project.shop;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import project.inventory.Goods;
 import project.inventory.Category;
 
-public class OverchargeCalculator {
+public class OverchargeCalculator  implements Serializable {
 
     public BigDecimal calculateOverchargePercentage(Shop shop, Goods goods) {
         Category category = goods.getCategory();

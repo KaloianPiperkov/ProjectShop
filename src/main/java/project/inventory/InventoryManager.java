@@ -1,9 +1,10 @@
 package project.inventory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InventoryManager implements IInventoryManager {
+public class InventoryManager implements IInventoryManager, Serializable {
     private List<Goods> inventory;
 
     public InventoryManager() {

@@ -82,7 +82,7 @@ public class Main {
         PrintSellingPriceForGoods(goods);
 
 
-        CreatingAndPrintingReceipts(cashDesk1,randomCashier,customers, itemsCart, receiptManager1);
+        CreatingAndPrintingReceipts(cashDesk1,randomCashier,customers, itemsCart, receiptManager1, shop);
 
         System.out.println("\n");
 
@@ -155,7 +155,7 @@ public class Main {
 
         CreatingCartsAndAddingGoodsToCarts2 carts2 = getCreatingCartsAndAddingGoodsToCarts2(customers2, goods2);
         GetItemsFromCart2 itemsCart2 = getGetItemsFromCart2(carts2);
-        CreatingAndPrintingReceiptsShop2(cashDesk2,randomCashier2,customers2, itemsCart2, receiptManager2);
+        CreatingAndPrintingReceiptsShop2(cashDesk2,randomCashier2,customers2, itemsCart2, receiptManager2, shop2);
 
         System.out.println("----Shop2 cost: " + shopCosts2.calculateTotalCost() + "-----");
         System.out.println("----Shop2 income: " + shopIncome2.calculateTotalIncome() + "-----");
@@ -170,9 +170,11 @@ public class Main {
 
         System.out.println(shop2);
     }
-    private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart, IReceiptManager receiptManager) {
+    private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart, IReceiptManager receiptManager, Shop shop) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        receipt.setShop(shop);
         Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
+        receipt2.setShop(shop);
 
         // Add the receipts to the receiptManager
         receiptManager.addReceipt(receipt);
@@ -183,8 +185,8 @@ public class Main {
         // Save the receipt to a file
         String filename = receipt.getId() + ".dat";
         String filename2 = receipt2.getId() + ".dat";
-        fileHandler.saveToFile(receipt,filename);
-        fileHandler.saveToFile(receipt2,filename2);
+        fileHandler.saveToFile(receipt,shop.getShop_name());
+        fileHandler.saveToFile(receipt2, shop.getShop_name());
     }
 
     private static Cashier RandomizeCashier(CreatingLists lists) {
@@ -352,10 +354,11 @@ public class Main {
         System.out.println("Selling price for one chair: " + goods2.goods3().calculateSellingPrice());
     }
 
-    private static void CreatingAndPrintingReceiptsShop2(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers2 customers, GetItemsFromCart2 itemsCart, IReceiptManager receiptManager) {
+    private static void CreatingAndPrintingReceiptsShop2(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers2 customers, GetItemsFromCart2 itemsCart, IReceiptManager receiptManager,Shop shop2) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        receipt.setShop(shop2);
         Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer2(), itemsCart.purchaseMap2());
-
+        receipt2.setShop(shop2);
         // Add the receipts to the receiptManager
         receiptManager.addReceipt(receipt);
         receiptManager.addReceipt(receipt2);
@@ -365,8 +368,8 @@ public class Main {
         // Save the receipt to a file
         String filename = receipt.getId() + ".dat";
         String filename2 = receipt2.getId() + ".dat";
-        fileHandler.saveToFile(receipt,filename);
-        fileHandler.saveToFile(receipt2,filename2);
+        fileHandler.saveToFile(receipt,shop2.getShop_name());
+        fileHandler.saveToFile(receipt2,shop2.getShop_name());
     }
 
     private static CreatingCustomers2 getCreatingCustomers2(CreatingLists lists) {

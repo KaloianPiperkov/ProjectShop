@@ -2,10 +2,11 @@ package project.shop;
 
 import project.checkout.Receipt;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class ShopIncome implements CalculatingTotalIncome{
+public class ShopIncome implements CalculatingTotalIncome, Serializable {
 
     private List<Receipt> receipts;
     private BigDecimal total_income;

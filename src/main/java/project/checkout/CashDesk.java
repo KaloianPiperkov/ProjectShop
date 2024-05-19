@@ -32,12 +32,12 @@ public class CashDesk {
         for (Map.Entry<Goods, Integer> entry : purchaseMap.entrySet()) {
             Goods goods = entry.getKey();
             int quantity = entry.getValue();
-            //BigDecimal totalPrice = goods.calculateSellingPrice().multiply(BigDecimal.valueOf(quantity));
+            BigDecimal totalPrice = goods.calculateSellingPrice().multiply(BigDecimal.valueOf(quantity));
 
 
             //goods.setQuantity(goods.getQuantity() - quantity);
             // Add the purchased item to the receipt
-//            receipt.addItem(goods, quantity, totalPrice);
+            receipt.addItem(goods, quantity, totalPrice);
 //
 //            // Update the quantity of goods in the inventory
 //            goods.decreaseQuantity(quantity);

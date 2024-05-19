@@ -1,8 +1,9 @@
 package project.shop;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class ProfitCalculator implements CalculatingProfit {
+public class ProfitCalculator implements CalculatingProfit, Serializable {
     private BigDecimal totalIncome;
     private BigDecimal totalCosts;
 

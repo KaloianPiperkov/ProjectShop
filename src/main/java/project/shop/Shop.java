@@ -6,11 +6,12 @@ import project.inventory.Goods;
 import project.checkout.Receipt;
 import project.inventory.IInventoryManager;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Shop {
+public class Shop implements Serializable {
     private String shop_name;
     private ICashierManager cashierManager;
     private IInventoryManager inventoryManager;
@@ -29,6 +30,9 @@ public class Shop {
         this.total_income = total_income;
         this.foodOverchargePercent = foodOverchargePercent;
         this.nonFoodOverchargePercent = nonFoodOverchargePercent;
+
+        Receipt receipt = new Receipt();
+        receipt.setShop(this);
     }
 
     public BigDecimal getFoodOverchargePercent() {

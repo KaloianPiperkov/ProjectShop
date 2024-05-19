@@ -9,6 +9,7 @@ package project.checkout;
 import project.cashier.Cashier;
 import project.customer.AddingToCart;
 import project.inventory.Goods;
+import project.shop.Shop;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -28,6 +29,7 @@ public class Receipt implements Serializable {
     private AddingToCart addingToCart;
     private List<PurchasedItem> purchasedItems = new ArrayList<>();
     private BigDecimal totalValue = BigDecimal.ZERO;
+    private Shop shopName;
     public Receipt() {
         this.id_receipt = nextId++;
         this.date_and_time_of_creation = LocalDateTime.now();
@@ -55,12 +57,16 @@ public class Receipt implements Serializable {
         this.date_and_time_of_creation = now;
     }
 
+    public void setShop(Shop shop) {
+        this.shopName = shop;
+    }
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Receipt ID: ").append(id_receipt).append("\n")
+        sb.append("Shop Name: ").append(shopName.getShop_name()).append("\n")
+                .append("Receipt ID: ").append(id_receipt).append("\n")
                 .append("Cashier: ").append(cashier.getName()).append("\n") // assuming you have a getName method in Cashier
                 .append("Date of Creation: ").append(date_and_time_of_creation).append("\n")
                 .append("Purchased Items: \n");
