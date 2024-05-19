@@ -105,7 +105,7 @@ public class Main {
 
 
 
-        //SHOP2
+        //-----------------SHOP2--------------------------
 
         System.out.println("---Information about shop2---");
         ICashierManager cashierManager2 = new CashierManager();
@@ -124,11 +124,22 @@ public class Main {
         CreatingLists lists2 = getCreatingLists();
         CashDesk cashDesk2 = new CashDesk(lists2.receipts());
         System.out.println("\n");
-        System.out.println("---Information about the cashiers in shop1---");
+        System.out.println("---Information about the cashiers in shop2---");
     
         //Adding new cashiers to shop2
-        
+        CreatingAndPrintingCashiersShop2 cashiers2 = getCreatingAndPrintingCashiersShop2();
+        AddingCashiersToShop2(lists2, cashiers2);
+        PrintCashiersSalaryShop2(cashiers2);        Cashier randomCashier2 = RandomizeCashier(lists2);
 
+        cashierManager2.addCashier(cashiers2.cashier1());
+        cashierManager2.addCashier(cashiers2.cashier2());
+
+//        inventoryManager2.addGoods(goods2.goods1());
+//        inventoryManager2.addGoods(goods2.goods2());
+//        inventoryManager2.addGoods(goods2.goods3());
+//
+//        CreatingCartsAndAddingGoodsToCards carts2 = getCreatingCartsAndAddingGoodsToCards(customers2,goods2);
+//
         System.out.println(shop2);
 
         SellingPriceCalculation sellingPriceCalculator2 = new GoodsSellingPriceCalculator(overchargeCalculator,shop2);
@@ -263,5 +274,34 @@ public class Main {
     }
 
     private record CreatingLists(List<Cashier> cashiers, List<Goods> inventory, List<Receipt> receipts) {
+    }
+//--------------------------Shop2------------------------
+    private static CreatingAndPrintingCashiersShop2 getCreatingAndPrintingCashiersShop2() {
+        Cashier cashier1 = new Cashier("John", 347);
+        Cashier cashier2 = new Cashier("Jane", 348);
+
+        System.out.println(cashier1);
+        System.out.println(cashier2);
+        CreatingAndPrintingCashiersShop2 cashiers = new CreatingAndPrintingCashiersShop2(cashier1, cashier2);
+        return cashiers;
+    }
+
+    private record CreatingAndPrintingCashiersShop2(Cashier cashier1, Cashier cashier2) {
+    }
+
+    private static void AddingCashiersToShop2(CreatingLists lists, CreatingAndPrintingCashiersShop2 cashiers) {
+        lists.cashiers().add(cashiers.cashier1());
+        lists.cashiers().add(cashiers.cashier2());
+    }
+
+    private static void PrintCashiersSalaryShop2(CreatingAndPrintingCashiersShop2 cashiers) {
+        BigDecimal salary1 = cashiers.cashier1().calculatingSalary(BigDecimal.valueOf(7.50), BigDecimal.valueOf(100));
+        BigDecimal salary2 = cashiers.cashier2().calculatingSalary(BigDecimal.valueOf(8.50), BigDecimal.valueOf(120));
+
+        cashiers.cashier1().setSalary(salary1);
+        cashiers.cashier2().setSalary(salary2);
+
+        System.out.println("Cashier 1's monthly salary: " + salary1);
+        System.out.println("Cashier 2's monthly salary: " + salary2);
     }
 }
