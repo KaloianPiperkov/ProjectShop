@@ -21,10 +21,10 @@ public class ShopIncome implements CalculatingTotalIncome, Serializable {
     public BigDecimal calculateTotalIncome() {
         total_income = BigDecimal.ZERO; // Reset totalIncome to zero
 
-        if (receipts == null || receipts.isEmpty()) {
-            System.out.println("No receipts to calculate income from.");
-            return total_income;
-        }
+//        if (receipts == null || receipts.isEmpty()) {
+//            System.out.println("No receipts to calculate income from.");
+//            return total_income;
+//        }
 
         for (Receipt receipt : receipts) {
             BigDecimal receiptTotalValue = receipt.calculateTotalValue();
@@ -36,7 +36,7 @@ public class ShopIncome implements CalculatingTotalIncome, Serializable {
             }
             return total_income;
         }
-        System.out.println("-------------TOTAL INCOME: ");
+//        System.out.println("-------------TOTAL INCOME: ");
         return total_income;
     }
 
