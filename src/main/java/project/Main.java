@@ -17,31 +17,28 @@ public class Main {
     public static void main(String[] args) {
 
         //SHOP1
-        System.out.println("\n");
-        System.out.println("--Information about the shop1 before adding cashiers, inventory and creating receipts---");
+//        System.out.println("\n");
+//        System.out.println("--Information about the shop1 before adding cashiers, inventory and creating receipts---");
 
         ICashierManager cashierManager1 = new CashierManager();
         IInventoryManager inventoryManager1 = new InventoryManager();
         IReceiptManager receiptManager1 = new ReceiptManager();
-
         ShopIncome shopIncome1 = new ShopIncome(receiptManager1.getReceipts());
         ShopCosts shopCosts1 = new ShopCosts(cashierManager1.getCashiers(), inventoryManager1.getInventory());
 
         Shop shop = new Shop("Lidl", cashierManager1, inventoryManager1, receiptManager1, shopCosts1, shopIncome1, BigDecimal.valueOf(8.5), BigDecimal.valueOf(4.0));
-
         List<Shop> shops = new ArrayList<>();
         shops.add(shop);
 
+        System.out.println("-----SHOP 1-----");
         System.out.println(shop);
 
         CreatingLists lists1 = getCreatingLists();
-
         OverchargeCalculator overchargeCalculator = new OverchargeCalculator();
-
         CashDesk cashDesk1 = new CashDesk(lists1.receipts());
 
         System.out.println("\n");
-        System.out.println("---Information about the cashiers in shop1---");
+        System.out.println("-----CASHIERS IN SHOP 1-----");
         CreatingAndPrintingCashiersShop1 cashiers = getCreatingAndPrintingCashiersShop1();
         //adding the cashiers to the shop
         AddingCashiersToShop1(lists1, cashiers);
@@ -57,8 +54,7 @@ public class Main {
         cashierManager1.addCashier(cashiers.cashier1());
         cashierManager1.addCashier(cashiers.cashier2());
 
-        SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator,shop);
-
+        SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator, shop);
         CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
 
 
@@ -76,52 +72,40 @@ public class Main {
         inventoryManager1.addGoods(goods.goods12());
 
         System.out.println("\n");
-        System.out.println("---Printing the goods added to the shop1---");
-        //printing the goods
-        PrintGoods(goods);
-        // Process the purchase at the cash desk
 
+        // Process the purchase at the cash desk
         CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
         GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
-        System.out.println("---Printing itemsCart of customer in shop1: " + itemsCart);
-
+        //System.out.println("---Printing itemsCart of customer in shop1: " + itemsCart);
 
         System.out.println("\n");
-        System.out.println("---Printing the price per one item for shop1---");
+        System.out.println("-----PRICE PER ITEM WITH OVERCHARGE PERCENTAGE IN SHOP 1-----");
+
         //printing the selling price of these goods
         PrintSellingPriceForGoods(goods);
-
-        CreatingAndPrintingReceipts(cashDesk1,randomCashier,customers, itemsCart, receiptManager1, shop);
+        CreatingAndPrintingReceipts(cashDesk1, randomCashier, customers, itemsCart, receiptManager1, shop);
 
         System.out.println("\n");
 
-        System.out.println("---Shop1 cost: " + shopCosts1.calculateTotalCost() + " -----");
-        System.out.println("---Shop1 income: " + shopIncome1.calculateTotalIncome() + "-----");
+        System.out.println("-----SHOP 1 COSTS: " + shopCosts1.calculateTotalCost() + " -----");
+        System.out.println("-----SHOP 1 INCOME: " + shopIncome1.calculateTotalIncome() + "-----");
 
         BigDecimal totalIncome = shopIncome1.calculateTotalIncome();
         BigDecimal totalCosts = shopCosts1.calculateTotalCost();
-        ProfitCalculator profitCalculator = new ProfitCalculator(totalIncome,totalCosts);
+        ProfitCalculator profitCalculator = new ProfitCalculator(totalIncome, totalCosts);
         BigDecimal profit = profitCalculator.calculateProfit();
-        System.out.println("---Shop1 Profit: " + profit + "-----");
+        System.out.println("-----SHOP 1 PROFIT: " + profit + "-----");
 
         System.out.println("\n");
-        System.out.println("----Information about the shop1 after purchases have been made----");
-        System.out.println(shop);
-
-        System.out.println("\n");
-        System.out.println("Checking what is inside the inventoryManager1 after purchases: ");
+        System.out.println("-----INVENTORY AFTER PURCHASES IN SHOP 1-----");
         System.out.println(inventoryManager1);
-
 
 
         //-----------------SHOP2--------------------------
 
-        System.out.println("---Information about shop2---");
         ICashierManager cashierManager2 = new CashierManager();
         IInventoryManager inventoryManager2 = new InventoryManager();
         IReceiptManager receiptManager2 = new ReceiptManager();
-
-
         ShopIncome shopIncome2 = new ShopIncome(receiptManager1.getReceipts());
         ShopCosts shopCosts2 = new ShopCosts(cashierManager1.getCashiers(), inventoryManager1.getInventory());
 
@@ -129,11 +113,13 @@ public class Main {
         Shop shop2 = new Shop("Kaufland", cashierManager2, inventoryManager2, receiptManager2, shopCosts2, shopIncome2, BigDecimal.valueOf(10.5), BigDecimal.valueOf(6.0));
         shops.add(shop2);
         System.out.println("\n");
+        System.out.println("-----SHOP 2-----");
+        System.out.println(shop2);
 
         CreatingLists lists2 = getCreatingLists();
         CashDesk cashDesk2 = new CashDesk(lists2.receipts());
         System.out.println("\n");
-        System.out.println("---Information about the cashiers in shop2---");
+        System.out.println("-----CASHIERS IN SHOP 2-----");
 
         //Adding new cashiers to shop2
         CreatingAndPrintingCashiersShop2 cashiers2 = getCreatingAndPrintingCashiersShop2();
@@ -144,9 +130,7 @@ public class Main {
         cashierManager2.addCashier(cashiers2.cashier1());
         cashierManager2.addCashier(cashiers2.cashier2());
 
-        System.out.println(shop2);
-
-        SellingPriceCalculation sellingPriceCalculator2 = new GoodsSellingPriceCalculator(overchargeCalculator,shop2);
+        SellingPriceCalculation sellingPriceCalculator2 = new GoodsSellingPriceCalculator(overchargeCalculator, shop2);
         CreatingGoods2 goods2 = getCreatingGoodsForShop2(sellingPriceCalculator2);
 
         inventoryManager2.addGoods(goods2.goods1());
@@ -162,31 +146,32 @@ public class Main {
         inventoryManager2.addGoods(goods2.goods11());
         inventoryManager2.addGoods(goods2.goods12());
 
-        PrintGoods2(goods2);
-
         System.out.println("\n");
-        System.out.println("---Printing the price per one item for shop2---");
-        PrintSellingPriceForGoods2(goods2);
 
         CreatingCustomers2 customers2 = getCreatingCustomers2(lists2);
-
         CreatingCartsAndAddingGoodsToCarts2 carts2 = getCreatingCartsAndAddingGoodsToCarts2(customers2, goods2);
         GetItemsFromCart2 itemsCart2 = getGetItemsFromCart2(carts2);
-        CreatingAndPrintingReceiptsShop2(cashDesk2,randomCashier2,customers2, itemsCart2, receiptManager2, shop2);
+        CreatingAndPrintingReceiptsShop2(cashDesk2, randomCashier2, customers2, itemsCart2, receiptManager2, shop2);
 
-        System.out.println("----Shop2 cost: " + shopCosts2.calculateTotalCost() + "-----");
-        System.out.println("----Shop2 income: " + shopIncome2.calculateTotalIncome() + "-----");
+        System.out.println("-----PRICE PER ITEM WITH OVERCHARGE PERCENTAGE IN SHOP 2-----");
+        PrintSellingPriceForGoods2(goods2);
+
+        System.out.println("\n");
+
+        System.out.println("-----SHOP 2 COSTS: " + shopCosts2.calculateTotalCost() + "-----");
+        System.out.println("-----SHOP 2 INCOME: " + shopIncome2.calculateTotalIncome() + "-----");
 
         BigDecimal totalIncome2 = shopIncome2.calculateTotalIncome();
         BigDecimal totalCost2 = shopCosts2.calculateTotalCost();
-
         ProfitCalculator profitCalculator2 = new ProfitCalculator(totalIncome2, totalCost2);
-
         BigDecimal profit2 = profitCalculator2.calculateProfit();
-        System.out.println("----Shop2 profit: " + profit2 + "---------");
+        System.out.println("-----SHOP 2 PROFIT: " + profit2 + "-----");
 
-        System.out.println(shop2);
+        System.out.println("\n");
+        System.out.println("-----INVENTORY AFTER PURCHASES IN SHOP 2-----");
+        System.out.println(inventoryManager2);
     }
+
     private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart, IReceiptManager receiptManager, Shop shop) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
         receipt.setShop(shop);
@@ -227,7 +212,7 @@ public class Main {
         cart.addGoodsToCart(goods.goods3(), 12);
         cart.addGoodsToCart(goods.goods10(), 2);
         cart.addGoodsToCart(goods.goods6(), 3);
-        System.out.println("---CARTS---");
+        System.out.println("---CARTS IN SHOP 1---");
         System.out.println(cart);
 
         AddingToCart cart2 = new AddingToCart(customers.customer2());
@@ -483,7 +468,7 @@ public class Main {
         AddingToCart cart = new AddingToCart(customers2.customer());
         cart.addGoodsToCart(goods2.goods1(),10);
         cart.addGoodsToCart(goods2.goods2(),1);
-        System.out.println("-------Carts2-------");
+        System.out.println("-------CARTS IN SHOP 2-------");
         System.out.println(cart);
 
         AddingToCart cart2 = new AddingToCart(customers2.customer2());
