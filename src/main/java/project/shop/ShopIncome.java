@@ -33,8 +33,9 @@ public class ShopIncome implements CalculatingTotalIncome{
             } else {
                 System.out.println("Receipt total value is null.");
             }
+            return total_income;
         }
-
+        System.out.println("-------------TOTAL INCOME: ");
         return total_income;
     }
 
