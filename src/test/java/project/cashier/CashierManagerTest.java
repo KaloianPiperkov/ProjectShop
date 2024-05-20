@@ -35,6 +35,6 @@ class CashierManagerTest {
     @Test
     void testGetCashierSalaryDoesNotExist() {
         CashierManager cashierManager = new CashierManager();
-        assertEquals(BigDecimal.valueOf(-1), cashierManager.getCashierSalary(1));
+        assertThrows(IllegalArgumentException.class, () -> cashierManager.getCashierSalary(1));
     }
 }
