@@ -177,16 +177,28 @@ public class Main {
         receipt.setShop(shop);
         Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
         receipt2.setShop(shop);
+        Receipt receipt3 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        receipt3.setShop(shop);
+        Receipt receipt4 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        receipt4.setShop(shop);
+        Receipt receipt5 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        receipt5.setShop(shop);
 
         // Add the receipts to the receiptManager
         receiptManager.addReceipt(receipt);
         receiptManager.addReceipt(receipt2);
+        receiptManager.addReceipt(receipt3);
+        receiptManager.addReceipt(receipt4);
+        receiptManager.addReceipt(receipt5);
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
 
 
         fileHandler.saveToFile(receipt,shop.getShop_name());
         fileHandler.saveToFile(receipt2, shop.getShop_name());
+        fileHandler.saveToFile(receipt3, shop.getShop_name());
+        fileHandler.saveToFile(receipt4, shop.getShop_name());
+        fileHandler.saveToFile(receipt5, shop.getShop_name());
     }
 
     private static Cashier RandomizeCashier(CreatingLists lists) {
