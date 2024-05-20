@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface IReceiptManager {
     List<Goods> getInventory();
-    //void addGoods(Goods goods);
+    //void addGoods(Goods goods) throws IllegalArgumentException;
 
     List<Receipt> getReceipts();
 
-    void addReceipt(Receipt receipt);
+    void addReceipt(Receipt receipt) throws IllegalArgumentException;
 }

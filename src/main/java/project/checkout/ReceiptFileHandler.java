@@ -5,6 +5,13 @@ import java.io.*;
 public class ReceiptFileHandler {
 
     public void saveToFile(Receipt receipt, String shopName) {
+        if (receipt == null) {
+            throw new IllegalArgumentException("Receipt cannot be null");
+        }
+        if (shopName == null || shopName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Shop name cannot be null or empty");
+        }
+
         // Create the directory for this shop's receipts (if it doesn't exist)
         File directory = new File(shopName + " receipts");
         if (!directory.exists()) {
