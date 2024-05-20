@@ -27,7 +27,7 @@ class CashierManagerTest {
     void testGetCashierSalaryExists() {
         CashierManager cashierManager = new CashierManager();
         Cashier cashier = new Cashier("John Doe", 1);
-        cashier.setSalary(BigDecimal.valueOf(100));             // Set the salary for the cashier
+        cashier.setSalary(BigDecimal.valueOf(100));
         cashierManager.addCashier(cashier);
         assertEquals(BigDecimal.valueOf(100), cashierManager.getCashierSalary(1));
     }
