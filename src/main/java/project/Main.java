@@ -211,11 +211,14 @@ public class Main {
     private static GetItemsFromCart getGetItemsFromCart(CreatingCartsAndAddingGoodsToCards carts) {
         Map<Goods, Integer> purchaseMap = carts.cart().getShoppingCart();       // assuming you have a getShoppingCart method in AddingToCart
         Map<Goods, Integer> purchaseMap2 = carts.cart2().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
-        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2);
+        Map<Goods, Integer> purchaseMap3 = carts.cart3().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        Map<Goods, Integer> purchaseMap4 = carts.cart4().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        Map<Goods, Integer> purchaseMap5 = carts.cart5().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2, purchaseMap3, purchaseMap4, purchaseMap5);
         return itemsCart;
     }
 
-    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2) {
+    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2, Map<Goods, Integer> purchaseMap3, Map<Goods, Integer> purchaseMap4, Map<Goods, Integer> purchaseMap5) {
     }
 
     private static CreatingCartsAndAddingGoodsToCards getCreatingCartsAndAddingGoodsToCards(CreatingCustomers customers, CreatingGoods goods) {
@@ -313,12 +316,6 @@ public class Main {
         System.out.println("Selling price for 1 tools: " + goods.goods10().calculateSellingPrice()); //not expired
         System.out.println("Selling price for 1 sheets: " + goods.goods11().calculateSellingPrice()); //not expired
         System.out.println("Selling price for 1 pasta: " + goods.goods12().calculateSellingPrice()); //not expired
-    }
-
-    private static void PrintGoods(CreatingGoods goods) {
-        System.out.println(goods.goods1());
-        System.out.println(goods.goods2());
-        System.out.println(goods.goods3());
     }
 
     private static CreatingGoods getCreatingGoods(SellingPriceCalculation sellingPriceCalculator) {
