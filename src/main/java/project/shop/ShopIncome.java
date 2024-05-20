@@ -34,7 +34,6 @@ public class ShopIncome implements CalculatingTotalIncome, Serializable {
             } else {
                 System.out.println("Receipt total value is null.");
             }
-            return total_income;
         }
         return total_income;
     }

@@ -1,5 +1,6 @@
 package project.checkout;
 
+//import jdk.internal.org.objectweb.asm.tree.InsnList;
 import project.cashier.Cashier;
 import project.customer.AddingToCart;
 import project.customer.Customer;
@@ -47,6 +48,10 @@ public class CashDesk {
         receipts.add(receipt);
 
         return receipt;
+    }
+
+    public List<Receipt> getReceipts() {
+        return receipts;
     }
 }
 

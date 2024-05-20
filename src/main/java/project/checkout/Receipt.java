@@ -81,5 +81,10 @@ public class Receipt implements Serializable {
     }
 
 
+    public void setTotalValue(BigDecimal bigDecimal) {
+    }
+    public BigDecimal getTotalValue() {
+        return totalValue;
+    }
 }
 

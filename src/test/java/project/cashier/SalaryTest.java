@@ -8,39 +8,38 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SalaryTest {
 
-//        @org.junit.jupiter.api.Test
-//        void calculatingSalary() {
-//            Salary salary = new Salary();
-//            assertEquals(0, salary.calculatingSalary(BigDecimal.valueOf(10), BigDecimal.valueOf(0)).intValue());
-//            assertEquals(10, salary.calculatingSalary(BigDecimal.valueOf(10), BigDecimal.valueOf(1)).intValue());
-//            assertEquals(20, salary.calculatingSalary(BigDecimal.valueOf(10), BigDecimal.valueOf(2)).intValue());
-//        }
-
     @Test
-    public void testSalaryCalculation() {
-        // Setup
+    void testSalaryCalculationNegativeHours() {
         SalaryCalculator salaryCalculator = new Salary();
         BigDecimal salaryPerHour = BigDecimal.valueOf(20);
-        BigDecimal hoursWorked = BigDecimal.valueOf(20);
+        BigDecimal hoursWorked = BigDecimal.valueOf(-1);
 
-        // Exercise
-        BigDecimal calculatedSalary = salaryCalculator.calculatingSalary(salaryPerHour, hoursWorked);
-
-        // Verify
-        assertEquals(BigDecimal.valueOf(400), calculatedSalary);
+        assertThrows(IllegalArgumentException.class, () -> {
+            salaryCalculator.calculatingSalary(salaryPerHour, hoursWorked);
+        });
     }
 
     @Test
-    public void testSalaryCalculationNoHoursWorked() {
-        // Setup
+    void testSalaryCalculationNegativeSalaryPerHour() {
         SalaryCalculator salaryCalculator = new Salary();
-        BigDecimal salaryPerHour = BigDecimal.valueOf(20);
-        BigDecimal hoursWorked = BigDecimal.ZERO;
+        BigDecimal salaryPerHour = BigDecimal.valueOf(-20);
+        BigDecimal hoursWorked = BigDecimal.valueOf(20);
 
-        // Exercise
+        //replace with actual exception
+        assertThrows(IllegalArgumentException.class, () -> {
+            salaryCalculator.calculatingSalary(salaryPerHour, hoursWorked);
+        });
+    }
+
+    @Test
+    void testSalaryCalculationLargeInputs() {
+        SalaryCalculator salaryCalculator = new Salary();
+        BigDecimal salaryPerHour = new BigDecimal("1000000000");
+        BigDecimal hoursWorked = new BigDecimal("1000000000");
+
+        BigDecimal expectedSalary = new BigDecimal("1000000000000000000");
         BigDecimal calculatedSalary = salaryCalculator.calculatingSalary(salaryPerHour, hoursWorked);
 
-        // Verify
-        assertEquals(BigDecimal.ZERO, calculatedSalary);
+        assertEquals(expectedSalary, calculatedSalary);
     }
 }
