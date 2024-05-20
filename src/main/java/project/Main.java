@@ -445,8 +445,6 @@ public class Main {
         Receipt receipt5 = cashDesk.processPurchase(randomCashier, customers.customer4(), itemsCart.purchaseMap5());
         receipt5.setShop(shop2);
 
-
-
         // Add the receipts to the receiptManager
         receiptManager.addReceipt(receipt);
         receiptManager.addReceipt(receipt2);

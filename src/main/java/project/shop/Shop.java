@@ -39,17 +39,17 @@ public class Shop implements Serializable {
         return foodOverchargePercent;
     }
 
-//    public void setFoodOverchargePercent(BigDecimal foodOverchargePercent) {
-//        this.foodOverchargePercent = foodOverchargePercent;
-//    }
+    public void setFoodOverchargePercent(BigDecimal foodOverchargePercent) {
+        this.foodOverchargePercent = foodOverchargePercent;
+    }
 
     public BigDecimal getNonFoodOverchargePercent() {
         return nonFoodOverchargePercent;
     }
 
-//    public void setNonFoodOverchargePercent(BigDecimal nonFoodOverchargePercent) {
-//        this.nonFoodOverchargePercent = nonFoodOverchargePercent;
-//    }
+    public void setNonFoodOverchargePercent(BigDecimal nonFoodOverchargePercent) {
+        this.nonFoodOverchargePercent = nonFoodOverchargePercent;
+    }
 
     public String getShop_name() {
         return shop_name;
