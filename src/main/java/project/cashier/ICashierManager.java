@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface ICashierManager {
     List<Cashier> getCashiers();
-    void addCashier(Cashier cashier);
-    BigDecimal getCashierSalary(long cashierId);
+    void addCashier(Cashier cashier) throws IllegalArgumentException;
+    BigDecimal getCashierSalary(long cashierId) throws IllegalArgumentException;
 }

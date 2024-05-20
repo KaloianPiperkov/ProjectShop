@@ -290,7 +290,6 @@ public class Main {
 
         Cashier cashier1 = new Cashier("Maria", 345);
         Cashier cashier2 = new Cashier("Alex", 346);
-
         System.out.println(cashier1);
         System.out.println(cashier2);
         CreatingAndPrintingCashiersShop1 cashiers = new CreatingAndPrintingCashiersShop1(cashier1, cashier2);

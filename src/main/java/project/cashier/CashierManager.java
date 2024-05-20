@@ -19,6 +19,9 @@ public class CashierManager implements ICashierManager, Serializable {
 
     @Override
     public void addCashier(Cashier cashier) {
+        if (cashier == null) {
+            throw new IllegalArgumentException("Cashier cannot be null");
+        }
         cashiers.add(cashier);
     }
 
@@ -29,7 +32,7 @@ public class CashierManager implements ICashierManager, Serializable {
                 return cashier.getSalary();
             }
         }
-        return BigDecimal.valueOf(-1);
+        throw new IllegalArgumentException("Cashier with id " + cashierId + " does not exist");
     }
 
     @Override
