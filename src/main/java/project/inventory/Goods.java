@@ -28,6 +28,21 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
 
 
     public Goods(long goods_id, String goods_name, BigDecimal goods_delivery_price, Category category, LocalDate goods_expiry_date, int goods_quantity, SellingPriceCalculation sellingPriceCalculator) {
+        if (goods_name == null || goods_name.isEmpty()) {
+            throw new IllegalArgumentException("Goods name cannot be null or empty");
+        }
+        if (goods_delivery_price == null || goods_delivery_price.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Goods delivery price cannot be null or negative");
+        }
+        if (category == null) {
+            throw new IllegalArgumentException("Category cannot be null");
+        }
+        if (goods_expiry_date == null || goods_expiry_date.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Goods expiry date cannot be null or in the past");
+        }
+        if (goods_quantity < 0) {
+            throw new IllegalArgumentException("Goods quantity cannot be negative");
+        }
         this.goods_id = goods_id;
         this.goods_name = goods_name;
         this.goods_delivery_price = goods_delivery_price;
@@ -70,13 +85,10 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
     }
 
     public void setQuantity(int goods_quantity) {
-        if(goods_quantity > 0){
-            this.goods_quantity = goods_quantity;
+        if (goods_quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        else {
-            //method to not add something to the cart/receipt
-            System.out.println("Quantity not enough");
-        }
+        this.goods_quantity = goods_quantity;
     }
 
     @Override

@@ -5,6 +5,7 @@ import project.inventory.Goods;
 import project.inventory.GoodsQuantity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +14,9 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
     private Map<Goods, Integer> shopping_cart;
 
     public AddingToCart(Customer customer) {
+        if (customer == null) {
+            throw new IllegalArgumentException("Customer cannot be null");
+        }
         this.customer = customer;
         this.shopping_cart = new HashMap<>();
     }
@@ -21,14 +25,26 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
         return shopping_cart;
     }
 
-    public void addGoodsToCart(Goods goods, int desired_quantity){
+    public void addGoodsToCart(Goods goods, int desired_quantity) {
+        if (goods == null) {
+            throw new IllegalArgumentException("Goods cannot be null");
+        }
+        if (desired_quantity <= 0) {
+            throw new IllegalArgumentException("Desired quantity must be greater than zero");
+        }
         CanBeSold canBeSold = new GoodsQuantity();
         if (canBeSold.canBeSold(desired_quantity, goods.getQuantity())) {
+            checkCustomerFunds(goods,desired_quantity);
             shopping_cart.put(goods, desired_quantity);
             goods.setQuantity(goods.getQuantity() - desired_quantity);
+        } else {
+            throw new InsufficientQuantityException("Not enough quantity");
         }
-        else{
-            System.out.println("Not enough quantity");
+    }
+
+    private void checkCustomerFunds(Goods goods, int desired_quantity){
+        if(customer.getFunds().compareTo(goods.calculateSellingPrice().multiply(new BigDecimal(desired_quantity))) < 0) {
+            throw new InsufficientFundsException("Not enough funds");
         }
     }
 
@@ -41,5 +57,11 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
                     .append(", Quantity: ").append(entry.getValue()).append("\n");
         }
         return sb.toString();
+    }
+}
+
+class InsufficientQuantityException extends RuntimeException {
+    public InsufficientQuantityException(String message) {
+        super(message);
     }
 }

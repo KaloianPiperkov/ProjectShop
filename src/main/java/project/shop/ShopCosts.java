@@ -14,6 +14,9 @@ public class ShopCosts implements CalculatingTotalCost , Serializable {
     private BigDecimal totalCost;
 
     public ShopCosts(List<Cashier> cashiers, List<Goods> goods) {
+        if (cashiers == null || goods == null) {
+            throw new IllegalArgumentException("Cashiers and goods lists cannot be null");
+        }
         this.cashiers = cashiers;
         this.goods = goods;
         this.totalCost = calculateTotalCost();
@@ -29,7 +32,7 @@ public class ShopCosts implements CalculatingTotalCost , Serializable {
                 totalCost = totalCost.add(salary);
             }
             else {
-                System.out.println("-----SALARIES ARE NULL------");
+                throw new IllegalArgumentException("Salary cannot be null");
             }
         }
 
@@ -39,7 +42,7 @@ public class ShopCosts implements CalculatingTotalCost , Serializable {
                 totalCost = totalCost.add(deliveryPrice);
             }
             else{
-                System.out.println("-----Goods are null-----");
+                throw new IllegalArgumentException("Delivery price cannot be null");
             }
         }
 

@@ -13,6 +13,9 @@ public class ShopIncome implements CalculatingTotalIncome, Serializable {
 
 
     public ShopIncome(List<Receipt> receipts){
+        if (receipts == null) {
+            throw new IllegalArgumentException("Receipts list cannot be null");
+        }
         this.receipts = receipts;
         this.total_income = calculateTotalIncome();
     }
@@ -32,7 +35,7 @@ public class ShopIncome implements CalculatingTotalIncome, Serializable {
             if (receiptTotalValue != null) {
                 total_income = total_income.add(receiptTotalValue);
             } else {
-                System.out.println("Receipt total value is null.");
+                throw new IllegalArgumentException("Receipt total value cannot be null");
             }
         }
         return total_income;
