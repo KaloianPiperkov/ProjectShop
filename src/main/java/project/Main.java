@@ -48,7 +48,6 @@ public class Main {
 
         System.out.println("\n");
 
-        CreatingCustomers customers = getCreatingCustomers(lists1);
 
         // Add cashiers, goods, and receipts to their respective managers
         cashierManager1.addCashier(cashiers.cashier1());
@@ -73,17 +72,22 @@ public class Main {
 
         System.out.println("\n");
 
+        CreatingCustomers customers = getCreatingCustomers(lists1);
+
         // Process the purchase at the cash desk
         CreatingCartsAndAddingGoodsToCards carts = getCreatingCartsAndAddingGoodsToCards(customers, goods);
+
         GetItemsFromCart itemsCart = getGetItemsFromCart(carts);
         //System.out.println("---Printing itemsCart of customer in shop1: " + itemsCart);
+
+        CreatingAndPrintingReceipts(cashDesk1, randomCashier, customers, itemsCart, receiptManager1, shop);
 
         System.out.println("\n");
         System.out.println("-----PRICE PER ITEM WITH OVERCHARGE PERCENTAGE IN SHOP 1-----");
 
         //printing the selling price of these goods
         PrintSellingPriceForGoods(goods);
-        CreatingAndPrintingReceipts(cashDesk1, randomCashier, customers, itemsCart, receiptManager1, shop);
+
 
         System.out.println("\n");
 
@@ -149,8 +153,11 @@ public class Main {
         System.out.println("\n");
 
         CreatingCustomers2 customers2 = getCreatingCustomers2(lists2);
+
         CreatingCartsAndAddingGoodsToCarts2 carts2 = getCreatingCartsAndAddingGoodsToCarts2(customers2, goods2);
+
         GetItemsFromCart2 itemsCart2 = getGetItemsFromCart2(carts2);
+
         CreatingAndPrintingReceiptsShop2(cashDesk2, randomCashier2, customers2, itemsCart2, receiptManager2, shop2);
 
         System.out.println("-----PRICE PER ITEM WITH OVERCHARGE PERCENTAGE IN SHOP 2-----");
@@ -175,13 +182,13 @@ public class Main {
     private static void CreatingAndPrintingReceipts(CashDesk cashDesk, Cashier randomCashier, CreatingCustomers customers, GetItemsFromCart itemsCart, IReceiptManager receiptManager, Shop shop) {
         Receipt receipt = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
         receipt.setShop(shop);
-        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap2());
+        Receipt receipt2 = cashDesk.processPurchase(randomCashier, customers.customer2(), itemsCart.purchaseMap2());
         receipt2.setShop(shop);
-        Receipt receipt3 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        Receipt receipt3 = cashDesk.processPurchase(randomCashier, customers.customer3(), itemsCart.purchaseMap3());
         receipt3.setShop(shop);
-        Receipt receipt4 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        Receipt receipt4 = cashDesk.processPurchase(randomCashier, customers.customer4(), itemsCart.purchaseMap4());
         receipt4.setShop(shop);
-        Receipt receipt5 = cashDesk.processPurchase(randomCashier, customers.customer(), itemsCart.purchaseMap());
+        Receipt receipt5 = cashDesk.processPurchase(randomCashier, customers.customer5(), itemsCart.purchaseMap5());
         receipt5.setShop(shop);
 
         // Add the receipts to the receiptManager
@@ -211,11 +218,14 @@ public class Main {
     private static GetItemsFromCart getGetItemsFromCart(CreatingCartsAndAddingGoodsToCards carts) {
         Map<Goods, Integer> purchaseMap = carts.cart().getShoppingCart();       // assuming you have a getShoppingCart method in AddingToCart
         Map<Goods, Integer> purchaseMap2 = carts.cart2().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
-        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2);
+        Map<Goods, Integer> purchaseMap3 = carts.cart3().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        Map<Goods, Integer> purchaseMap4 = carts.cart4().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        Map<Goods, Integer> purchaseMap5 = carts.cart5().getShoppingCart();     // assuming you have a getShoppingCart method in AddingToCart
+        GetItemsFromCart itemsCart = new GetItemsFromCart(purchaseMap, purchaseMap2, purchaseMap3, purchaseMap4, purchaseMap5);
         return itemsCart;
     }
 
-    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2) {
+    private record GetItemsFromCart(Map<Goods, Integer> purchaseMap, Map<Goods, Integer> purchaseMap2, Map<Goods, Integer> purchaseMap3, Map<Goods, Integer> purchaseMap4, Map<Goods, Integer> purchaseMap5) {
     }
 
     private static CreatingCartsAndAddingGoodsToCards getCreatingCartsAndAddingGoodsToCards(CreatingCustomers customers, CreatingGoods goods) {
@@ -315,12 +325,6 @@ public class Main {
         System.out.println("Selling price for 1 pasta: " + goods.goods12().calculateSellingPrice()); //not expired
     }
 
-    private static void PrintGoods(CreatingGoods goods) {
-        System.out.println(goods.goods1());
-        System.out.println(goods.goods2());
-        System.out.println(goods.goods3());
-    }
-
     private static CreatingGoods getCreatingGoods(SellingPriceCalculation sellingPriceCalculator) {
         Goods goods1 = new Goods(1000, "apples", BigDecimal.valueOf(0.18), Category.FOOD, LocalDate.of(2024, 4, 7), 50, sellingPriceCalculator);
         Goods goods2 = new Goods(1001, "strawberries", BigDecimal.valueOf(0.62), Category.FOOD, LocalDate.of(2024, 6, 30), 150, sellingPriceCalculator);
@@ -383,11 +387,6 @@ public class Main {
         System.out.println("Cashier 2's monthly salary: " + salary2);
     }
 
-    private static void AddingGoodsToShop2(CreatingLists lists, CreatingGoods goods) {
-        lists.inventory().add(goods.goods1());
-        lists.inventory().add(goods.goods2());
-        lists.inventory().add(goods.goods3());
-    }
     private static CreatingGoods2 getCreatingGoodsForShop2(SellingPriceCalculation sellingPriceCalculator) {
         Goods goods1 = new Goods(2000, "milk", BigDecimal.valueOf(1.20), Category.NON_FOOD, LocalDate.of(2024, 5, 20), 120, sellingPriceCalculator);
         Goods goods2 = new Goods(2001, "bread", BigDecimal.valueOf(0.95), Category.FOOD, LocalDate.of(2024, 5, 25), 130, sellingPriceCalculator);
@@ -410,11 +409,6 @@ public class Main {
 
     private record CreatingGoods2(Goods goods1, Goods goods2, Goods goods3, Goods goods4, Goods goods5, Goods goods6,Goods goods7,
                                   Goods goods8, Goods goods9,Goods goods10, Goods goods11, Goods goods12) {
-    }
-    private static void PrintGoods2(CreatingGoods2 goods2){
-        System.out.println(goods2.goods1());
-        System.out.println(goods2.goods2());
-        System.out.println(goods2.goods3());
     }
 
     private static void PrintSellingPriceForGoods2(CreatingGoods2 goods2){
