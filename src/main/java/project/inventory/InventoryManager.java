@@ -18,6 +18,9 @@ public class InventoryManager implements IInventoryManager, Serializable {
 
     @Override
     public void addGoods(Goods goods) {
+        if (goods == null) {
+            throw new IllegalArgumentException("Goods cannot be null");
+        }
         inventory.add(goods);
     }
 

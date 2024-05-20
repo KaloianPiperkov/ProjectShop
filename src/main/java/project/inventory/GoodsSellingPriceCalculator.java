@@ -14,6 +14,12 @@ public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Ser
     private Shop shop;
 
     public GoodsSellingPriceCalculator(OverchargeCalculator overchargeCalculator, Shop shop) {
+        if (overchargeCalculator == null) {
+            throw new IllegalArgumentException("OverchargeCalculator cannot be null");
+        }
+        if (shop == null) {
+            throw new IllegalArgumentException("Shop cannot be null");
+        }
         this.overchargeCalculator = overchargeCalculator;
         this.shop = shop;
     }
@@ -23,7 +29,9 @@ public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Ser
 
     @Override
     public BigDecimal calculateSellingPrice(Goods goods) {
-
+        if (goods == null) {
+            throw new IllegalArgumentException("Goods cannot be null");
+        }
         BigDecimal sellingPrice = BigDecimal.ZERO;
 
         // Getting the overcharge percentage for the specific category
