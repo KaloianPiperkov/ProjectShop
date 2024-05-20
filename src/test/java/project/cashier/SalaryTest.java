@@ -1,12 +1,20 @@
 package project.cashier;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SalaryTest {
+class SalaryTest {
+
+//        @org.junit.jupiter.api.Test
+//        void calculatingSalary() {
+//            Salary salary = new Salary();
+//            assertEquals(0, salary.calculatingSalary(BigDecimal.valueOf(10), BigDecimal.valueOf(0)).intValue());
+//            assertEquals(10, salary.calculatingSalary(BigDecimal.valueOf(10), BigDecimal.valueOf(1)).intValue());
+//            assertEquals(20, salary.calculatingSalary(BigDecimal.valueOf(10), BigDecimal.valueOf(2)).intValue());
+//        }
 
     @Test
     public void testSalaryCalculation() {
