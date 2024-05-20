@@ -34,4 +34,8 @@ public class InventoryManager implements IInventoryManager, Serializable {
         sb.append("}");
         return sb.toString();
     }
+
+    public Object getGoodsList() {
+        return inventory;
+    }
 }
