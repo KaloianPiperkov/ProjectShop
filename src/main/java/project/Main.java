@@ -220,16 +220,16 @@ public class Main {
 
     private static CreatingCartsAndAddingGoodsToCards getCreatingCartsAndAddingGoodsToCards(CreatingCustomers customers, CreatingGoods goods) {
         AddingToCart cart = new AddingToCart(customers.customer());
-        cart.addGoodsToCart(goods.goods2(), 10);
-        cart.addGoodsToCart(goods.goods3(), 12);
-        cart.addGoodsToCart(goods.goods10(), 2);
-        cart.addGoodsToCart(goods.goods6(), 3);
+        cart.addGoodsToCart(goods.goods2(), 1);
+        cart.addGoodsToCart(goods.goods3(), 1);
+        cart.addGoodsToCart(goods.goods10(), 1);
+        cart.addGoodsToCart(goods.goods6(), 1);
         System.out.println("---CARTS IN SHOP 1---");
         System.out.println(cart);
 
         AddingToCart cart2 = new AddingToCart(customers.customer2());
-        cart2.addGoodsToCart(goods.goods1(), 6);
-        cart2.addGoodsToCart(goods.goods2(), 3);
+        cart2.addGoodsToCart(goods.goods1(), 1);
+        cart2.addGoodsToCart(goods.goods2(), 1);
         System.out.println(cart2);
 
         AddingToCart cart3 = new AddingToCart(customers.customer3());
@@ -238,16 +238,16 @@ public class Main {
         System.out.println(cart3);
 
         AddingToCart cart4 = new AddingToCart(customers.customer4());
-        cart4.addGoodsToCart(goods.goods8(), 10);
-        cart4.addGoodsToCart(goods.goods4(), 20);
-        cart4.addGoodsToCart(goods.goods5(), 7);
-        cart4.addGoodsToCart(goods.goods9(), 13);
+        cart4.addGoodsToCart(goods.goods8(), 1);
+        cart4.addGoodsToCart(goods.goods4(), 1);
+        cart4.addGoodsToCart(goods.goods5(), 1);
+        cart4.addGoodsToCart(goods.goods9(), 1);
         System.out.println(cart4);
 
         AddingToCart cart5 = new AddingToCart(customers.customer5());
-        cart5.addGoodsToCart(goods.goods3(), 20);
-        cart5.addGoodsToCart(goods.goods11(), 5);
-        cart5.addGoodsToCart(goods.goods12(), 14);
+        cart5.addGoodsToCart(goods.goods3(), 1);
+        cart5.addGoodsToCart(goods.goods11(), 1);
+        cart5.addGoodsToCart(goods.goods12(), 1);
         System.out.println(cart5);
 
         CreatingCartsAndAddingGoodsToCards carts = new CreatingCartsAndAddingGoodsToCards(cart, cart2, cart3, cart4, cart5);
@@ -260,7 +260,7 @@ public class Main {
     private static CreatingCustomers getCreatingCustomers(CreatingLists lists) {
         Customer customer = new Customer(0001, lists.inventory(), BigDecimal.valueOf(120.32));
         Customer customer2 = new Customer(0002, lists.inventory(), BigDecimal.valueOf(35.96));
-        Customer customer3 = new Customer(0003, lists.inventory(), BigDecimal.valueOf(0.01));
+        Customer customer3 = new Customer(0003, lists.inventory(), BigDecimal.valueOf(99990.01));
         Customer customer4 = new Customer(0004, lists.inventory(), BigDecimal.valueOf(4327.05));
         Customer customer5 = new Customer(0005, lists.inventory(), BigDecimal.valueOf(360.36));
         CreatingCustomers customers = new CreatingCustomers(customer, customer2, customer3, customer4, customer5);
@@ -464,8 +464,8 @@ public class Main {
     private static CreatingCustomers2 getCreatingCustomers2(CreatingLists lists) {
         Customer customer1 = new Customer(0001, lists.inventory(), BigDecimal.valueOf(200.32));
         Customer customer2 = new Customer(0002, lists.inventory(), BigDecimal.valueOf(50.96));
-        Customer customer3 = new Customer(0003, lists.inventory(), BigDecimal.valueOf(0.06));
-        Customer customer4 = new Customer(0004, lists.inventory(), BigDecimal.valueOf(5000.99));
+        Customer customer3 = new Customer(0003, lists.inventory(), BigDecimal.valueOf(99990.06));
+        Customer customer4 = new Customer(0004, lists.inventory(), BigDecimal.valueOf(99990.99));
         Customer customer5 = new Customer(0005, lists.inventory(), BigDecimal.valueOf(89.46));
         CreatingCustomers2 customers2 = new CreatingCustomers2(customer1, customer2, customer3, customer4,customer5);
         return customers2;
@@ -475,33 +475,33 @@ public class Main {
     }
     private static CreatingCartsAndAddingGoodsToCarts2 getCreatingCartsAndAddingGoodsToCarts2(CreatingCustomers2 customers2, CreatingGoods2 goods2){
         AddingToCart cart = new AddingToCart(customers2.customer());
-        cart.addGoodsToCart(goods2.goods1(),10);
+        cart.addGoodsToCart(goods2.goods1(),1);
         cart.addGoodsToCart(goods2.goods2(),1);
         System.out.println("-------CARTS IN SHOP 2-------");
         System.out.println(cart);
 
         AddingToCart cart2 = new AddingToCart(customers2.customer2());
-        cart2.addGoodsToCart(goods2.goods2(),15);
-        cart2.addGoodsToCart(goods2.goods3(),5);
+        cart2.addGoodsToCart(goods2.goods2(),1);
+        cart2.addGoodsToCart(goods2.goods3(),1);
         System.out.println(cart2);
 
         AddingToCart cart3 = new AddingToCart(customers2.customer3());
-        cart3.addGoodsToCart(goods2.goods6(),19);
+        cart3.addGoodsToCart(goods2.goods6(),1);
         System.out.println(cart3);
 
         AddingToCart cart4 = new AddingToCart(customers2.customer4());
-        cart4.addGoodsToCart(goods2.goods1(),15);
+        cart4.addGoodsToCart(goods2.goods1(),1);
         cart4.addGoodsToCart(goods2.goods9(),1);
-        cart4.addGoodsToCart(goods2.goods3(),34);
-        cart4.addGoodsToCart(goods2.goods7(),12);
-        cart4.addGoodsToCart(goods2.goods12(),150);
+        cart4.addGoodsToCart(goods2.goods3(),1);
+        cart4.addGoodsToCart(goods2.goods7(),1);
+        cart4.addGoodsToCart(goods2.goods12(),1);
         System.out.println(cart4);
 
         AddingToCart cart5 = new AddingToCart(customers2.customer5());
-        cart5.addGoodsToCart(goods2.goods2(),15);
-        cart5.addGoodsToCart(goods2.goods1(),3);
-        cart5.addGoodsToCart(goods2.goods8(),8);
-        cart5.addGoodsToCart(goods2.goods6(),14);
+        cart5.addGoodsToCart(goods2.goods2(),1);
+        cart5.addGoodsToCart(goods2.goods1(),1);
+        cart5.addGoodsToCart(goods2.goods8(),1);
+        cart5.addGoodsToCart(goods2.goods6(),1);
         System.out.println(cart5);
 
         CreatingCartsAndAddingGoodsToCarts2 carts = new CreatingCartsAndAddingGoodsToCarts2(cart, cart2,cart3,cart4,cart5);
