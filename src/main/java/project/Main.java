@@ -48,14 +48,12 @@ public class Main {
 
         System.out.println("\n");
 
-
         // Add cashiers, goods, and receipts to their respective managers
         cashierManager1.addCashier(cashiers.cashier1());
         cashierManager1.addCashier(cashiers.cashier2());
 
         SellingPriceCalculation sellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator, shop);
         CreatingGoods goods = getCreatingGoods(sellingPriceCalculator);
-
 
         inventoryManager1.addGoods(goods.goods1());
         inventoryManager1.addGoods(goods.goods2());
@@ -87,7 +85,6 @@ public class Main {
 
         //printing the selling price of these goods
         PrintSellingPriceForGoods(goods);
-
 
         System.out.println("\n");
 
@@ -199,7 +196,6 @@ public class Main {
         receiptManager.addReceipt(receipt5);
 
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
-
 
         fileHandler.saveToFile(receipt,shop.getShop_name());
         fileHandler.saveToFile(receipt2, shop.getShop_name());
