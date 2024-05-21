@@ -27,6 +27,8 @@ public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Ser
     public GoodsSellingPriceCalculator() {
     }
 
+
+
     @Override
     public BigDecimal calculateSellingPrice(Goods goods) {
         if (goods == null) {

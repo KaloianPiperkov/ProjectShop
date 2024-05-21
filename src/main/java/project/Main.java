@@ -388,13 +388,13 @@ public class Main {
     }
 
     private static CreatingGoods2 getCreatingGoodsForShop2(SellingPriceCalculation sellingPriceCalculator) {
-        Goods goods1 = new Goods(2000, "milk", BigDecimal.valueOf(1.20), Category.NON_FOOD, LocalDate.of(2024, 5, 20), 120, sellingPriceCalculator);
-        Goods goods2 = new Goods(2001, "bread", BigDecimal.valueOf(0.95), Category.FOOD, LocalDate.of(2024, 5, 25), 130, sellingPriceCalculator);
+        Goods goods1 = new Goods(2000, "milk", BigDecimal.valueOf(1.20), Category.NON_FOOD, LocalDate.of(2024, 6, 20), 120, sellingPriceCalculator);
+        Goods goods2 = new Goods(2001, "bread", BigDecimal.valueOf(0.95), Category.FOOD, LocalDate.of(2024, 6, 25), 130, sellingPriceCalculator);
         Goods goods3 = new Goods(2002, "shampoo", BigDecimal.valueOf(3.50), Category.NON_FOOD, LocalDate.of(2030, 8, 15), 90, sellingPriceCalculator);
         Goods goods4 = new Goods(2003, "cheese", BigDecimal.valueOf(2.50), Category.FOOD, LocalDate.of(2024, 7, 10), 75, sellingPriceCalculator);
         Goods goods5 = new Goods(2004, "oranges", BigDecimal.valueOf(0.50), Category.FOOD, LocalDate.of(2024, 6, 5), 85, sellingPriceCalculator);
         Goods goods6 = new Goods(2005, "detergent", BigDecimal.valueOf(4.30), Category.NON_FOOD, LocalDate.of(2031, 3, 20), 60, sellingPriceCalculator);
-        Goods goods7 = new Goods(2006, "carrots", BigDecimal.valueOf(0.40), Category.FOOD, LocalDate.of(2024, 5, 30), 110, sellingPriceCalculator);
+        Goods goods7 = new Goods(2006, "carrots", BigDecimal.valueOf(0.40), Category.FOOD, LocalDate.of(2024, 6, 30), 110, sellingPriceCalculator);
         Goods goods8 = new Goods(2007, "batteries", BigDecimal.valueOf(2.00), Category.NON_FOOD, LocalDate.of(2029, 12, 31), 50, sellingPriceCalculator);
         Goods goods9 = new Goods(2008, "rice", BigDecimal.valueOf(1.10), Category.FOOD, LocalDate.of(2025, 1, 10), 100, sellingPriceCalculator);
         Goods goods10 = new Goods(2009, "drill", BigDecimal.valueOf(45.00), Category.NON_FOOD, LocalDate.of(2045, 10, 1), 20, sellingPriceCalculator);

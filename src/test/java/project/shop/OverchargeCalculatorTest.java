@@ -35,6 +35,14 @@ class OverchargeCalculatorTest {
         Goods foodGoods = new Goods(1L, "Apple", BigDecimal.valueOf(1), Category.FOOD, LocalDate.now().plusDays(5), 10, null);
         Goods nonFoodGoods = new Goods(2L, "Book", BigDecimal.valueOf(2), Category.NON_FOOD, LocalDate.now().plusDays(5), 20, null);
 
+        assertThrows(NullPointerException.class, () -> {
+            overchargeCalculator.calculateOverchargePercentage(null, foodGoods);
+        });
+
+        assertThrows(NullPointerException.class, () -> {
+            overchargeCalculator.calculateOverchargePercentage(shop, null);
+        });
+
         BigDecimal foodOvercharge = overchargeCalculator.calculateOverchargePercentage(shop, foodGoods);
         BigDecimal nonFoodOvercharge = overchargeCalculator.calculateOverchargePercentage(shop, nonFoodGoods);
 
