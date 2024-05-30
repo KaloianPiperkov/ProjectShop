@@ -2,7 +2,6 @@ package project.checkout;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.mockito.Mockito;
 import project.cashier.Cashier;
 import project.cashier.CashierManager;
 import project.inventory.Goods;
@@ -57,10 +56,10 @@ class ReceiptFileHandlerTest {
 
         // Save the Receipt object to a file
         ReceiptFileHandler receiptFileHandler = new ReceiptFileHandler();
-        receiptFileHandler.saveToFile(receipt, shop.getShop_name());
+        receiptFileHandler.saveToFile(receipt, shop.getShopName());
 
         // Check if the file exists
-        File file = tempDir.resolve(shop.getShop_name() + " receipts").resolve(receipt.getId() + ".dat").toFile();
+        File file = tempDir.resolve(shop.getShopName() + " receipts").resolve(receipt.getId() + ".dat").toFile();
         assertTrue(file.exists());
     }
 }

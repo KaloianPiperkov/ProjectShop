@@ -1,6 +1,7 @@
 package project.cashier;
 
 import project.checkout.CashDesk;
+import project.shop.Shop;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,8 +10,9 @@ public class Cashier extends Salary implements Serializable {
     private String name_of_cashier;
     private long id_of_cashier;
     private BigDecimal salary;
+    private Shop shop;
 
-    public Cashier(String name_of_cashier, long id_of_cashier) {
+    public Cashier(String name_of_cashier, long id_of_cashier, Shop shop) {
         if (name_of_cashier == null || name_of_cashier.isEmpty()) {
             throw new IllegalArgumentException("Name of cashier cannot be null or empty");
         }
@@ -19,6 +21,7 @@ public class Cashier extends Salary implements Serializable {
         }
         this.name_of_cashier = name_of_cashier;
         this.id_of_cashier = id_of_cashier;
+        this.shop = shop;
     }
 
     public void setSalary(BigDecimal salary){
@@ -26,10 +29,6 @@ public class Cashier extends Salary implements Serializable {
             throw new IllegalArgumentException("Salary cannot be null or negative");
         }
         this.salary = salary;
-    }
-
-    public String getName_of_cashier() {
-        return name_of_cashier;
     }
 
     public long getId_of_cashier() {
@@ -40,6 +39,19 @@ public class Cashier extends Salary implements Serializable {
 
     public char[] getName() {
         return name_of_cashier.toCharArray();
+    }
+
+//    public static Cashier createCashier(String name, int id){
+//        return new Cashier(name, id);
+//    }
+
+
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
     }
 
     @Override

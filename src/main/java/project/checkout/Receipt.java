@@ -1,7 +1,6 @@
 package project.checkout;
 
 import project.cashier.Cashier;
-import project.customer.AddingToCart;
 import project.inventory.Goods;
 import project.shop.Shop;
 
@@ -78,7 +77,7 @@ public class Receipt implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Shop Name: ").append(shopName.getShop_name()).append("\n")
+        sb.append("Shop Name: ").append(shopName.getShopName()).append("\n")
                 .append("Receipt ID: ").append(id_receipt).append("\n")
                 .append("Cashier: ").append(cashier.getName()).append("\n")
                 .append("Date of Creation: ").append(date_and_time_of_creation).append("\n")
@@ -86,7 +85,9 @@ public class Receipt implements Serializable {
 
         for (PurchasedItem item : purchasedItems) {
             sb.append("Goods Name: ").append(item.getGoods().getName())
-                    .append(", Quantity: ").append(item.getQuantity()).append("\n");
+                    .append(", Quantity: ").append(item.getQuantity()).append("\n")
+                    .append("Total Price For Good: ").append(item.getGoods().calculateSellingPrice()
+                            .multiply(BigDecimal.valueOf(item.getQuantity()))).append("\n");
         }
 
         sb.append("Total Value: ").append(totalValue).append("\n");
@@ -94,12 +95,6 @@ public class Receipt implements Serializable {
         return sb.toString();
     }
 
-    public void setTotalValue(BigDecimal bigDecimal) {
-        if (bigDecimal == null || bigDecimal.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Total value must be greater than zero");
-        }
-        this.totalValue = bigDecimal;
-    }
 
     public BigDecimal getTotalValue() {
         return totalValue;

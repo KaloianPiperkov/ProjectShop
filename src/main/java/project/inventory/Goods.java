@@ -77,9 +77,6 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
         return goods_quantity;
     }
 
-    public BigDecimal getOverchargePercentage() {
-        return overchargePercentage;
-    }
     public BigDecimal calculateSellingPrice() {
         return sellingPriceCalculator.calculateSellingPrice(this);
     }

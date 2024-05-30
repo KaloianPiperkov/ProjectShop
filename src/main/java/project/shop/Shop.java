@@ -1,9 +1,11 @@
 package project.shop;
 import project.cashier.Cashier;
 import project.cashier.ICashierManager;
+import project.checkout.CashDesk;
 import project.checkout.IReceiptManager;
-import project.inventory.Goods;
 import project.checkout.Receipt;
+import project.customer.Customer;
+import project.inventory.Goods;
 import project.inventory.IInventoryManager;
 
 import java.io.Serializable;
@@ -12,14 +14,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Shop implements Serializable {
-    private String shop_name;
+    private final String shopName;
     private ICashierManager cashierManager;
     private IInventoryManager inventoryManager;
     private IReceiptManager receiptManager;
-    private ShopCosts total_costs;
-    private ShopIncome total_income;
+    private ShopCosts totalCosts;
+    private ShopIncome totalIncome;
     private BigDecimal foodOverchargePercent;
     private BigDecimal nonFoodOverchargePercent;
+
+    private List<Goods> goods;
+    private List<CashDesk> cashDesks;
+    private List<Customer> customers;
+    private List<Cashier> cashiers;
 
     public Shop(String shop_name, ICashierManager cashierManager, IInventoryManager inventoryManager, IReceiptManager receiptManager, ShopCosts total_costs, ShopIncome total_income, BigDecimal foodOverchargePercent, BigDecimal nonFoodOverchargePercent) {
         if (shop_name == null || shop_name.isEmpty()) {
@@ -31,18 +38,36 @@ public class Shop implements Serializable {
         if (foodOverchargePercent.compareTo(BigDecimal.ZERO) < 0 || nonFoodOverchargePercent.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Overcharge percentages cannot be negative");
         }
-        this.shop_name = shop_name;
+        this.shopName = shop_name;
         this.cashierManager = cashierManager;
         this.inventoryManager = inventoryManager;
         this.receiptManager = receiptManager;
-        this.total_costs = total_costs;
-        this.total_income = total_income;
+        this.totalCosts = total_costs;
+        this.totalIncome = total_income;
         this.foodOverchargePercent = foodOverchargePercent;
         this.nonFoodOverchargePercent = nonFoodOverchargePercent;
+
+        this.goods = new ArrayList<>();
+        this.cashDesks = new ArrayList<>();
+        this.customers = new ArrayList<>();
+        this.cashiers = new ArrayList<>();
 
         Receipt receipt = new Receipt();
         receipt.setShop(this);
     }
+
+    public void addGoods(Goods goods){
+        this.goods.add(goods);
+    }
+
+    public void addCashDesk(CashDesk cashDesk){
+        this.cashDesks.add(cashDesk);
+    }
+
+    public void addCustomer(Customer customer){
+        this.customers.add(customer);
+    }
+
 
     public BigDecimal getFoodOverchargePercent() {
         return foodOverchargePercent;
@@ -67,11 +92,22 @@ public class Shop implements Serializable {
         this.nonFoodOverchargePercent = nonFoodOverchargePercent;
     }
 
-    public String getShop_name() {
-        return shop_name;
+    public void addGoodsToShop(Shop shop,List<Goods> goodsList){
+        for (Goods goods : goodsList){
+            shop.addGoods(goods);
+        }
     }
 
-//    public ICashierManager getCashierManager() {
+    public String getShopName() {
+        return shopName;
+    }
+
+
+//    public void addGoodsToInventory(Goods goods){
+//        this.inventoryManager.addGoods(goods);
+//    }
+
+    //    public ICashierManager getCashierManager() {
 //        return cashierManager;
 //    }
 //
@@ -95,11 +131,11 @@ public class Shop implements Serializable {
     @Override
     public String toString() {
         return "Shop{" +
-                "shop_name='" + shop_name + '\'' +
+                "shop_name='" + shopName + '\'' +
                 ", cashierManager=" + cashierManager +
                 ", inventoryManager= " + inventoryManager +
-                ", total_costs=" + total_costs +
-                ", total_income=" + total_income +
+                ", total_costs=" + totalCosts +
+                ", total_income=" + totalIncome +
                 '}';
     }
 }

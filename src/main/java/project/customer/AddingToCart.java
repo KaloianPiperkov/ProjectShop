@@ -7,18 +7,26 @@ import project.inventory.GoodsQuantity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddingToCart extends GoodsQuantity implements Serializable {
     private Customer customer;
     private Map<Goods, Integer> shopping_cart;
 
+    public void addMultipleGoodsToCart(List<Goods> goodsList, List<Integer> quantities, AddingToCart cart) {
+        for (int i = 0; i < goodsList.size(); i++) {
+            cart.addGoodsToCart(goodsList.get(i), quantities.get(i));
+        }
+    }
+
     public AddingToCart(Customer customer) {
         if (customer == null) {
             throw new IllegalArgumentException("Customer cannot be null");
         }
         this.customer = customer;
-        this.shopping_cart = new HashMap<>();
+        this.shopping_cart = new LinkedHashMap<>();
     }
 
     public Map<Goods, Integer> getShoppingCart() {

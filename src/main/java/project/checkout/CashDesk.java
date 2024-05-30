@@ -2,10 +2,12 @@ package project.checkout;
 
 import project.cashier.Cashier;
 import project.customer.Customer;
+import project.customer.InsufficientFundsException;
 import project.inventory.Goods;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +21,8 @@ public class CashDesk {
         this.receipts = receipts;
     }
 
-    public Receipt processPurchase(Cashier cashier, Customer customer, Map<Goods, Integer> purchaseMap) {
+    public Receipt processPurchase(Cashier cashier, Customer customer, LinkedHashMap<Goods, Integer> purchaseMap) {
+
         if (cashier == null) {
             throw new IllegalArgumentException("Cashier cannot be null");
         }
@@ -30,8 +33,13 @@ public class CashDesk {
             throw new IllegalArgumentException("Purchase map cannot be null");
         }
 
-        // Create a new receipt
         Receipt receipt = new Receipt();
+
+        BigDecimal totalCost = receipt.getTotalValue();
+        if(customer.getFunds().compareTo(totalCost) < 0){
+            throw new InsufficientFundsException("Customer does not have enough money to make the purchase");
+        }
+
 
         // Set cashier
         receipt.setCashier(cashier);

@@ -25,6 +25,11 @@ public class InventoryManager implements IInventoryManager, Serializable {
     }
 
     @Override
+    public void addMultipleGoods(List<Goods> multipleGoods) {
+        multipleGoods.forEach(this::addGoods);
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("InventoryManager{\n");
