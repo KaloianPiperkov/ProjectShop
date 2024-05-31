@@ -41,8 +41,8 @@ public class Main {
         CashDesk cashDesk = new CashDesk(new ArrayList<>());
         shop1.addCashDesk(cashDesk);
 
-        Customer customer = new Customer(1, new ArrayList<>(), BigDecimal.valueOf(100.00), shop1);
-        Customer customer1 = new Customer(2, new ArrayList<>(), BigDecimal.valueOf(300.0), shop1);
+        Customer customer = new Customer(1, new ArrayList<>(), BigDecimal.valueOf(100.00));
+        Customer customer1 = new Customer(2, new ArrayList<>(), BigDecimal.valueOf(300.0));
 
         shop1.addCustomer(customer);
         shop1.addCustomer(customer1);
@@ -59,8 +59,10 @@ public class Main {
         cart.addMultipleGoodsToCart(customerCart, quantities, cart);
         cart1.addMultipleGoodsToCart(customerCart1, quantities1, cart1);
 
-        Cashier cashier = new Cashier("John Doe", 1, shop1);
-        Cashier cashier1 = new Cashier("Alex Martin", 2, shop1);
+        Cashier cashier = new Cashier("John Doe", 1);
+        Cashier cashier1 = new Cashier("Alex Martin", 2);
+        shop1.addCashier(cashier);
+        shop1.addCashier(cashier1);
 
         BigDecimal salary = cashier.calculatingSalary(BigDecimal.valueOf(7.50), BigDecimal.valueOf(100));
         BigDecimal salary1 = cashier1.calculatingSalary(BigDecimal.valueOf(7.50), BigDecimal.valueOf(100));
@@ -111,8 +113,8 @@ public class Main {
         CashDesk cashDesk1 = new CashDesk(new ArrayList<>());
         shop1.addCashDesk(cashDesk1);
 
-        Customer customer2 = new Customer(1, new ArrayList<>(), BigDecimal.valueOf(100.00), shop2);
-        Customer customer3 = new Customer(2, new ArrayList<>(), BigDecimal.valueOf(9990.0), shop2);
+        Customer customer2 = new Customer(1, new ArrayList<>(), BigDecimal.valueOf(100.00));
+        Customer customer3 = new Customer(2, new ArrayList<>(), BigDecimal.valueOf(9990.0));
 
         shop1.addCustomer(customer2);
         shop1.addCustomer(customer3);
@@ -129,8 +131,11 @@ public class Main {
         cart.addMultipleGoodsToCart(customerCart2, quantities2, cart2);
         cart1.addMultipleGoodsToCart(customerCart3, quantities3, cart3);
 
-        Cashier cashier2 = new Cashier("John Doe", 1, shop2);
-        Cashier cashier3 = new Cashier("Alex Martin", 2, shop2);
+        Cashier cashier2 = new Cashier("John Doe", 1);
+        Cashier cashier3 = new Cashier("Alex Martin", 2);
+
+        shop2.addCashier(cashier2);
+        shop2.addCashier(cashier3);
 
         BigDecimal salary2 = cashier.calculatingSalary(BigDecimal.valueOf(7.50), BigDecimal.valueOf(100));
         BigDecimal salary3 = cashier1.calculatingSalary(BigDecimal.valueOf(7.50), BigDecimal.valueOf(100));

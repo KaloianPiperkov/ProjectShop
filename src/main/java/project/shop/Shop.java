@@ -68,6 +68,10 @@ public class Shop implements Serializable {
         this.customers.add(customer);
     }
 
+    public void addCashier(Cashier cashier){
+        this.cashiers.add(cashier);
+    }
+
 
     public BigDecimal getFoodOverchargePercent() {
         return foodOverchargePercent;
@@ -101,31 +105,6 @@ public class Shop implements Serializable {
     public String getShopName() {
         return shopName;
     }
-
-
-//    public void addGoodsToInventory(Goods goods){
-//        this.inventoryManager.addGoods(goods);
-//    }
-
-    //    public ICashierManager getCashierManager() {
-//        return cashierManager;
-//    }
-//
-//    public IInventoryManager getInventoryManager() {
-//        return inventoryManager;
-//    }
-//
-//    public IReceiptManager getReceiptManager() {
-//        return receiptManager;
-//    }
-//
-//    public ShopCosts getTotal_costs() {
-//        return total_costs;
-//    }
-//
-//    public ShopIncome getTotal_income() {
-//        return total_income;
-//    }
 
 
     @Override

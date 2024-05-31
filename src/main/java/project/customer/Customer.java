@@ -14,11 +14,11 @@ public class Customer implements Serializable {
     private BigDecimal funds;
     private Shop shop;
 
-    public Customer(long id, List<Goods> goods, BigDecimal funds, Shop shop) {
+    public Customer(long id, List<Goods> goods, BigDecimal funds) {
         this.id = id;
         this.goods = goods;
         this.funds = funds;
-        this.shop = shop;
+
     }
 
     public long getId() {

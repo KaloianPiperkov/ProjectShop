@@ -12,7 +12,7 @@ public class Cashier extends Salary implements Serializable {
     private BigDecimal salary;
     private Shop shop;
 
-    public Cashier(String name_of_cashier, long id_of_cashier, Shop shop) {
+    public Cashier(String name_of_cashier, long id_of_cashier) {
         if (name_of_cashier == null || name_of_cashier.isEmpty()) {
             throw new IllegalArgumentException("Name of cashier cannot be null or empty");
         }
@@ -21,7 +21,6 @@ public class Cashier extends Salary implements Serializable {
         }
         this.name_of_cashier = name_of_cashier;
         this.id_of_cashier = id_of_cashier;
-        this.shop = shop;
     }
 
     public void setSalary(BigDecimal salary){
@@ -40,10 +39,6 @@ public class Cashier extends Salary implements Serializable {
     public char[] getName() {
         return name_of_cashier.toCharArray();
     }
-
-//    public static Cashier createCashier(String name, int id){
-//        return new Cashier(name, id);
-//    }
 
 
     public Shop getShop() {

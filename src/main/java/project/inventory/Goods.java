@@ -22,7 +22,6 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
     private Category category;
     private LocalDate goods_expiry_date;
     private int goods_quantity;
-    private BigDecimal overchargePercentage;
     private SellingPriceCalculation sellingPriceCalculator;
 
 
@@ -49,7 +48,6 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
         this.category = category;
         this.goods_expiry_date = goods_expiry_date;
         this.goods_quantity = goods_quantity;
-        //this.overchargePercentage = overchargePercentage;
         this.sellingPriceCalculator = sellingPriceCalculator;
     }
 
