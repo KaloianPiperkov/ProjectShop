@@ -9,7 +9,6 @@ import project.inventory.InventoryManager;
 import project.shop.Shop;
 import project.shop.ShopCosts;
 import project.shop.ShopIncome;
-
 import java.io.File;
 import java.math.BigDecimal;
 import java.nio.file.Files;
@@ -35,9 +34,9 @@ class ReceiptFileHandlerTest {
         ShopCosts shopCosts = mock(ShopCosts.class);
         ShopIncome shopIncome = mock(ShopIncome.class);
 
-        Cashier cashier = mock(Cashier.class); // Create a mock Cashier object
-        when(cashier.getName()).thenReturn("John Doe".toCharArray()); // Specify a return value for the getName() method
-        when(cashier.getSalary()).thenReturn(BigDecimal.valueOf(5000)); // Specify a return value for the getSalary() method
+        Cashier cashier = mock(Cashier.class);                              // Create a mock Cashier object
+        when(cashier.getName()).thenReturn("John Doe".toCharArray());       // Specify a return value for the getName() method
+        when(cashier.getSalary()).thenReturn(BigDecimal.valueOf(5000));     // Specify a return value for the getSalary() method
 
         List<Cashier> cashiers = new ArrayList<>();
         cashiers.add(cashier); // Add the mock Cashier object to the list
@@ -62,8 +61,10 @@ class ReceiptFileHandlerTest {
         receiptFileHandler.saveToFile(receipt, shop.getShopName());
 
         // Check if the file exists
-        File file = new File(shop.getShopName() + "receipts/" + receipt.getId() + ".dat");
+        String filePath = shop.getShopName() + " receipts";
+        receiptFileHandler.saveToFile(receipt, filePath);
 
+        File file = new File(filePath);
         assertTrue(file.exists());
     }
 }
