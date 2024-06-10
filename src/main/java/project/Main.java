@@ -20,16 +20,16 @@ public class Main {
 
         Shop shop1 = shopFactory.createShop("Lidl", BigDecimal.valueOf(8.5), BigDecimal.valueOf(4.0));
 
-        GoodsSellingPriceCalculator goodsSellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator, shop1);
+        GoodsSellingPriceCalculator goodsSellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator, shop1, 3);
 
 
-        Goods apples = new Goods(1000, "apples", BigDecimal.valueOf(0.18), Category.FOOD, LocalDate.of(2024, 6, 7), 50, goodsSellingPriceCalculator);
-        Goods strawberries = new Goods(1001, "strawberries", BigDecimal.valueOf(0.62), Category.FOOD, LocalDate.of(2024, 6, 30), 150, goodsSellingPriceCalculator);
-        Goods toiletPaper = new Goods(1002, "toilet paper", BigDecimal.valueOf(0.70), Category.NON_FOOD, LocalDate.of(2030, 6, 15), 200, goodsSellingPriceCalculator);
-        Goods lutenica = new Goods(1003, "lutenica", BigDecimal.valueOf(1.50), Category.FOOD, LocalDate.of(2024, 6, 22), 45, goodsSellingPriceCalculator);
-        Goods bananas = new Goods(1004, "bananas", BigDecimal.valueOf(0.28), Category.FOOD, LocalDate.of(2024, 6, 10), 97, goodsSellingPriceCalculator);
+        Goods apples = new Goods(1000, "apples", BigDecimal.valueOf(0.18), Category.FOOD, LocalDate.of(2024, 9, 7), 50, goodsSellingPriceCalculator);
+        Goods strawberries = new Goods(1001, "strawberries", BigDecimal.valueOf(0.62), Category.FOOD, LocalDate.of(2024, 9, 30), 150, goodsSellingPriceCalculator);
+        Goods toiletPaper = new Goods(1002, "toilet paper", BigDecimal.valueOf(0.70), Category.NON_FOOD, LocalDate.of(2030, 9, 15), 200, goodsSellingPriceCalculator);
+        Goods lutenica = new Goods(1003, "lutenica", BigDecimal.valueOf(1.50), Category.FOOD, LocalDate.of(2024, 9, 22), 45, goodsSellingPriceCalculator);
+        Goods bananas = new Goods(1004, "bananas", BigDecimal.valueOf(0.28), Category.FOOD, LocalDate.of(2024, 9, 10), 97, goodsSellingPriceCalculator);
         Goods toothpaste = new Goods(1005, "toothpaste", BigDecimal.valueOf(2.30), Category.NON_FOOD, LocalDate.of(2030, 12, 10), 30, goodsSellingPriceCalculator);
-        Goods tomatoes = new Goods(1006, "tomatoes", BigDecimal.valueOf(0.57), Category.FOOD, LocalDate.of(2024, 6, 23), 77, goodsSellingPriceCalculator);
+        Goods tomatoes = new Goods(1006, "tomatoes", BigDecimal.valueOf(0.57), Category.FOOD, LocalDate.of(2024, 9, 23), 77, goodsSellingPriceCalculator);
         Goods cigarettes = new Goods(1007, "cigarettes", BigDecimal.valueOf(4.00), Category.NON_FOOD, LocalDate.of(2025, 12, 31), 45, goodsSellingPriceCalculator);
         Goods cereal = new Goods(1008, "cereal", BigDecimal.valueOf(1.14), Category.FOOD, LocalDate.of(2025, 2, 6), 82, goodsSellingPriceCalculator);
         Goods tools = new Goods(1009, "tools", BigDecimal.valueOf(20.80), Category.NON_FOOD, LocalDate.of(2040, 11, 25), 25, goodsSellingPriceCalculator);
@@ -95,18 +95,21 @@ public class Main {
 
         Shop shop2 = shopFactory.createShop("Kaufland", BigDecimal.valueOf(10.5), BigDecimal.valueOf(6.0));
 
-        Goods milk = new Goods(2000, "milk", BigDecimal.valueOf(1.20), Category.NON_FOOD, LocalDate.of(2024, 6, 20), 120, goodsSellingPriceCalculator);
-        Goods bread = new Goods(2001, "bread", BigDecimal.valueOf(0.95), Category.FOOD, LocalDate.of(2024, 6, 25), 130, goodsSellingPriceCalculator);
-        Goods shampoo = new Goods(2002, "shampoo", BigDecimal.valueOf(3.50), Category.NON_FOOD, LocalDate.of(2030, 8, 15), 90, goodsSellingPriceCalculator);
-        Goods cheese = new Goods(2003, "cheese", BigDecimal.valueOf(2.50), Category.FOOD, LocalDate.of(2024, 7, 10), 75, goodsSellingPriceCalculator);
-        Goods oranges = new Goods(2004, "oranges", BigDecimal.valueOf(0.50), Category.FOOD, LocalDate.of(2024, 6, 5), 85, goodsSellingPriceCalculator);
-        Goods detergent = new Goods(2005, "detergent", BigDecimal.valueOf(4.30), Category.NON_FOOD, LocalDate.of(2031, 3, 20), 60, goodsSellingPriceCalculator);
-        Goods carrots = new Goods(2006, "carrots", BigDecimal.valueOf(0.40), Category.FOOD, LocalDate.of(2024, 6, 30), 110, goodsSellingPriceCalculator);
-        Goods batteries = new Goods(2007, "batteries", BigDecimal.valueOf(2.00), Category.NON_FOOD, LocalDate.of(2029, 12, 31), 50, goodsSellingPriceCalculator);
-        Goods rice = new Goods(2008, "rice", BigDecimal.valueOf(1.10), Category.FOOD, LocalDate.of(2025, 1, 10), 100, goodsSellingPriceCalculator);
-        Goods drill = new Goods(2009, "drill", BigDecimal.valueOf(45.00), Category.NON_FOOD, LocalDate.of(2045, 10, 1), 20, goodsSellingPriceCalculator);
-        Goods towels = new Goods(2010, "towels", BigDecimal.valueOf(15.00), Category.NON_FOOD, LocalDate.of(2037, 7, 15), 30, goodsSellingPriceCalculator);
-        Goods coffee = new Goods(2011, "coffee", BigDecimal.valueOf(5.00), Category.NON_FOOD, LocalDate.of(2025, 12, 20), 140, goodsSellingPriceCalculator);
+        GoodsSellingPriceCalculator goodsSellingPriceCalculator1 = new GoodsSellingPriceCalculator(overchargeCalculator, shop2, 3);
+
+
+        Goods milk = new Goods(2000, "milk", BigDecimal.valueOf(1.20), Category.NON_FOOD, LocalDate.of(2024, 9, 20), 120, goodsSellingPriceCalculator1);
+        Goods bread = new Goods(2001, "bread", BigDecimal.valueOf(0.95), Category.FOOD, LocalDate.of(2024, 9, 25), 130, goodsSellingPriceCalculator1);
+        Goods shampoo = new Goods(2002, "shampoo", BigDecimal.valueOf(3.50), Category.NON_FOOD, LocalDate.of(2030, 8, 15), 90, goodsSellingPriceCalculator1);
+        Goods cheese = new Goods(2003, "cheese", BigDecimal.valueOf(2.50), Category.FOOD, LocalDate.of(2024, 9, 10), 75, goodsSellingPriceCalculator1);
+        Goods oranges = new Goods(2004, "oranges", BigDecimal.valueOf(0.50), Category.FOOD, LocalDate.of(2024, 9, 5), 85, goodsSellingPriceCalculator1);
+        Goods detergent = new Goods(2005, "detergent", BigDecimal.valueOf(4.30), Category.NON_FOOD, LocalDate.of(2031, 3, 20), 60, goodsSellingPriceCalculator1);
+        Goods carrots = new Goods(2006, "carrots", BigDecimal.valueOf(0.40), Category.FOOD, LocalDate.of(2024, 10, 30), 110, goodsSellingPriceCalculator1);
+        Goods batteries = new Goods(2007, "batteries", BigDecimal.valueOf(2.00), Category.NON_FOOD, LocalDate.of(2029, 12, 31), 50, goodsSellingPriceCalculator1);
+        Goods rice = new Goods(2008, "rice", BigDecimal.valueOf(1.10), Category.FOOD, LocalDate.of(2025, 1, 10), 100, goodsSellingPriceCalculator1);
+        Goods drill = new Goods(2009, "drill", BigDecimal.valueOf(45.00), Category.NON_FOOD, LocalDate.of(2045, 10, 1), 20, goodsSellingPriceCalculator1);
+        Goods towels = new Goods(2010, "towels", BigDecimal.valueOf(15.00), Category.NON_FOOD, LocalDate.of(2037, 10, 15), 30, goodsSellingPriceCalculator1);
+        Goods coffee = new Goods(2011, "coffee", BigDecimal.valueOf(5.00), Category.NON_FOOD, LocalDate.of(2025, 12, 20), 140, goodsSellingPriceCalculator1);
 
         shop2.addGoodsToShop(shop2,Arrays.asList(milk,bread,shampoo,cheese,oranges,detergent,carrots,batteries,rice,drill,towels,coffee));
 

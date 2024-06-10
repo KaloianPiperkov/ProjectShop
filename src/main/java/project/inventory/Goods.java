@@ -51,9 +51,6 @@ public class Goods extends GoodsSellingPriceCalculator implements Serializable {
         this.sellingPriceCalculator = sellingPriceCalculator;
     }
 
-    public long getId() {
-        return goods_id;
-    }
 
     public String getName() {
         return goods_name;

@@ -10,10 +10,8 @@ import project.inventory.SellingPriceCalculation;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class CashDeskTest {
@@ -27,7 +25,7 @@ class CashDeskTest {
         Customer customer = new Customer(453, goodsList, BigDecimal.valueOf(100));
         SellingPriceCalculation sellingPriceCalculation = new GoodsSellingPriceCalculator();
         Goods goods = new Goods(1L, "Apple", BigDecimal.valueOf(50), Category.FOOD, LocalDate.now().plusDays(5), 10, sellingPriceCalculation);
-        Map<Goods, Integer> purchaseMap = new HashMap<>();
+        LinkedHashMap<Goods, Integer> purchaseMap = new LinkedHashMap<>();
         purchaseMap.put(goods, 2);
 
         Receipt receipt = cashDesk.processPurchase(cashier, customer, purchaseMap);

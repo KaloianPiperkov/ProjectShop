@@ -32,7 +32,7 @@ class GoodsSellingPriceCalculatorTest {
 
         OverchargeCalculator overchargeCalculator = new OverchargeCalculator();
         Shop shop = new Shop("Shop",cashierManager, inventoryManager, receiptManager, shopCosts,shopIncome,BigDecimal.valueOf(2.5),BigDecimal.valueOf(3.5));
-        GoodsSellingPriceCalculator goodsSellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator, shop);
+        GoodsSellingPriceCalculator goodsSellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator, shop, 3);
 
         Goods goods = new Goods(1L, "Apple", BigDecimal.valueOf(10), Category.FOOD, LocalDate.now().plusDays(5), 10, goodsSellingPriceCalculator);
 

@@ -12,7 +12,9 @@ import project.shop.ShopIncome;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,13 +55,15 @@ class ReceiptFileHandlerTest {
         // Create a Receipt object and set the Shop object
         Receipt receipt = new Receipt();
         receipt.setShop(shop);
+        receipt.setCashier(cashier);
 
         // Save the Receipt object to a file
         ReceiptFileHandler receiptFileHandler = new ReceiptFileHandler();
         receiptFileHandler.saveToFile(receipt, shop.getShopName());
 
         // Check if the file exists
-        File file = tempDir.resolve(shop.getShopName() + " receipts").resolve(receipt.getId() + ".dat").toFile();
+        File file = new File(shop.getShopName() + "receipts/" + receipt.getId() + ".dat");
+
         assertTrue(file.exists());
     }
 }

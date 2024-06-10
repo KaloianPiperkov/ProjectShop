@@ -12,8 +12,9 @@ import java.time.temporal.ChronoUnit;
 public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Serializable {
     private OverchargeCalculator overchargeCalculator;
     private Shop shop;
+    private long daysUntilExpirationThreshold;
 
-    public GoodsSellingPriceCalculator(OverchargeCalculator overchargeCalculator, Shop shop) {
+    public GoodsSellingPriceCalculator(OverchargeCalculator overchargeCalculator, Shop shop, long daysUntilExpirationThreshold) {
         if (overchargeCalculator == null) {
             throw new IllegalArgumentException("OverchargeCalculator cannot be null");
         }
@@ -22,6 +23,7 @@ public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Ser
         }
         this.overchargeCalculator = overchargeCalculator;
         this.shop = shop;
+        this.daysUntilExpirationThreshold = daysUntilExpirationThreshold;
     }
 
     public GoodsSellingPriceCalculator() {
@@ -43,7 +45,7 @@ public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Ser
 
         long daysUntilExpiration = ChronoUnit.DAYS.between(LocalDate.now(), goods.getExpiry_date()); // Should be put in another method
 
-        if (daysUntilExpiration > 0 && daysUntilExpiration <= 3) { // Considered close to expiration if less than or equal to 3 days left
+        if (daysUntilExpiration > 0 && daysUntilExpiration <= daysUntilExpirationThreshold) {
             sellingPrice = sellingPrice.multiply(BigDecimal.ONE.subtract(overchargePercent.divide(BigDecimal.valueOf(100), 4, RoundingMode.HALF_UP)));
         }
 
