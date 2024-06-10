@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+//class that manages the inventory
 public class InventoryManager implements IInventoryManager, Serializable {
     private List<Goods> inventory;
 

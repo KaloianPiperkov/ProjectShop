@@ -1,12 +1,9 @@
 package project.customer;
-
 import project.inventory.CanBeSold;
 import project.inventory.Goods;
 import project.inventory.GoodsQuantity;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,18 +11,6 @@ import java.util.Map;
 public class AddingToCart extends GoodsQuantity implements Serializable {
     private Customer customer;
     private Map<Goods, Integer> shopping_cart;
-
-    public void addMultipleGoodsToCart(List<Goods> goodsList, List<Integer> quantities, AddingToCart cart) {
-        for (int i = 0; i < goodsList.size(); i++) {
-            Goods goods = goodsList.get(i);
-            int desiredQuantity = quantities.get(i);
-            if (goods.getQuantity() >= desiredQuantity) {
-                cart.addGoodsToCart(goods, desiredQuantity);
-            } else {
-                System.out.println("Not enough quantity of " + goods.getName() + " available. Only " + goods.getQuantity() + " left in stock.");
-            }
-        }
-    }
 
     public AddingToCart(Customer customer) {
         if (customer == null) {
@@ -39,6 +24,22 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
         return shopping_cart;
     }
 
+    //method that adds multiple goods to the cart of the customer
+    //checking if the desired quantity of the good is available before adding it
+    public void addMultipleGoodsToCart(List<Goods> goodsList, List<Integer> quantities, AddingToCart cart) {
+        for (int i = 0; i < goodsList.size(); i++) {
+            Goods goods = goodsList.get(i);
+            int desiredQuantity = quantities.get(i);
+            if (goods.getQuantity() >= desiredQuantity) {
+                cart.addGoodsToCart(goods, desiredQuantity);
+            } else {
+                System.out.println("Not enough quantity of " + goods.getName() + " available. Only " + goods.getQuantity() + " left in stock.");
+            }
+        }
+    }
+
+    //method that adds a single item to the cart
+    //checking if the desired quantity is available
     public void addGoodsToCart(Goods goods, int desired_quantity) {
         if (goods == null) {
             throw new IllegalArgumentException("Goods cannot be null");
@@ -58,6 +59,7 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
         }
     }
 
+    //method that checks if the customer has enough funds to buy
     private void checkCustomerFunds(Goods goods, int desired_quantity){
         if(customer.getFunds().compareTo(goods.calculateSellingPrice().multiply(new BigDecimal(desired_quantity))) < 0) {
             throw new InsufficientFundsException("Not enough funds");
@@ -76,8 +78,10 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
     }
 }
 
+
 class InsufficientQuantityException extends RuntimeException {
     public InsufficientQuantityException(String message) {
         super(message);
     }
 }
+

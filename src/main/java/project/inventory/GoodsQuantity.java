@@ -1,5 +1,6 @@
 package project.inventory;
 
+//class that implements the interface CanBeSold
 public class GoodsQuantity implements CanBeSold{
 
     @Override

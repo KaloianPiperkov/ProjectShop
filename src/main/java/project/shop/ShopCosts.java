@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+//class that calculates the total costs of the shop
 public class ShopCosts implements CalculatingTotalCost , Serializable {
     private List<Cashier> cashiers;
     private List<Goods> goods;

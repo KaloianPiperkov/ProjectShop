@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+//class that represents the shop
 public class Shop implements Serializable {
     private final String shopName;
     private ICashierManager cashierManager;
@@ -56,6 +57,8 @@ public class Shop implements Serializable {
         receipt.setShop(this);
     }
 
+    //Adding the necessary components of the shop
+
     public void addGoods(Goods goods){
         this.goods.add(goods);
     }
@@ -72,7 +75,6 @@ public class Shop implements Serializable {
         this.cashiers.add(cashier);
     }
 
-
     public BigDecimal getFoodOverchargePercent() {
         return foodOverchargePercent;
     }
@@ -83,7 +85,6 @@ public class Shop implements Serializable {
         }
         this.foodOverchargePercent = foodOverchargePercent;
     }
-
 
     public BigDecimal getNonFoodOverchargePercent() {
         return nonFoodOverchargePercent;

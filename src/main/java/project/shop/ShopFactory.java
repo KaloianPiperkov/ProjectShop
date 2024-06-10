@@ -9,6 +9,7 @@ import project.inventory.InventoryManager;
 
 import java.math.BigDecimal;
 
+//class that is a factory for creating shops
 public class ShopFactory {
     public Shop createShop(String name, BigDecimal overchargePercentage, BigDecimal taxPercentage) {
         ICashierManager cashierManager = new CashierManager();

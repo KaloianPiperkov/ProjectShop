@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+//class that represents a customer in the shop
 public class Customer implements Serializable {
 
     private long id;

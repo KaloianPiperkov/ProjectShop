@@ -22,7 +22,6 @@ public class Main {
 
         GoodsSellingPriceCalculator goodsSellingPriceCalculator = new GoodsSellingPriceCalculator(overchargeCalculator, shop1, 3);
 
-
         Goods apples = new Goods(1000, "apples", BigDecimal.valueOf(0.18), Category.FOOD, LocalDate.of(2024, 9, 7), 50, goodsSellingPriceCalculator);
         Goods strawberries = new Goods(1001, "strawberries", BigDecimal.valueOf(0.62), Category.FOOD, LocalDate.of(2024, 9, 30), 150, goodsSellingPriceCalculator);
         Goods toiletPaper = new Goods(1002, "toilet paper", BigDecimal.valueOf(0.70), Category.NON_FOOD, LocalDate.of(2030, 9, 15), 200, goodsSellingPriceCalculator);
@@ -43,7 +42,6 @@ public class Main {
 
         Customer customer = new Customer(1, new ArrayList<>(), BigDecimal.valueOf(100.00));
         Customer customer1 = new Customer(2, new ArrayList<>(), BigDecimal.valueOf(300.0));
-
         shop1.addCustomer(customer);
         shop1.addCustomer(customer1);
 
@@ -70,18 +68,18 @@ public class Main {
         cashier.setSalary(salary);
         cashier1.setSalary(salary1);
 
+        //Processing of the purchases
         LinkedHashMap<Goods, Integer> purchaseMap = (LinkedHashMap<Goods, Integer>) cart.getShoppingCart();
         LinkedHashMap<Goods, Integer> purchaseMap1 = (LinkedHashMap<Goods, Integer>) cart1.getShoppingCart();
-
         Receipt receipt = cashDesk.processPurchase(cashier, customer, purchaseMap);
         Receipt receipt1 = cashDesk.processPurchase(cashier1, customer1, purchaseMap1);
 
         receipt.setShop(shop1);
         receipt1.setShop(shop1);
 
+        //Saving the receipts to files
         ReceiptFileHandler fileHandler = new ReceiptFileHandler();
         ReceiptFileHandler fileHandler1 = new ReceiptFileHandler();
-
         fileHandler.saveToFile(receipt, shop1.getShopName());
         fileHandler1.saveToFile(receipt1, shop1.getShopName());
 
@@ -91,12 +89,11 @@ public class Main {
         List<Shop> shops = new ArrayList<>();
         shops.add(shop1);
 
-        //-------------------SHOP2----------------
+        //-------------------SHOP2-----------------------------------------------------------------------
 
         Shop shop2 = shopFactory.createShop("Kaufland", BigDecimal.valueOf(10.5), BigDecimal.valueOf(6.0));
 
         GoodsSellingPriceCalculator goodsSellingPriceCalculator1 = new GoodsSellingPriceCalculator(overchargeCalculator, shop2, 3);
-
 
         Goods milk = new Goods(2000, "milk", BigDecimal.valueOf(1.20), Category.NON_FOOD, LocalDate.of(2024, 9, 20), 120, goodsSellingPriceCalculator1);
         Goods bread = new Goods(2001, "bread", BigDecimal.valueOf(0.95), Category.FOOD, LocalDate.of(2024, 9, 25), 130, goodsSellingPriceCalculator1);
@@ -165,6 +162,5 @@ public class Main {
         System.out.println(receipt3);
 
         shops.add(shop2);
-
     }
 }

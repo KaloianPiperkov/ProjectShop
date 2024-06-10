@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+//class that manages a list of receipts
 public class ReceiptManager implements IReceiptManager, Serializable {
     private List<Receipt> receipts;
 

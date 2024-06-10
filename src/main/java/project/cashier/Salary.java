@@ -2,6 +2,7 @@ package project.cashier;
 
 import java.math.BigDecimal;
 
+//class that calculates the salary of a cashier based on hourly wage and number of hours worked
 public class Salary implements SalaryCalculator {
     @Override
     public BigDecimal calculatingSalary(BigDecimal salaryPerHour, BigDecimal hoursWorked) {

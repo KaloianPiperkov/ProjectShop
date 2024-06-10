@@ -5,8 +5,11 @@ import java.math.BigDecimal;
 import project.inventory.Goods;
 import project.inventory.Category;
 
+//class that calculates the overcharge percentage
 public class OverchargeCalculator  implements Serializable {
 
+
+    //the calculating is based on the category of the food for each shop
     public BigDecimal calculateOverchargePercentage(Shop shop, Goods goods) {
         if (shop == null) {
             throw new IllegalArgumentException("Shop cannot be null");

@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+//class that represents a receipt for a purchase
 public class Receipt implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +53,8 @@ public class Receipt implements Serializable {
         return id_receipt;
     }
 
+
+    //method that adds an item to the receipt
     public void addItem(Goods goods, int quantity, BigDecimal totalPrice) {
         if (goods == null) {
             throw new IllegalArgumentException("Goods cannot be null");
@@ -67,6 +70,7 @@ public class Receipt implements Serializable {
         totalValue = totalValue.add(totalPrice);
     }
 
+    //calculates the total value of the receipt
     public BigDecimal calculateTotalValue() {
         totalValue = purchasedItems.stream()
                 .map(PurchasedItem::getTotalPrice)

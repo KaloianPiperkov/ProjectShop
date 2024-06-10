@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+//class that manages a list of cashiers
 public class CashierManager implements ICashierManager, Serializable {
     private List<Cashier> cashiers;
 
@@ -17,6 +18,7 @@ public class CashierManager implements ICashierManager, Serializable {
         return cashiers;
     }
 
+    //method that adds a cashier to the list
     @Override
     public void addCashier(Cashier cashier) {
         if (cashier == null) {
@@ -25,6 +27,7 @@ public class CashierManager implements ICashierManager, Serializable {
         cashiers.add(cashier);
     }
 
+    //method that returns the salary of the cashier
     @Override
     public BigDecimal getCashierSalary(long cashierId) {
         for (Cashier cashier : cashiers) {

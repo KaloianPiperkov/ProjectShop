@@ -11,8 +11,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+//class that represents a cash desk in a shop
 public class CashDesk {
-    private List<Receipt> receipts;
+    private List<Receipt> receipts;     //list of receipts processed by this cash desk
 
     public CashDesk(List<Receipt> receipts) {
         if (receipts == null) {
@@ -21,6 +22,8 @@ public class CashDesk {
         this.receipts = receipts;
     }
 
+    //method that processes a purchase made by a customer by taking
+    //the cashier, the customer, a map of the goods and their quantity
     public Receipt processPurchase(Cashier cashier, Customer customer, LinkedHashMap<Goods, Integer> purchaseMap) {
 
         if (cashier == null) {
@@ -41,26 +44,26 @@ public class CashDesk {
         }
 
 
-        // Set cashier
+        //set cashier
         receipt.setCashier(cashier);
 
-        // Set date and time
+        //set date and time
         receipt.setDateTime(LocalDateTime.now());
 
-        // Populate the purchase list
+        //populate the purchase list
         for (Map.Entry<Goods, Integer> entry : purchaseMap.entrySet()) {
             Goods goods = entry.getKey();
             int quantity = entry.getValue();
             BigDecimal totalPrice = goods.calculateSellingPrice().multiply(BigDecimal.valueOf(quantity));
 
-            // Add the purchased item to the receipt
+            //add the purchased item to the receipt
             receipt.addItem(goods, quantity, totalPrice);
         }
 
-        // Calculate total value of the receipt
+        //calculate total value of the receipt
         receipt.calculateTotalValue();
 
-        // Add the receipt to the list of receipts
+        //add the receipt to the list of receipts
         receipts.add(receipt);
 
         return receipt;

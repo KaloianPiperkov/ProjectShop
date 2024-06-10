@@ -5,6 +5,7 @@ import project.inventory.Goods;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+//class that represents an item that has been purchased
 public class PurchasedItem implements Serializable {
     private Goods goods;
     private int quantity;

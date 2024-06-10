@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
+//class that calculates the total income of the shop
 public class ShopIncome implements CalculatingTotalIncome, Serializable {
 
     private List<Receipt> receipts;

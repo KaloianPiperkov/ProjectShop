@@ -9,6 +9,7 @@ import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+//class that calculates the selling price of the goods
 public class GoodsSellingPriceCalculator implements SellingPriceCalculation, Serializable {
     private OverchargeCalculator overchargeCalculator;
     private Shop shop;

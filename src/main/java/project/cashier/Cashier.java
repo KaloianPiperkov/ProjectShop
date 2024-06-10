@@ -6,6 +6,7 @@ import project.shop.Shop;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+//class representing a cashier in the shop
 public class Cashier extends Salary implements Serializable {
     private String name_of_cashier;
     private long id_of_cashier;

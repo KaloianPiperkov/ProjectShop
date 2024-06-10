@@ -3,6 +3,7 @@ package project.shop;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+//class that calculates the profit of the shop
 public class ProfitCalculator implements CalculatingProfit, Serializable {
     private BigDecimal totalIncome;
     private BigDecimal totalCosts;

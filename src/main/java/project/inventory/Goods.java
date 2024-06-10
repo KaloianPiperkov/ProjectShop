@@ -13,7 +13,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-
+//class that represents goods in inventory
 public class Goods extends GoodsSellingPriceCalculator implements Serializable {
 
     private long goods_id;

@@ -2,6 +2,7 @@ package project.checkout;
 
 import java.io.*;
 
+//class that handles the saving of the receipts to files
 public class ReceiptFileHandler {
 
     public void saveToFile(Receipt receipt, String shopName) {
