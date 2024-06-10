@@ -1,6 +1,7 @@
 package project.cashier;
 
 import org.junit.jupiter.api.Test;
+import project.shop.Shop;
 
 import java.math.BigDecimal;
 

@@ -17,7 +17,13 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
 
     public void addMultipleGoodsToCart(List<Goods> goodsList, List<Integer> quantities, AddingToCart cart) {
         for (int i = 0; i < goodsList.size(); i++) {
-            cart.addGoodsToCart(goodsList.get(i), quantities.get(i));
+            Goods goods = goodsList.get(i);
+            int desiredQuantity = quantities.get(i);
+            if (goods.getQuantity() >= desiredQuantity) {
+                cart.addGoodsToCart(goods, desiredQuantity);
+            } else {
+                System.out.println("Not enough quantity of " + goods.getName() + " available. Only " + goods.getQuantity() + " left in stock.");
+            }
         }
     }
 
@@ -37,9 +43,11 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
         if (goods == null) {
             throw new IllegalArgumentException("Goods cannot be null");
         }
+
         if (desired_quantity <= 0) {
             throw new IllegalArgumentException("Desired quantity must be greater than zero");
         }
+
         CanBeSold canBeSold = new GoodsQuantity();
         if (canBeSold.canBeSold(desired_quantity, goods.getQuantity())) {
             checkCustomerFunds(goods,desired_quantity);

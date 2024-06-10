@@ -129,7 +129,7 @@ public class Main {
         List<Integer> quantities2 = Arrays.asList(1, 2, 3, 1);
 
         List<Goods> customerCart3 = Arrays.asList(bananas, pasta, cigarettes, tomatoes, lutenica);
-        List<Integer> quantities3 = Arrays.asList(5, 1, 20, 3, 1);
+        List<Integer> quantities3 = Arrays.asList(5, 1, 20, 3, 15);
 
         cart.addMultipleGoodsToCart(customerCart2, quantities2, cart2);
         cart1.addMultipleGoodsToCart(customerCart3, quantities3, cart3);
