@@ -62,7 +62,6 @@ class ReceiptFileHandlerTest {
 
         // Check if the file exists
         String filePath = shop.getShopName() + " receipts";
-        receiptFileHandler.saveToFile(receipt, filePath);
 
         File file = new File(filePath);
         assertTrue(file.exists());
