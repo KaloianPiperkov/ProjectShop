@@ -28,13 +28,7 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
     //checking if the desired quantity of the good is available before adding it
     public void addMultipleGoodsToCart(List<Goods> goodsList, List<Integer> quantities, AddingToCart cart) {
         for (int i = 0; i < goodsList.size(); i++) {
-            Goods goods = goodsList.get(i);
-            int desiredQuantity = quantities.get(i);
-            if (goods.getQuantity() >= desiredQuantity) {
-                cart.addGoodsToCart(goods, desiredQuantity);
-            } else {
-                System.out.println("Not enough quantity of " + goods.getName() + " available. Only " + goods.getQuantity() + " left in stock.");
-            }
+            cart.addGoodsToCart(goodsList.get(i), quantities.get(i));
         }
     }
 
