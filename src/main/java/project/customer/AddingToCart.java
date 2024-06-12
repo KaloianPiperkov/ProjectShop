@@ -73,9 +73,3 @@ public class AddingToCart extends GoodsQuantity implements Serializable {
 }
 
 
-class InsufficientQuantityException extends RuntimeException {
-    public InsufficientQuantityException(String message) {
-        super(message);
-    }
-}
-
